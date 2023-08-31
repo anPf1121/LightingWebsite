@@ -3,9 +3,10 @@ import HomeHeader from './Components/HomeHeader/homeHeader'
 // import 'react-sticky-header/styles.css';
 // import StickyHeader from 'ReactStickyHeader'
 export default function Home() {
-    return (
-        <>
-          <p>this is Home Page</p>
-        </>
-    )
+  return (
+    <>
+      <HomeHeader />
+      <div className="test"></div>
+    </>
+  )
 }

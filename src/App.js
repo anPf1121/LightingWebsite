@@ -1,12 +1,11 @@
 import React from 'react';
-
-import Home from '../src/Pages/Home/home';
+import './App.css';
+import Home from './Pages/Home/home';
 
 import { 
   BrowserRouter as Router,
   Routes,
-  Route,
-  link
+  Route
 } from "react-router-dom";
 
 import SingleItem from './Pages/SingleItem/singleItem';
