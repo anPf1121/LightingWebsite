@@ -4,17 +4,33 @@ import { Typography } from '@mui/material'
 export default function HomeHeader() {
     return (
         <>
-            <StickyNav/>
+            <StickyNav />
             <div className="header-img">
                 <div className="header-img-title">
-                    <Typography variant='h1'>
-                        This Is Main Title
+                    <Typography sx={{
+                        fontSize: {
+                            sm: '2.5rem',
+                            md: '3rem',
+                            lg: '3.5rem',
+                            xl: '6rem',
+                        }, fontFamily: "'Cormorant Garamond', serif",
+                        textAlign: 'center'
+                    }}>
+                        Tam Anh
                     </Typography>
-                    <Typography variant='h5'>
-                        This Is Sub Title
+                    <Typography sx={{
+                        fontSize: {
+                            sm: '1rem',
+                            md: '1.5rem',
+                            lg: '2rem',
+                            xl: '2.5rem',
+                        }, fontFamily: "'Cormorant Garamond', serif",
+                        textAlign: 'center'
+                    }}>
+                        Modern Design & Living
                     </Typography>
                 </div>
-                <img src="https://www.sensio.co.uk/images/kitchen-home-page-slider-2017.jpg" alt="" />
+                <img src="https://png.pngtree.com/thumb_back/fh260/background/20201111/pngtree-grey-abstract-watercolor-paint-background-image_468924.jpg" alt="" />
             </div>
         </>
     )
