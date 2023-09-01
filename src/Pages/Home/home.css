@@ -4,10 +4,7 @@
     box-sizing: border-box;
 }
 
-.test {
-    height: 5000px;
-}
-
+/* header */
 h1 {
     color: black;
     font-size: 2rem;
@@ -30,7 +27,14 @@ h1 {
     transform: translate(-50%, -50%);
     color: white;
 }
+/* end header */
 
-.header-img-title .main-title {
-    font-size: 5rem;
+/* content */
+.top-content-title {
+    text-align: center;
+    width: 50%;
+    margin: 25px 50%;
+    transform: translateX(-50%);
 }
+
+/* end content */
