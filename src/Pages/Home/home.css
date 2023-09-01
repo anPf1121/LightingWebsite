@@ -1,0 +1,36 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.test {
+    height: 5000px;
+}
+
+h1 {
+    color: black;
+    font-size: 2rem;
+}
+
+.header-img {
+    position: relative;
+    z-index: 5;
+}
+
+.header-img img {
+    width: 100%;
+    height: 800px;
+}
+
+.header-img-title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.header-img-title .main-title {
+    font-size: 5rem;
+}
