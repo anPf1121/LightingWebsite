@@ -1,5 +1,6 @@
 import React from 'react'
 import { Typography } from '@mui/material'
+import ProductSlideShow from '../../../Components/productSlideShow'
 export default function HomeContent() {
     return (
         <>
@@ -7,6 +8,7 @@ export default function HomeContent() {
                 <Typography variant='h2'>Main Title</Typography>
                 <Typography variant='h5'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam repellendus suscipit error exercitationem quam molestiae vel aspernatur amet voluptatem neque voluptatibus, tenetur eum quia deserunt temporibus. Mollitia, illo! Ea, quasi.</Typography>
             </div>
+            <ProductSlideShow/>
         </>
     )
 }

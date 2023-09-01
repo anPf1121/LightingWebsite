@@ -9,8 +9,10 @@
 }
 
 h1 {
-    color: black;
     font-size: 21rem;
+}
+h1, h2, h3, h4, h5, h6, h7 {
+    user-select: none;
 }
 
 .nav-container {
@@ -58,4 +60,8 @@ h1 {
 
 .header-img-title .main-title {
     font-size: 5rem;
+}
+
+.swiper-pagination {
+    display: none;
 }

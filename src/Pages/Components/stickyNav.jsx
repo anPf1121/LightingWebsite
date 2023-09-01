@@ -17,9 +17,9 @@ export default function StickyNav() {
                             <Button color='inherit'><Link to='/single-item' className='nav-link'>About Us</Link></Button>
                             <Button color='inherit'><Link to='/single-item' className='nav-link'>Contact</Link></Button>
                         </Stack>
-                        <IconButton size='large' aria-label='logo' className="logo">
-                            <div className="logo">
-                                <Link to='/' className='nav-link'>Logo</Link>
+                        <IconButton size='large' aria-label='logo' sx={{position: 'absolute', left: '50%', transform: 'translate(-50%)'}}>
+                            <div>
+                                <Link to='/' className="logo">Logo</Link>
                             </div>
                         </IconButton>
                         <Stack direction='row' spacing={2}>
