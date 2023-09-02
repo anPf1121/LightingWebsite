@@ -30,7 +30,7 @@ export default function HomeHeader() {
                         Modern Design & Living
                     </Typography>
                 </div>
-                <img src="https://png.pngtree.com/thumb_back/fh260/background/20201111/pngtree-grey-abstract-watercolor-paint-background-image_468924.jpg" alt="" />
+                <img src="https://png.pngtree.com/thumb_back/fh260/background/20201111/pngtree-grey-abstract-watercolor-paint-background-image_468924.jpg" alt="description of image" />
             </div>
         </>
     )

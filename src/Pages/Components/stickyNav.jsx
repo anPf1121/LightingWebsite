@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Link } from "react-router-dom";
 import './globalComponents.css';
-import { IconButton, Toolbar, AppBar, Stack, Button, Typography } from '@mui/material';
+import { IconButton, Toolbar, AppBar, Stack, Button } from '@mui/material';
 
 export default function StickyNav() {
     return (
