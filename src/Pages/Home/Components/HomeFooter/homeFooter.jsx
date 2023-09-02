@@ -6,7 +6,10 @@ export default function HomeFooter() {
     return (
         <>
             <Box sx={{
-                padding: '50px',
+                padding: {
+                    xs: '10px',
+                    md: '50px'
+                },
                 backgroundColor: 'rgba(50, 50, 50)',
                 marginBottom: '50px'
             }}>
@@ -14,9 +17,9 @@ export default function HomeFooter() {
                     width: '100%',
                     backgroundColor: 'white'
                 }}>
-                    <Grid container>
+                    <Grid container sx={{alignItems: 'center', textAlign: 'center'}}>
                         <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
-                            <Box p={2} sx={{ backgroundColor: 'white', padding: '50px' }}>
+                            <Box p={2} sx={{ backgroundColor: 'white', padding: '20px' }}>
                                 <Typography variant='h3' sx={{ fontSize: '3rem', fontFamily: "'Cormorant Garamond', serif" }}>
                                     About Us
                                 </Typography>
@@ -30,8 +33,6 @@ export default function HomeFooter() {
                                     20 Lieu Giai, Hanoi, Vietnam
                                 </Typography>
                                 <Button color='primary' sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
                                     alignItems: 'center',
                                     margin: '20px 0px',
                                     color: 'white',
@@ -50,7 +51,7 @@ export default function HomeFooter() {
                         </Grid>
                         <Grid item xs={12} sm={12} md={4} lg={4} xl={4} sx={{ maxWidth: '100%', height: 'auto', overflow: 'hidden', objectFit: 'cover' }}>
                             <Box sx={{ maxWidth: '100%', height: '100%' }}>
-                                <img className="footer-img" src='https://static.wixstatic.com/media/5b4b7e_a3fc1e94fe694859858278948c6969bf~mv2.jpg/v1/fill/w_583,h_685,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/5b4b7e_a3fc1e94fe694859858278948c6969bf~mv2.jpg' alt='cutest kitten'/>
+                                <img className="footer-img" src='https://static.wixstatic.com/media/5b4b7e_a3fc1e94fe694859858278948c6969bf~mv2.jpg/v1/fill/w_583,h_685,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/5b4b7e_a3fc1e94fe694859858278948c6969bf~mv2.jpg' alt='cutest kitten' />
                             </Box>
                         </Grid>
                     </Grid>

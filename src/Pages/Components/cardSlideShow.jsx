@@ -1,7 +1,8 @@
 import React from 'react'
 // import { Link } from "react-router-dom";
 import './globalComponents.css';
-import { Box, Card, CardContent, CardMedia, Typography, Button, Modal } from '@mui/material';
+import { GridMaximize2O } from "lovedicons/dist/gridO";
+import { Box, Card, CardContent, CardMedia, Typography, Modal } from '@mui/material';
 
 export default function CardSlideShow() {
     const [open, setOpen] = React.useState(false);
@@ -15,28 +16,17 @@ export default function CardSlideShow() {
                     <Typography
                         gutterBottom
                         variant='h5'
+                        sx={{ textAlign: 'center' }}
                     >Product Name</Typography>
                     <Typography variant='body1' sx={{
                         color: 'gray',
-                        position: 'absolute',
-                        bottom: '15px',
-                        right: '15px'
+                        textAlign: 'center',
                     }}>20.000.000 VND</Typography>
                     <Box className="card-overlay">
                         {/* <Typography variant='h6' sx={{color: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', lineHeight: '450px', fontSize: '1.5rem'}}>
                             Xem Chi Tiết
                         </Typography>  */}
-                        <Button onClick={handleOpen} sx={{
-                            position: 'absolute',
-                            left: '50%',
-                            bottom: '25%',
-                            transform: 'translateX(-50%)',
-                            color: 'black',
-                            backgroundColor: 'white',
-                            '&:hover': {
-                                color: 'white'
-                            }
-                        }}>Xem Nhanh</Button>
+                        <div onClick={handleOpen} className='fastViewDetails'><GridMaximize2O className='iconFastView'/></div>
                         <Modal
                             open={open}
                             onClose={handleClose}
@@ -57,7 +47,7 @@ export default function CardSlideShow() {
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
                                     Title
                                 </Typography>
-                                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                <Typography id="modal-modal-description" sx={{ mt: 2, margin:"20px" }}>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat non iste laboriosam ullam ab maxime quisquam, possimus totam officiis ratione perspiciatis veritatis unde beatae, nihil incidunt? Quo repellendus cupiditate fugit.
                                 </Typography>
                             </Box>

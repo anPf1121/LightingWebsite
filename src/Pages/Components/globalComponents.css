@@ -115,6 +115,8 @@ h6 {
 .card {
     position: relative;
     overflow: hidden;
+    box-shadow: none !important;
+    border: none !important;
 }
 
 .card-overlay {
@@ -140,4 +142,41 @@ h6 {
 
 .right-nav:hover {
     color: rgb(0, 0, 0);
+}
+
+/* sx={{
+    position: 'absolute',
+    top: '5px',
+    right: '-20px',
+    transform: 'translateX(-50%)',
+    color: 'black',
+    backgroundColor: 'white',
+    '&:hover': {
+        color: 'white'
+    }
+}} */
+.fastViewDetails {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    align-items: center;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: #ffffffda;
+}
+
+.iconFastView {
+    color: rgb(2, 2, 2);
+    font-size: 30px;
+    margin-top: 3px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.fastViewDetails:hover {
+    color: 'white';
+    background-color: #ffffff56;
+    transition: .3s;
 }

@@ -2,11 +2,12 @@ import React from 'react'
 
 import { Link } from "react-router-dom";
 import './globalComponents.css';
-import { IconButton, Toolbar, AppBar, Stack, Button, styled, Badge } from '@mui/material';
+import { IconButton, Toolbar, AppBar, Stack, Button, styled, Badge, Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { TbAlignJustified } from "react-icons/tb";
 
-const StyledBadge = styled(Badge) (({ theme }) => ({
+const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
         right: 3,
         top: 0,
@@ -22,6 +23,8 @@ export default function StickyNav() {
                 <AppBar position='static' sx={{ backgroundColor: '#ffffff0f' }}>
                     <Toolbar className="nav-wrapper">
                         <Stack direction='row' spacing={2} sx={{ flexGrow: 1 }}>
+
+                            <Box color='inherit' sx={{ display: { xs: 'block', md: 'none', color: 'black', fontSize: '1.5rem' } }}><TbAlignJustified /></Box>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' } }}><Link to='/single-item' sx={{
                                 fontSize: '2rem'
                             }} className='nav-link'>Sản Phẩm</Link></Button>
@@ -37,7 +40,7 @@ export default function StickyNav() {
                                 <Link to='/' className="logo">Logo</Link>
                             </div>
                         </IconButton>
-                        <Stack direction='row' spacing={2} sx={{alignItems: 'center'}}>
+                        <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
                             <div className='right-nav'>
                                 <IconButton aria-label="cart">
                                     <StyledBadge badgeContent={4} color="error">
