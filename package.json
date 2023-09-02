@@ -1,5 +1,4 @@
 {
-  "homepage": "https://anpf1121.github.io/lighting-website",
   "name": "lampwebsite",
   "version": "0.1.0",
   "private": true,
@@ -42,6 +41,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.0.0"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
