@@ -21,6 +21,7 @@
     "swiper": "^10.2.0",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://anpf1121.github.io/LightingWebsite",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
