@@ -73,59 +73,6 @@ h6 {
     height: auto;
 }
 
-.swiper-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-}
-
-.crd:hover {
-    border: 1px solid #e7e7e7;
-}
-
-.crd:hover .crd-content {
-    overflow: hidden;
-    position: relative;
-}
-
-.css-46bh2p-MuiCardContent-root {
-    padding: 0 !important;
-}
-
-.css-wt7jgy-MuiTypography-root {
-    padding: 20px;
-}
-
-.css-46bh2p-MuiCardContent-root:last-child {
-    padding: 0;
-}
-
-.crd {
-    position: relative;
-}
-
-.crd-content-inner {
-    position: relative;
-}
-
-.crd .crd-content .crd-content-inner .crd-content-typo {
-    padding: 10px 0;
-    position: absolute;
-    bottom: -100%;
-    left: 0;
-    right: 0;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.733);
-    color: #000000;
-    opacity: 0;
-    z-index: 100;
-    transition: transform .5s, opacity .5s;
-}
-
-.crd:hover .crd-content .crd-content-typo {
-    opacity: 1;
-}
 
 .swiper div {
     color: rgb(0, 0, 0);
@@ -134,13 +81,17 @@ h6 {
 .rc-footer {
     background-color: white !important;
 }
-.rc-footer h2, .rc-footer a {
+
+.rc-footer h2,
+.rc-footer a {
     color: #000000 !important;
     font-family: 'Cormorant Garamond', serif;
 }
+
 .rc-footer a {
     font-size: 1.3rem !important;
 }
+
 .rc-footer-column h2 {
     font-size: 2rem !important;
     font-family: 'Cormorant Garamond', serif;
@@ -161,7 +112,32 @@ h6 {
     padding: 0;
 }
 
-.css-1be214h-MuiPaper-root-MuiCard-root {
-    border: 1px solid #e9e9e9 !important;
-    border-radius: 0 !important;
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.219);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .card-overlay {
+    opacity: 1;
+}
+
+.right-nav {
+    color: rgb(78, 78, 78);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.right-nav:hover {
+    color: rgb(0, 0, 0);
 }
