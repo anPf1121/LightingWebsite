@@ -52,7 +52,7 @@ export default function HomeFooter() {
                         </Grid>
                         <Grid item xs={12} sm={12} md={4} lg={4} xl={4} sx={{ maxWidth: '100%', height: 'auto' }}>
                             <Box sx={{ maxWidth: '100%', height: '100%' }}>
-                                <img className="footer-img" src='https://static.wixstatic.com/media/5b4b7e_a3fc1e94fe694859858278948c6969bf~mv2.jpg/v1/fill/w_583,h_685,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/5b4b7e_a3fc1e94fe694859858278948c6969bf~mv2.jpg' alt=''/>
+                                <img className="footer-img" src='https://static.wixstatic.com/media/5b4b7e_a3fc1e94fe694859858278948c6969bf~mv2.jpg/v1/fill/w_583,h_685,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/5b4b7e_a3fc1e94fe694859858278948c6969bf~mv2.jpg' alt='footer image'/>
                             </Box>
                         </Grid>
                     </Grid>
