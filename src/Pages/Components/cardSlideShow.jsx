@@ -29,7 +29,7 @@ export default function CardSlideShow() {
                         <Button onClick={handleOpen} sx={{
                             position: 'absolute',
                             left: '50%',
-                            bottom: '20%',
+                            bottom: '25%',
                             transform: 'translateX(-50%)',
                             color: 'black',
                             backgroundColor: 'white',
