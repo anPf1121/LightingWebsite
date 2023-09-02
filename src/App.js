@@ -12,7 +12,7 @@ import SingleItem from './Pages/SingleItem/singleItem';
 function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
-        <Routes>            
+        <Routes>
             <Route path='/' element={<Home />}/>
             <Route path='/single-item' index element={<SingleItem />}/>
         </Routes>
