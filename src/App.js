@@ -11,6 +11,7 @@ import {
 
 import SingleItem from './Pages/SingleItem/singleItem';
 import ProductDetails from './Pages/ProductDetails/productDetails';
+import Products from './Pages/Products/products';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ function App() {
             <Route exact path='/' element={<Home />} />
             <Route path='/single-item' element={<SingleItem />} />
             <Route path='/product-details' element={<ProductDetails />} />
+            <Route path='/products' element={<Products />} />
           </Routes>
         </Router>
       )}

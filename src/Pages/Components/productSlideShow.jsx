@@ -17,32 +17,42 @@ import CardSlideShow from './cardSlideShow';
 export default function ProductSlideShow() {
     return (
         <>
-            <Swiper
-                slidesPerView={3}
-                breakpoints={{ 1536: { slidesPerView: 4, }, 900: { slidesPerView: 3, }, 600: { slidesPerView: 3, }, 0: { slidesPerView: 1, } }}
-                centeredSlides={true}
-                spaceBetween={30}
-                pagination={{ type: 'fraction', }}
-                initialSlide={2}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="swiper-container">
-                <SwiperSlide><Box>
-                    <CardSlideShow />
-                </Box></SwiperSlide>
-                <SwiperSlide><Box>
-                    <CardSlideShow />
-                </Box></SwiperSlide>
-                <SwiperSlide><Box>
-                    <CardSlideShow />
-                </Box></SwiperSlide>
-                <SwiperSlide><Box>
-                    <CardSlideShow />
-                </Box></SwiperSlide>
-                <SwiperSlide><Box>
-                    <CardSlideShow />
-                </Box></SwiperSlide>
-            </Swiper >
+            <Box sx={{
+                padding: {
+                    xs: "0 5px",
+                    sm: "0 15px",
+                    md: "0 50px",
+                    lg: "0 150px",
+                    xl: "0 250px"
+                }
+            }}>
+                <Swiper
+                    slidesPerView={3}
+                    breakpoints={{ 1536: { slidesPerView: 4, }, 900: { slidesPerView: 3, }, 600: { slidesPerView: 3, }, 0: { slidesPerView: 1, } }}
+                    centeredSlides={true}
+                    spaceBetween={30}
+                    pagination={{ type: 'fraction', }}
+                    initialSlide={2}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className="swiper-container">
+                    <SwiperSlide><Box>
+                        <CardSlideShow />
+                    </Box></SwiperSlide>
+                    <SwiperSlide><Box>
+                        <CardSlideShow />
+                    </Box></SwiperSlide>
+                    <SwiperSlide><Box>
+                        <CardSlideShow />
+                    </Box></SwiperSlide>
+                    <SwiperSlide><Box>
+                        <CardSlideShow />
+                    </Box></SwiperSlide>
+                    <SwiperSlide><Box>
+                        <CardSlideShow />
+                    </Box></SwiperSlide>
+                </Swiper >
+            </Box>
         </>
     )
 }
