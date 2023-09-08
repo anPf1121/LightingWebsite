@@ -1,12 +1,10 @@
-import { Box } from "@mui/material";
 import React from "react";
+import GlobalFooter from "../../../Components/footer";
 
 export default function ProductsFooter() {
     return (
         <>
-            <Box sx={{ padding: '50px', marginTop: '60px' }}>
-                abcdsadas
-            </Box>
+            <GlobalFooter></GlobalFooter>
         </>
     )
 }
