@@ -14,6 +14,7 @@ export default function HomeHeader() {
                             lg: '3.5rem',
                             xl: '6rem',
                         }, fontFamily: "'Cormorant Garamond', serif",
+                        color: '#000',
                         textAlign: 'center'
                     }}>
                         Tam Anh
@@ -25,6 +26,7 @@ export default function HomeHeader() {
                             lg: '2rem',
                             xl: '2.5rem',
                         }, fontFamily: "'Cormorant Garamond', serif",
+                        color: '#000',
                         textAlign: 'center'
                     }}>
                         Modern Design & Living
