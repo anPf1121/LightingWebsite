@@ -36,6 +36,7 @@ function App() {
             <Route path='/products' element={<Products />} />
             {/* <Route path='/about' element={<About />} /> */}
             {/* <Route path='/about' element={<Exp />} /> */}
+            {/* <Route path='/about' element={<Collections />} /> */}
           </Routes>
         </Router>
       )}

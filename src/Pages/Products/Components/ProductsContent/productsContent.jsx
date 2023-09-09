@@ -16,9 +16,6 @@ export default function ProductsContent() {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <Box sx={{ marginTop: '200px' }}>
-                    <ProductSlideShow />
-                </Box>
                 <Box sx={{
                     padding: {
                         xs: "0 5px",
@@ -28,17 +25,20 @@ export default function ProductsContent() {
                         xl: "0 250px"
                     }
                 }}>
-                    <Box sx={{ margin: '50px' }}>
+                    <Box sx={{ margin: '150px 0' }}>
                         <Typography variant="h2" sx={{ textAlign: "center" }}>Products</Typography>
                         <Typography variant="h5" sx={{ textAlign: "center" }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed iste ex quae tempora eum quam neque consequuntur consectetur placeat molestiae quidem nesciunt, animi hic illum quia quo provident eveniet culpa.</Typography>
                     </Box>
                     <Box>
-                        <Grid container sx={{ textAlign: 'center' }}>
+                        <Grid container sx={{ textAlign: 'center', position: 'relative' }}>
                             <Button sx={{
-                                marginLeft: '50%', transform: 'translateX(-50%)', color: 'black', border: '1px solid gray', display: {
+                                color: 'black', border: '1px solid gray', display: {
                                     xs: 'block',
                                     md: 'none'
-                                }
+                                },
+                                position: 'absolute',
+                                right: '15px',
+                                top: '-50px'
                             }}>filter</Button>
                             <Grid item xs={12} sm={12} md={4} lg={2} xl={2} sx={{
                                 backgroundColor: '#fafafa', display: {
@@ -48,11 +48,12 @@ export default function ProductsContent() {
                             }}>
                                 <Accordion sx={{ boxShadow: 'none', marginTop: '10px', backgroundColor: '#fafafa' }}>
                                     <AccordionDetails>
-                                        <Typography component='div'>Danh Mục Sản Phẩm</Typography>
+                                        <Typography component='div' variant="h5">Danh Mục Sản Phẩm</Typography>
                                         <div className="">checkbox 1</div>
                                         <div className="">checkbox 2</div>
                                         <div className="">checkbox 3</div>
                                         <div className="">checkbox 4</div>
+                                        <div className="">checkbox 5</div>
                                     </AccordionDetails>
                                 </Accordion>
                             </Grid>
@@ -126,7 +127,32 @@ export default function ProductsContent() {
                         </Grid>
                     </Box>
                 </Box>
-            </ThemeProvider>
+                <Box sx={{ margin: '50px 0' }}>
+                    <Box sx={{
+                        padding: {
+                            xs: "0 5px",
+                            sm: "0 15px",
+                            md: "0 50px",
+                            lg: "0 150px",
+                            xl: "0 250px"
+                        },
+                        display: "flex",
+                        justifyContent: "space-between"
+                    }}>
+                        <Typography variant="h4" sx={{
+                            marginLeft: '5px',}}>Sản Phẩm Bán Chạy</Typography>
+                        <Typography variant="h6" sx={{
+                            color: 'gray', 
+                            marginRight: '5px',
+                            cursor: 'pointer', "&:hover": {
+                                color: 'black',
+                                transition: '.3s'
+                            }
+                        }}>Xem Thêm</Typography>
+                    </Box>
+                    <ProductSlideShow />
+                </Box>
+            </ThemeProvider >
         </>
     )
 }

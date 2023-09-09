@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Link } from "react-router-dom";
 import './globalComponents.css';
-import { IconButton, Toolbar, AppBar, Stack, Button, styled, Badge } from '@mui/material';
+import { IconButton, Toolbar, AppBar, Stack, Button, styled, Badge, Box, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ToggleSideBar from './toggleSidebar';
@@ -24,9 +24,30 @@ export default function StickyNav() {
                     <Toolbar className="nav-wrapper">
                         <Stack direction='row' spacing={2} sx={{ flexGrow: 1 }}>
                             <ToggleSideBar />
-                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' },  textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}><Link to='/products' className='nav-link' >Sản Phẩm</Link></Button>
-                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}><Link to='/single-item' className='nav-link'>Bộ Sưu Tập</Link></Button>
-                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}><Link to='/about' className='nav-link'>Về Chúng Tôi</Link></Button>
+                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem', "&.hover": {
+                                border: 'none',
+                                boxShadow: 'none'
+                            } }}>
+                                <Link to='/products' className='nav-link' >
+                                    <Typography sx={{borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        color: '#000',
+                                    } }}>SẢN PHẨM</Typography>
+                                </Link>
+                            </Button>
+                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
+                                <Link to='/single-item' className='nav-link'>
+                                    <Typography sx={{borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        color: '#000',
+                                    } }}>VỀ CHÚNG TÔI</Typography>
+                                </Link>
+                            </Button>
+                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
+                                <Link to='/about' className='nav-link'>
+                                    <Typography sx={{borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        color: '#000',
+                                    } }}>BỘ SƯU TẬP</Typography>
+                                </Link>
+                            </Button>
                         </Stack>
                         <IconButton size='large' aria-label='logo' sx={{ position: 'absolute', left: '50%', transform: 'translate(-50%)' }}>
                             <div>
