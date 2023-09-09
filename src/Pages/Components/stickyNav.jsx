@@ -24,7 +24,7 @@ export default function StickyNav() {
                     <Toolbar className="nav-wrapper">
                         <Stack direction='row' spacing={2} sx={{ flexGrow: 1 }}>
                             <ToggleSideBar />
-                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' },  textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}><Link to='/single-item' className='nav-link'>Sản Phẩm</Link></Button>
+                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' },  textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}><Link to='/products' className='nav-link' >Sản Phẩm</Link></Button>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}><Link to='/single-item' className='nav-link'>Bộ Sưu Tập</Link></Button>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}><Link to='/about' className='nav-link'>Về Chúng Tôi</Link></Button>
                         </Stack>
@@ -47,7 +47,6 @@ export default function StickyNav() {
                         </Stack>
                     </Toolbar>
                 </AppBar>
-
             </div>
         </>
     )

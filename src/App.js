@@ -15,11 +15,10 @@ import Products from './Pages/Products/products';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    // Giả lập việc tải dữ liệu hoặc các tác vụ khởi đầu khác
+  useEffect(() => { // Giả lập việc tải dữ liệu hoặc các tác vụ khởi đầu khác
     setTimeout(() => {
       setLoading(false); // Kết thúc tải
-    }, 3000); // Thời gian giả lập, có thể thay đổi
+    }, 300); // Thời gian giả lập, có thể thay đổi
   }, []);
   return (
     <>
@@ -35,6 +34,8 @@ function App() {
             <Route path='/single-item' element={<SingleItem />} />
             <Route path='/product-details' element={<ProductDetails />} />
             <Route path='/products' element={<Products />} />
+            {/* <Route path='/about' element={<About />} /> */}
+            {/* <Route path='/about' element={<Exp />} /> */}
           </Routes>
         </Router>
       )}
