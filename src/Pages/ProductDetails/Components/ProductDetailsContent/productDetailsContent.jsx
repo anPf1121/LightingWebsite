@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, CardContent, Button, Typography, Grid } from "@mui/material";
+import { Box, Button, Typography, Grid } from "@mui/material";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 export default function ProductDetailsContent() {
   const [quantity, setQuantity] = useState(1);
 
@@ -23,113 +25,66 @@ export default function ProductDetailsContent() {
 
   return (
     <>
-      <Grid>
-        <CardContent>
-            <Box
-              sx={{
-                width: "50vw",
-                display: "block",
-                marginLeft: "25%",
-                marginTop: "15vh",
-                marginRight: "25%",
-              }}
-              className="produc-content-container"
-            >
-                <div
-                  style={{
-                    marginBottom: "6vh",
-                    marginTop: "10vh",
-                    display: "flex",
-                  }}
-                  className="btn-home"
-                >
+      <Grid container>
+        <Grid item xs={1} lg={3} md={2}></Grid>
+        <Grid item xs={12} lg={6} md={8}>
+          <Grid container my={8} spacing={2}>
+            <Grid item xs={12} sm={12}>
+              <Box p={1}>
+                <div className="btn-home">
                   <Link to="/">Trang Chủ </Link>/<span> Collections</span>
                 </div>
-              <div
-                style={{
-                  display: "block",
-                  width: "50vw",
-                }}
-              >
-                <div
-                  className="product-details-data-container"
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <div
-                    className="product-information-container"
-                    style={{ display: "block", marginRight: "2em" }}
-                  >
-                    <img
-                      src="https://static.wixstatic.com/media/5b4b7e_ddb3c954e30d417f8bbc945e87896aca~mv2.jpg/v1/fill/w_500,h_667,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/5b4b7e_ddb3c954e30d417f8bbc945e87896aca~mv2.jpg"
-                      alt=""
-                      style={{ border: "2px", solid: "#000", width: "25vw" }}
-                    />
-                    <Typography
-                      variant="h4"
-                      sx={{
-                        userSelect: "none",
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "1.1em",
-                        width: "25vw",
-                      }}
-                    >
-                      We offer a wide range of products in diverse designs and
-                      materials in our collections. Our collections are entirely
-                      customizable, allowing you to choose from an array of
-                      colors, finishes, and sizes, depending on the product or
-                      collection. This customization option enables you to
-                      create a personalized fixture by mixing and matching
-                      different elements. Since our items are all hand-made,
-                      variations in size, color, shape, and texture, such as
-                      fissures, bubbles, crackling, and crazing in the glass,
-                      are inherent in our glass products.
-                    </Typography>
-                  </div>
-                  <Box
-                    className="product-price-container"
-                    sx={{ display: "block", width: "25vw" }}
-                  >
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} sx={{}}>
+              <Box p={2}>
+                <div className="product-image">
+                  <img
+                    src="https://static.wixstatic.com/media/5b4b7e_ddb3c954e30d417f8bbc945e87896aca~mv2.jpg/v1/fill/w_500,h_667,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/5b4b7e_ddb3c954e30d417f8bbc945e87896aca~mv2.jpg"
+                    alt=""
+                    style={{ border: "2px", solid: "#000", width: "100%" }}
+                  />
+                </div>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Box p={2}>
+                <div className="product-inf-container">
+                  <div className="name">
                     <Typography
                       variant="h2"
                       sx={{
                         userSelect: "none",
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "2em",
+                        fontSize: "1.6em",
                         width: "25vw",
                       }}
                     >
                       Collections
                     </Typography>
-                    <div
-                      className="product-price"
-                      style={{ marginTop: "0.5em" }}
+                  </div>
+                  <div className="price">
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.5em",
+                        width: "100%",
+                      }}
                     >
-                      <Typography
-                        variant="h4"
-                        sx={{
-                          userSelect: "none",
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: "1.5em",
-                          width: "25vw",
-                        }}
-                      >
-                        $500.00
-                      </Typography>
-                    </div>
-
-                    <div
-                      className="product-options-input"
-                      style={{ boxSizing: "border-box", textAlign: "left" }}
-                    >
+                      $500.00
+                    </Typography>
+                  </div>
+                  <div className="product-options-input">
+                    <div className="quantity">
                       <div
                         className="input-quantity"
                         style={{
                           position: "relative",
                           display: "inline-block",
-                          marginTop: "1.5em",
+                          marginTop: "1em",
                           marginBottom: "2em",
-                          WebkitAppearance: "none",
-                          MozAppearance: "textfield",
                         }}
                       >
                         <div className="number-input-title"></div>
@@ -150,7 +105,6 @@ export default function ProductDetailsContent() {
                               display: "inline-block",
                               position: "relative",
                               width: "6em",
-                              textAlign: "left",
                             }}
                           >
                             <input
@@ -224,47 +178,76 @@ export default function ProductDetailsContent() {
                         </label>
                       </div>
                     </div>
-                    <div className="btn-options" style={{ display: "flex" }}>
-                      <Button
-                        className="Add-to-bag"
-                        color="primary"
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginRight: "1em",
-                          color: "white",
-                          width: "20em",
-                          height: "3.5em",
+                  </div>
+                  <div className="btn-options" style={{ display: "flex" }}>
+                    <Button
+                      className="Add-to-bag"
+                      color="primary"
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginRight: "1em",
+                        color: "white",
+                        width: "20em",
+                        height: "3.5em",
+                        border: "1px solid black",
+                        backgroundColor: "rgb(0,0,0)",
+                        "&:hover": {
+                          backgroundColor: "rgba(0,0,0,0.7)",
                           border: "1px solid black",
-                          backgroundColor: "rgb(0,0,0)",
-                          "&:hover": {
-                            backgroundColor: "rgba(0,0,0,0.7)",
-                            border: "1px solid black",
-                            color: "white",
-                            transition: ".3s",
-                          },
-                        }}
-                      >
-                        <span>Add To Bag</span>
-                      </Button>
-                      <button
-                        className="add-to-favourite-product"
-                        style={{
-                          paddingRight: "1em",
-                          paddingLeft: "1em",
-                          cursor: "pointer",
-                        }}
-                      >
-                        ❤️
-                      </button>
-                    </div>
-                  </Box>
+                          color: "white",
+                          transition: ".3s",
+                        },
+                      }}
+                    >
+                      <span>Add To Bag</span>
+                    </Button>
+                    <button
+                      className="add-to-favourite-product"
+                      style={{
+                        paddingRight: "1em",
+                        paddingLeft: "1em",
+                        cursor: "pointer",
+                      }}
+                    >
+                      ❤️
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </Box>
-        </CardContent>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Box p={2}>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    userSelect: "none",
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "1.1em",
+                    width: "100%",
+                  }}
+                >
+                  We offer a wide range of products in diverse designs and
+                  materials in our collections. Our collections are entirely
+                  customizable, allowing you to choose from an array of colors,
+                  finishes, and sizes, depending on the product or collection.
+                  This customization option enables you to create a personalized
+                  fixture by mixing and matching different elements. Since our
+                  items are all hand-made, variations in size, color, shape, and
+                  texture, such as fissures, bubbles, crackling, and crazing in
+                  the glass, are inherent in our glass products.
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Box p={1}></Box>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={1} lg={3} md={2}></Grid>
       </Grid>
+      {/* </div> */}
     </>
   );
 }
