@@ -43,7 +43,7 @@ export default function GlobalFooter() {
                         }
                     ]
                 }
-                bottom="Thành Lập Ngày 01 Tháng 01 Năm 2001"
+                bottom="Copyright 2023 © Công ty trách nhiệm hữu hạn điện chiếu sáng Tam Anh, thành lập ngày 6/5/2003"
             />
         </>
     )

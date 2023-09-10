@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
 import { Box } from '@mui/material';
-import CardSlideShow from './cardSlideShow';
+import ProductCard from './productCard';
 
 
 
@@ -37,19 +37,19 @@ export default function ProductSlideShow() {
                     modules={[Pagination, Navigation]}
                     className="swiper-container">
                     <SwiperSlide><Box>
-                        <CardSlideShow />
+                        <ProductCard />
                     </Box></SwiperSlide>
                     <SwiperSlide><Box>
-                        <CardSlideShow />
+                        <ProductCard />
                     </Box></SwiperSlide>
                     <SwiperSlide><Box>
-                        <CardSlideShow />
+                        <ProductCard />
                     </Box></SwiperSlide>
                     <SwiperSlide><Box>
-                        <CardSlideShow />
+                        <ProductCard />
                     </Box></SwiperSlide>
                     <SwiperSlide><Box>
-                        <CardSlideShow />
+                        <ProductCard />
                     </Box></SwiperSlide>
                 </Swiper >
             </Box>
