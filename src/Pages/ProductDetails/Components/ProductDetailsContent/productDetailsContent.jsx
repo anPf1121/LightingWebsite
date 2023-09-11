@@ -1,9 +1,54 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Typography, Grid } from "@mui/material";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+
 export default function ProductDetailsContent() {
+  function CustomTabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+  CustomTabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
+  }
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   const [quantity, setQuantity] = useState(1);
 
   const handleIncrease = () => {
@@ -22,6 +67,8 @@ export default function ProductDetailsContent() {
       setQuantity(newValue);
     }
   };
+
+  const label = { inputProps: { "aria-label": "Checkbox" } };
 
   return (
     <>
@@ -206,12 +253,15 @@ export default function ProductDetailsContent() {
                     <button
                       className="add-to-favourite-product"
                       style={{
-                        paddingRight: "1em",
-                        paddingLeft: "1em",
+                        width: "4em",
                         cursor: "pointer",
                       }}
                     >
-                      ❤️
+                      <Checkbox
+                        {...label}
+                        icon={<FavoriteBorder />}
+                        checkedIcon={<Favorite />}
+                      />
                     </button>
                   </div>
                 </div>
@@ -219,25 +269,140 @@ export default function ProductDetailsContent() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Box p={2}>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    userSelect: "none",
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "1.1em",
-                    width: "100%",
-                  }}
-                >
-                  We offer a wide range of products in diverse designs and
-                  materials in our collections. Our collections are entirely
-                  customizable, allowing you to choose from an array of colors,
-                  finishes, and sizes, depending on the product or collection.
-                  This customization option enables you to create a personalized
-                  fixture by mixing and matching different elements. Since our
-                  items are all hand-made, variations in size, color, shape, and
-                  texture, such as fissures, bubbles, crackling, and crazing in
-                  the glass, are inherent in our glass products.
-                </Typography>
+                <Box sx={{ width: "100%" }}>
+                  <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                    <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      variant="scrollable"
+                      scrollButtons={false}
+                      aria-label="basic tabs example"
+                    >
+                      <Tab
+                        label="Introduce"
+                        sx={{
+                          fontFamily: "'Cormorant Garamond', serif",
+                          fontSize: "1.1em",
+                          color: "#000",
+                        }}
+                        {...a11yProps(0)}
+                      />
+                      <Tab
+                        label="Product specifications"
+                        sx={{
+                          fontFamily: "'Cormorant Garamond', serif",
+                          fontSize: "1.1em",
+                          color: "#000",
+                        }}
+                        {...a11yProps(1)}
+                      />
+                    </Tabs>
+                  </Box>
+                  <CustomTabPanel value={value} index={0}>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1em",
+                        width: "100%",
+                      }}
+                    >
+                      We offer a wide range of products in diverse designs and
+                      materials in our collections. Our collections are entirely
+                      customizable, allowing you to choose from an array of
+                      colors, finishes, and sizes, depending on the product or
+                      collection. This customization option enables you to
+                      create a personalized fixture by mixing and matching
+                      different elements. Since our items are all hand-made,
+                      variations in size, color, shape, and texture, such as
+                      fissures, bubbles, crackling, and crazing in the glass,
+                      are inherent in our glass products.
+                    </Typography>
+                  </CustomTabPanel>
+                  <CustomTabPanel value={value} index={1}>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      Voltage: 85-265VAC
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      Power: 100W
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      Protection Rating: IP65
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      Luminous Flux: 9000
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      Lumens Color Temperature: 3000K - 6500K
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      Color Rendering Index (CRI): CRI &gt; 80
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      Dimensions: 370x295x65mm
+                    </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      Warranty: 2 years
+                    </Typography>
+                  </CustomTabPanel>
+                </Box>
               </Box>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -247,7 +412,6 @@ export default function ProductDetailsContent() {
         </Grid>
         <Grid item xs={1} lg={3} md={2}></Grid>
       </Grid>
-      {/* </div> */}
     </>
   );
 }
