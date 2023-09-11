@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Button, Typography, Grid } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Grid,
+  AppBar,
+  Toolbar,
+  IconButton,
+} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
@@ -70,11 +80,21 @@ export default function ProductDetailsContent() {
 
   const label = { inputProps: { "aria-label": "Checkbox" } };
 
+  const handleFacebookClick = () => {
+    // Xử lý khi người dùng nhấn nút Facebook
+    window.open("https://www.facebook.com", "_blank");
+  };
+
+  const handleInstagramClick = () => {
+    // Xử lý khi người dùng nhấn nút Instagram
+    window.open("https://www.instagram.com", "_blank");
+  };
+
   return (
     <>
       <Grid container>
-        <Grid item xs={1} lg={3} md={2}></Grid>
-        <Grid item xs={12} lg={6} md={8}>
+        <Grid item xs={1} lg={2} md={2}></Grid>
+        <Grid item xs={12} lg={8} md={8}>
           <Grid container my={8} spacing={2}>
             <Grid item xs={12} sm={12}>
               <Box p={1}>
@@ -103,7 +123,7 @@ export default function ProductDetailsContent() {
                       sx={{
                         userSelect: "none",
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "1.6em",
+                        fontSize: "2em",
                         width: "25vw",
                       }}
                     >
@@ -265,6 +285,17 @@ export default function ProductDetailsContent() {
                     </button>
                   </div>
                 </div>
+                <div>
+                  <Toolbar style={{ padding: "0px" }}>
+                    <Typography variant="h6" component="div"></Typography>
+                    <IconButton color="inherit" onClick={handleFacebookClick}>
+                      <FacebookIcon sx={{color: "blue"}} />
+                    </IconButton>
+                    <IconButton color="inherit" onClick={handleInstagramClick}>
+                      <InstagramIcon />
+                    </IconButton>
+                  </Toolbar>
+                </div>
               </Box>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -410,7 +441,7 @@ export default function ProductDetailsContent() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={1} lg={3} md={2}></Grid>
+        <Grid item xs={1} lg={2} md={2}></Grid>
       </Grid>
     </>
   );
