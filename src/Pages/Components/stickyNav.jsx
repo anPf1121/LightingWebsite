@@ -24,28 +24,45 @@ export default function StickyNav() {
                     <Toolbar className="nav-wrapper">
                         <Stack direction='row' spacing={2} sx={{ flexGrow: 1 }}>
                             <ToggleSideBar />
-                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem', "&.hover": {
-                                border: 'none',
-                                boxShadow: 'none'
-                            } }}>
+                            <Button color='inherit' sx={{
+                                display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem', "&.hover": {
+                                    border: 'none',
+                                    boxShadow: 'none'
+                                }
+                            }}>
                                 <Link to='/products' className='nav-link' >
-                                    <Typography sx={{borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
-                                        color: '#000',
-                                    } }}>SẢN PHẨM</Typography>
+                                    <Typography sx={{
+                                        borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                            color: '#000',
+                                        }
+                                    }}>SẢN PHẨM</Typography>
                                 </Link>
                             </Button>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
-                                <Link to='/single-item' className='nav-link'>
-                                    <Typography sx={{borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
-                                        color: '#000',
-                                    } }}>VỀ CHÚNG TÔI</Typography>
+                                <Link to='/collections' className='nav-link'>
+                                    <Typography sx={{
+                                        borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                            color: '#000',
+                                        }
+                                    }}>BỘ SƯU TẬP</Typography>
                                 </Link>
                             </Button>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
                                 <Link to='/about' className='nav-link'>
-                                    <Typography sx={{borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
-                                        color: '#000',
-                                    } }}>BỘ SƯU TẬP</Typography>
+                                    <Typography sx={{
+                                        borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                            color: '#000',
+                                        }
+                                    }}>DỰ ÁN</Typography>
+                                </Link>
+                            </Button>
+                            <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
+                                <Link to='/single-item' className='nav-link'>
+                                    <Typography sx={{
+                                        borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                            color: '#000',
+                                        }
+                                    }}>VỀ CHÚNG TÔI</Typography>
                                 </Link>
                             </Button>
                         </Stack>
