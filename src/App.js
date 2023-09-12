@@ -11,6 +11,8 @@ import SingleItem from './Pages/SingleItem/singleItem';
 import ProductDetails from './Pages/ProductDetails/productDetails';
 import Products from './Pages/Products/products';
 import Collections from './Pages/Collections/collections';
+import Projects from './Pages/Projects/projects';
+import AboutUs from './Pages/AboutUs/aboutUs';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -34,8 +36,8 @@ function App() {
             <Route path='/product-details' element={<ProductDetails />} />
             <Route path='/products' element={<Products />} />
             <Route path='/collections' element={<Collections />} />
-            {/* <Route path='/about' element={<About />} /> */}
-            {/* <Route path='/about' element={<Exp />} /> */}
+            <Route path='/projects' element={<Projects />} />
+            <Route path='/about-us' element={<AboutUs />} />
           </Routes>
         </Router>
       )}

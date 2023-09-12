@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Link } from "react-router-dom";
 import './globalComponents.css';
 import { IconButton, Toolbar, AppBar, Stack, Button, styled, Badge, Box, Typography } from '@mui/material';
@@ -48,7 +47,7 @@ export default function StickyNav() {
                                 </Link>
                             </Button>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
-                                <Link to='/about' className='nav-link'>
+                                <Link to='/projects' className='nav-link'>
                                     <Typography sx={{
                                         borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
                                             color: '#000',
@@ -57,7 +56,7 @@ export default function StickyNav() {
                                 </Link>
                             </Button>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
-                                <Link to='/single-item' className='nav-link'>
+                                <Link to='/about-us' className='nav-link'>
                                     <Typography sx={{
                                         borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
                                             color: '#000',

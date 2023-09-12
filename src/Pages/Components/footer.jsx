@@ -9,35 +9,32 @@ export default function GlobalFooter() {
                 columns={
                     [
                         {
-                            title: 'Address',
+                            title: 'Địa chỉ',
                             items: [
                                 {
-                                    title: '20 Lieu Giai, Ba Dinh District,'
-                                },
-                                {
-                                    title: 'Hanoi, Vietnam, 100000',
+                                    title: 'Số 22 Thanh Nhàn, phường Thanh Nhàn, Quận Hai Bà Trưng, Hà Nội'
                                 }
                             ]
                         },
                         {
-                            title: 'Contact',
+                            title: 'Liên hệ',
                             items: [
                                 {
-                                    title: '0983889888'
+                                    title: '0913.201920 – 0978.116688'
                                 }
                             ]
                         },
                         {
-                            title: 'Opening Hours',
+                            title: 'Giờ Làm Việc',
                             items: [
                                 {
-                                    title: 'Mon - Fri 8:00 am – 5:00 pm'
+                                    title: 'Thứ 2 - Thứ 6 8:00 SA – 5:00 CH'
                                 },
                                 {
-                                    title: 'Saturday - Fri 9:00 am – 5:00 pm'
+                                    title: 'Thứ 7 - Thứ 6 9:00 SA – 5:00 CH'
                                 },
                                 {
-                                    title: 'Sunday - Fri 10:00 am – 4:00 pm'
+                                    title: 'CN - Thứ 6 10:00 SA – 4:00 CH'
                                 },
                             ]
                         }
