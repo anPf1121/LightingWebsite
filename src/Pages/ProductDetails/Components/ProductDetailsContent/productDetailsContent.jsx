@@ -5,7 +5,6 @@ import {
   Button,
   Typography,
   Grid,
-  AppBar,
   Toolbar,
   IconButton,
 } from "@mui/material";
@@ -90,6 +89,8 @@ export default function ProductDetailsContent() {
     window.open("https://www.instagram.com", "_blank");
   };
 
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   return (
     <>
       <Grid container>
@@ -112,6 +113,92 @@ export default function ProductDetailsContent() {
                     style={{ border: "2px", solid: "#000", width: "100%" }}
                   />
                 </div>
+                <Box>
+                  <Swiper
+                    spaceBetween={10}
+                    navigation={true}
+                    slidesPerView={1}
+                    initialSlide={2}
+                    centeredSlides={true}
+                    thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : null}
+                    modules={[FreeMode, Navigation, Thumbs]}
+                    className="mySwiper2"
+                  >
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+                    </SwiperSlide>
+                  </Swiper>
+                  <Swiper
+                    onSwiper={setThumbsSwiper}
+                    spaceBetween={10}
+                    slidesPerView={4}
+                    freeMode={true}
+                    watchSlidesProgress={true}
+                    modules={[FreeMode, Navigation, Thumbs]}
+                    className="mySwiper"
+                    style={{
+                      height: "7em",
+                    }}
+                  >
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+                    </SwiperSlide>
+                  </Swiper>
+                </Box>
               </Box>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -289,7 +376,7 @@ export default function ProductDetailsContent() {
                   <Toolbar style={{ padding: "0px" }}>
                     <Typography variant="h6" component="div"></Typography>
                     <IconButton color="inherit" onClick={handleFacebookClick}>
-                      <FacebookIcon sx={{color: "blue"}} />
+                      <FacebookIcon sx={{ color: "#385898" }} />
                     </IconButton>
                     <IconButton color="inherit" onClick={handleInstagramClick}>
                       <InstagramIcon />
@@ -435,9 +522,6 @@ export default function ProductDetailsContent() {
                   </CustomTabPanel>
                 </Box>
               </Box>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Box p={1}></Box>
             </Grid>
           </Grid>
         </Grid>
