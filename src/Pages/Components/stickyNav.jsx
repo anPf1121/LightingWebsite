@@ -31,7 +31,7 @@ export default function StickyNav() {
                             }}>
                                 <Link to='/products' className='nav-link' >
                                     <Typography sx={{
-                                        borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
                                             color: '#000',
                                         }
                                     }}>SẢN PHẨM</Typography>
@@ -40,7 +40,7 @@ export default function StickyNav() {
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
                                 <Link to='/collections' className='nav-link'>
                                     <Typography sx={{
-                                        borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
                                             color: '#000',
                                         }
                                     }}>BỘ SƯU TẬP</Typography>
@@ -49,7 +49,7 @@ export default function StickyNav() {
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
                                 <Link to='/projects' className='nav-link'>
                                     <Typography sx={{
-                                        borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
                                             color: '#000',
                                         }
                                     }}>DỰ ÁN</Typography>
@@ -58,7 +58,7 @@ export default function StickyNav() {
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem' }}>
                                 <Link to='/about-us' className='nav-link'>
                                     <Typography sx={{
-                                        borderBottom: '3px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
                                             color: '#000',
                                         }
                                     }}>VỀ CHÚNG TÔI</Typography>
