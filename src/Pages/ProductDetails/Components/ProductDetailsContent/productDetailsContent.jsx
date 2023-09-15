@@ -526,7 +526,11 @@ export default function ProductDetailsContent() {
           </Grid>
         </Grid>
         <Grid item xs={1} lg={2} md={2}></Grid>
+        <Grid>
+          Duc
+        </Grid>
       </Grid>
+      {/* Duc */}
     </>
   );
 }
