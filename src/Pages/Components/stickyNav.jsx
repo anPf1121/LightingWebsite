@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import './globalComponents.css';
-import { IconButton, Toolbar, AppBar, Stack, Button, styled, Badge, Box, Typography } from '@mui/material';
+import { IconButton, Toolbar, AppBar, Stack, Button, styled, Badge, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ToggleSideBar from './toggleSidebar';

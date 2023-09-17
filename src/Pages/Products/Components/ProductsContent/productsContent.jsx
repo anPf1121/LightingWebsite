@@ -1,8 +1,7 @@
-import { Accordion, AccordionDetails, Autocomplete, Box, Button, Grid, Pagination, TextField, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, Box, Button, Grid, Pagination, Typography } from "@mui/material";
 import React from "react";
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
-import { Link } from "react-router-dom";
 import ProductCard from "../../../Components/productCard";
 import ProductSlideShow from "../../../Components/productSlideShow";
 

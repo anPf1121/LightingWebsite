@@ -88,9 +88,6 @@ export default function ProductDetailsContent() {
     // Xử lý khi người dùng nhấn nút Instagram
     window.open("https://www.instagram.com", "_blank");
   };
-
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
   return (
     <>
       <Grid container>
@@ -116,11 +113,6 @@ export default function ProductDetailsContent() {
             <Grid item xs={12} sm={6} sx={{}}>
               <Box p={2}>
                 <div className="product-image">
-                  {/* <img
-                    src="https://static.wixstatic.com/media/5b4b7e_ddb3c954e30d417f8bbc945e87896aca~mv2.jpg/v1/fill/w_500,h_667,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/5b4b7e_ddb3c954e30d417f8bbc945e87896aca~mv2.jpg"
-                    alt=""
-                    style={{ border: "2px", solid: "#000", width: "100%" }}
-                  /> */}
                 </div>
                 <ProductSwiper />
               </Box>
