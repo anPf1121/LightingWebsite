@@ -1,8 +1,22 @@
+.slick-prev:before,
+.slick-next:before {
+  color: black !important;
+}
 
-  .slick-prev:before, .slick-next:before {
-    color: black !important;
-  }
+.css-1aquho2-MuiTabs-indicator {
+  background-color: black !important;
+}
 
-  .css-1aquho2-MuiTabs-indicator {
-    background-color: black !important;
-  }
+.slick-image {
+  border: 1.5px solid #000;
+  display: block;
+  box-sizing: border-box;
+  cursor: pointer;
+  /* transition: border-color 0.3s ease; Màu và độ rộng của border */
+  /* Các thuộc tính CSS khác tùy chỉnh theo ý muốn */
+}
+
+.slick-image2:active {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 1.5px 2px gray;
+  box-sizing: border-box;
+}

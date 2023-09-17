@@ -18,6 +18,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import ProductSwiper from "./../ProductSwiper";
 import ProductSlideShow from "../../../Components/productSlideShow";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 export default function ProductDetailsContent() {
   function CustomTabPanel(props) {
@@ -104,16 +105,15 @@ export default function ProductDetailsContent() {
                       color: "black",
                     }}
                   >
-                    Trang Chủ{" "}
+                    Trang Chủ
                   </Link>
-                  /<span style={{ color: "gray" }}> Collections</span>
+                  /<span style={{ color: "gray" }}> Bộ Sưu Tập</span>
                 </div>
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} sx={{}}>
               <Box p={2}>
-                <div className="product-image">
-                </div>
+                <div className="product-image"></div>
                 <ProductSwiper />
               </Box>
             </Grid>
@@ -127,10 +127,9 @@ export default function ProductDetailsContent() {
                         userSelect: "none",
                         fontFamily: "'Cormorant Garamond', serif",
                         fontSize: "2em",
-                        width: "25vw",
                       }}
                     >
-                      Collections
+                      Bộ Sưu Tập
                     </Typography>
                   </div>
                   <div className="price">
@@ -168,7 +167,7 @@ export default function ProductDetailsContent() {
                               display: "block",
                             }}
                           >
-                            Quantity
+                            Số Lượng
                           </Typography>
                           <div
                             style={{
@@ -271,7 +270,18 @@ export default function ProductDetailsContent() {
                         },
                       }}
                     >
-                      <span>Add To Bag</span>
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <div>Thêm Vào Giỏ Hàng </div>
+                        <div
+                          style={{
+                            width: "2em",
+                            height: "2em",
+                            padding: "0 5px",
+                          }}
+                        >
+                          <AddShoppingCartIcon />
+                        </div>
+                      </Box>
                     </Button>
                     <button
                       className="add-to-favourite-product"
@@ -451,11 +461,11 @@ export default function ProductDetailsContent() {
               lg: "0 150px",
               xl: "0 250px",
             },
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '20px',
-            cursor: 'pointer'
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "20px",
+            cursor: "pointer",
           }}
         >
           <Typography
