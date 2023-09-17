@@ -16,8 +16,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import ProductSwiper from "./../ProductSwiper";
+import ProductSlideShow from "../../../Components/productSlideShow";
 
 export default function ProductDetailsContent() {
   function CustomTabPanel(props) {
@@ -100,105 +100,29 @@ export default function ProductDetailsContent() {
             <Grid item xs={12} sm={12}>
               <Box p={1}>
                 <div className="btn-home">
-                  <Link to="/">Trang Chủ </Link>/<span> Collections</span>
+                  <Link
+                    to="/"
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                    }}
+                  >
+                    Trang Chủ{" "}
+                  </Link>
+                  /<span style={{ color: "gray" }}> Collections</span>
                 </div>
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} sx={{}}>
               <Box p={2}>
                 <div className="product-image">
-                  <img
+                  {/* <img
                     src="https://static.wixstatic.com/media/5b4b7e_ddb3c954e30d417f8bbc945e87896aca~mv2.jpg/v1/fill/w_500,h_667,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/5b4b7e_ddb3c954e30d417f8bbc945e87896aca~mv2.jpg"
                     alt=""
                     style={{ border: "2px", solid: "#000", width: "100%" }}
-                  />
+                  /> */}
                 </div>
-                <Box>
-                  <Swiper
-                    spaceBetween={10}
-                    navigation={true}
-                    slidesPerView={1}
-                    initialSlide={2}
-                    centeredSlides={true}
-                    thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : null}
-                    modules={[FreeMode, Navigation, Thumbs]}
-                    className="mySwiper2"
-                  >
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                    </SwiperSlide>
-                  </Swiper>
-                  <Swiper
-                    onSwiper={setThumbsSwiper}
-                    spaceBetween={10}
-                    slidesPerView={4}
-                    freeMode={true}
-                    watchSlidesProgress={true}
-                    modules={[FreeMode, Navigation, Thumbs]}
-                    className="mySwiper"
-                    style={{
-                      height: "7em",
-                    }}
-                  >
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                    </SwiperSlide>
-                  </Swiper>
-                </Box>
+                <ProductSwiper />
               </Box>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -384,8 +308,6 @@ export default function ProductDetailsContent() {
                   </Toolbar>
                 </div>
               </Box>
-            </Grid>
-            <Grid item xs={12} sm={6}>
               <Box p={2}>
                 <Box sx={{ width: "100%" }}>
                   <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -397,20 +319,18 @@ export default function ProductDetailsContent() {
                       aria-label="basic tabs example"
                     >
                       <Tab
-                        label="Introduce"
+                        label="Mô tả sản phẩm"
                         sx={{
-                          fontFamily: "'Cormorant Garamond', serif",
                           fontSize: "1.1em",
-                          color: "#000",
+                          color: "#000 !important",
                         }}
                         {...a11yProps(0)}
                       />
                       <Tab
-                        label="Product specifications"
+                        label="Thông số kỹ thuật"
                         sx={{
-                          fontFamily: "'Cormorant Garamond', serif",
                           fontSize: "1.1em",
-                          color: "#000",
+                          color: "#000 !important",
                         }}
                         {...a11yProps(1)}
                       />
@@ -526,11 +446,38 @@ export default function ProductDetailsContent() {
           </Grid>
         </Grid>
         <Grid item xs={1} lg={2} md={2}></Grid>
-        <Grid>
-          Duc
-        </Grid>
       </Grid>
-      {/* Duc */}
+      <Box
+        sx={{ margin: "50px 0", backgroundColor: "#f7f7f7", padding: "50px 0" }}
+      >
+        <Box
+          sx={{
+            padding: {
+              xs: "0 5px",
+              sm: "0 15px",
+              md: "0 50px",
+              lg: "0 150px",
+              xl: "0 250px",
+            },
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '20px',
+            cursor: 'pointer'
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              marginLeft: "5px",
+            }}
+          >
+            Sản Phẩm Cùng Loại
+          </Typography>
+          <div className="btn-see-more">Xem Thêm</div>
+        </Box>
+        <ProductSlideShow />
+      </Box>
     </>
   );
 }

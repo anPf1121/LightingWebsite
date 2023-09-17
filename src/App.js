@@ -13,6 +13,14 @@ import Products from './Pages/Products/products';
 import Collections from './Pages/Collections/collections';
 import Projects from './Pages/Projects/projects';
 import AboutUs from './Pages/AboutUs/aboutUs';
+import { ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+      fontFamily: "'Cormorant Garamond', serif", // Thay 'Your-Font-Family' bằng font bạn muốn sử dụng
+  },
+})
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -23,6 +31,7 @@ function App() {
   }, []);
   return (
     <>
+    <ThemeProvider theme={theme}>
       {loading ? (
         // Hiển thị Spinner khi đang tải
         <div className="spinner">
@@ -41,6 +50,7 @@ function App() {
           </Routes>
         </Router>
       )}
+    </ThemeProvider>
     </>
   );
 }
