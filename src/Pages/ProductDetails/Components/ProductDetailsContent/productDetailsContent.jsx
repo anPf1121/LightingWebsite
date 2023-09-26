@@ -257,30 +257,45 @@ export default function ProductDetailsContent() {
                         justifyContent: "center",
                         alignItems: "center",
                         marginRight: "1em",
-                        color: "white",
-                        width: "20em",
-                        height: "3.5em",
-                        border: "1px solid black",
-                        backgroundColor: "rgb(0,0,0)",
+                        color: "black",
+                        backgroundColor: "white",
                         "&:hover": {
-                          backgroundColor: "rgba(0,0,0,0.7)",
-                          border: "1px solid black",
-                          color: "white",
+                          backgroundColor: "rgb(215 215 215)",
+                          color: "black",
                           transition: ".3s",
                         },
                       }}
                     >
                       <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <div>Thêm Vào Giỏ Hàng </div>
                         <div
                           style={{
                             width: "2em",
                             height: "2em",
-                            padding: "0 5px",
                           }}
                         >
                           <AddShoppingCartIcon />
                         </div>
+                      </Box>
+                    </Button>
+                    <Button
+                      className="buy-now"
+                      color="primary"
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginRight: "1em",
+                        color: "black",
+                        backgroundColor: "white",
+                        "&:hover": {
+                          backgroundColor: "rgb(215 215 215)",
+                          color: "black",
+                          transition: ".3s",
+                        },
+                      }}
+                    >
+                      <Box sx={{ display: "flex", alignItems: "center", textTransform: 'none' }}>
+                        <Typography variant="h6"><Link style={{ color: 'black', textDecoration: 'none'}} to='/payment'>Mua Ngay</Link></Typography>
                       </Box>
                     </Button>
                     <button
@@ -288,12 +303,13 @@ export default function ProductDetailsContent() {
                       style={{
                         width: "4em",
                         cursor: "pointer",
+                        border: 'none'
                       }}
                     >
                       <Checkbox
                         {...label}
                         icon={<FavoriteBorder />}
-                        checkedIcon={<Favorite />}
+                        checkedIcon={<Favorite style={{ color: 'red' }}/>}
                       />
                     </button>
                   </div>

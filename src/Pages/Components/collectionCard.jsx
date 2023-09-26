@@ -13,7 +13,7 @@ export default function CollectionCard() {
                 <CardMedia alt='unsplash image' component="img" image="https://static.wixstatic.com/media/5b4b7e_16fbc48187634d308f1d5572efd2b4cd~mv2.webp" />
                 <Typography variant='h4' sx={{ textAlign: 'center', margin: '10px 0' }}>Collection Name</Typography>
                 <Typography sx={{ textAlign: 'center', margin: '10px 0' }}>Collection description</Typography>
-                <BtnSeeMore />
+                <BtnSeeMore style={{mgLeft: '50%', transform: 'translateX(-50%)'}}/>
             </Card>
         </>
     )

@@ -1,9 +1,11 @@
-import { Accordion, AccordionDetails, Box, Button, Grid, Pagination, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, Box, Button, Divider, Grid, List, ListItem, ListItemText, Pagination, Typography } from "@mui/material";
 import React from "react";
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
 import ProductCard from "../../../Components/productCard";
 import ProductSlideShow from "../../../Components/productSlideShow";
+import StickyBox from "react-sticky-box";
+import { useState } from "react";
 
 const theme = createTheme({
     typography: {
@@ -13,6 +15,8 @@ const theme = createTheme({
 
 
 export default function ProductsContent() {
+    let [toggleFilter, setToggleFilter] = useState(false);
+    const handleToggleFilter = () => setToggleFilter(!toggleFilter);
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -38,32 +42,191 @@ export default function ProductsContent() {
                                 },
                                 position: 'absolute',
                                 right: '15px',
-                                top: '-50px'
-                            }}>filter</Button>
+                                top: '-50px',
+                                textTransform: 'none'
+                            }} onClick={() => handleToggleFilter()}>Bộ lọc</Button>
                             <Grid item xs={12} sm={12} md={4} lg={2} xl={2} sx={{
-                                marginTop: '9px',
-                                backgroundColor: '#f7f7f7', display: {
+                                display: {
                                     xs: 'none',
                                     md: 'block'
                                 }
                             }}>
-                                <Accordion sx={{ boxShadow: 'none', marginTop: '10px', backgroundColor: '#f7f7f7' }} className="product-menu">
-                                    <AccordionDetails>
-                                        <Typography component='div' variant="h5" sx={{ marginBottom: '25px' }} >Danh Mục Sản Phẩm</Typography>
-                                        <div className="menu-item">Đèn downlight</div>
-                                        <div className="menu-item">Đèn ốp trần</div>
-                                        <div className="menu-item">Đèn sân vườn</div>
-                                        <div className="menu-item">Đèn rọi ray</div>
-                                        <div className="menu-item">Đèn panel</div>
-                                        <div className="menu-item">Đèn led dây</div>
-                                        <div className="menu-item">Đèn bulb</div>
-                                        <div className="menu-item">Đèn tuýp</div>
-                                        <div className="menu-item">Đèn smart</div>
-                                        <div className="menu-item">Đèn gắn tường</div>
-                                        <div className="menu-item">Đèn sự cố - emergency</div>
-                                        <div className="menu-item">Đèn pha</div>
-                                    </AccordionDetails>
-                                </Accordion>
+                                <StickyBox offsetTop={20} offsetBottom={20}>
+                                    <Accordion sx={{ boxShadow: 'none', marginTop: '10px' }} className="product-menu">
+                                        <AccordionDetails>
+                                            <Typography component='div' variant="h5" sx={{ marginBottom: '25px' }} >Danh Mục Sản Phẩm</Typography>
+                                            <div className="menu-item">
+                                                Đèn downlight
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List>
+                                            </div>
+                                            <div className="menu-item">Đèn ốp trần
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn sân vườn
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn rọi ray
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn panel
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn led dây
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn bulb
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn tuýp
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn smart
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn gắn tường
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn sự cố - emergency
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                            <div className="menu-item">Đèn pha
+
+                                                <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
+                                                    <ListItem button>
+                                                        <ListItemText primary="Nhỏ" />
+                                                    </ListItem>
+                                                    <Divider />
+                                                    <ListItem button divider>
+                                                        <ListItemText primary="Vừa" />
+                                                    </ListItem>
+                                                    <ListItem button>
+                                                        <ListItemText primary="Lớn" />
+                                                    </ListItem>
+                                                </List></div>
+                                        </AccordionDetails>
+                                    </Accordion>
+                                </StickyBox>
                             </Grid>
                             <Grid item xs={12} sm={12} md={8} lg={10} xl={10}>
                                 <Grid container sx={{ alignItems: 'center', textAlign: 'center' }}>

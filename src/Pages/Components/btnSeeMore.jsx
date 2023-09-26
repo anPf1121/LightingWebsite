@@ -3,7 +3,7 @@ import React from 'react'
 import './globalComponents.css';
 import { Button } from '@mui/material';
 
-export default function BtnSeeMore() {
+export default function BtnSeeMore({mgLeft, transform}) {
     return (
         <>
             <Button color='primary' sx={{
@@ -12,8 +12,8 @@ export default function BtnSeeMore() {
                 alignItems: 'center',
                 margin: '5px 0px',
                 marginBottom: '50px',
-                marginLeft: '50%',
-                transform: 'translateX(-50%)',
+                marginLeft: `${mgLeft}`,
+                transform: `${transform}`,
                 color: 'white',
                 padding: '8px 20px',
                 border: '1px solid black',

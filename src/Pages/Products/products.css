@@ -8,3 +8,11 @@
 .product-menu .menu-item:hover {
     background-color: rgb(240, 240, 240);
 }
+
+.menu-dropdown {
+    display: none;
+}
+
+.menu-item:hover .menu-dropdown {
+    display: block;
+}

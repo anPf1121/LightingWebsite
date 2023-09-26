@@ -4,7 +4,7 @@ export default function AboutUsContent() {
     return (
         <>
             <Box sx={{
-                marginTop: '200px', padding: {
+                margin: '100px 0', padding: {
                     xs: "0 5px",
                     sm: "0 15px",
                     md: "0 50px",

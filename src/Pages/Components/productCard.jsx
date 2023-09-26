@@ -30,11 +30,7 @@ export default function ProductCard() {
                             color: 'gray',
                             textAlign: 'center',
                         }}>20.000.000 VND</Typography>
-                        <Box className="card-overlay">
-                            {/* <Typography variant='h6' sx={{color: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', lineHeight: '450px', fontSize: '1.5rem'}}>
-                            Xem Chi Tiết
-                        </Typography>  */}
-                        </Box>
+                        <Box className="card-overlay"></Box>
                     </CardContent>
                 </Link>
                 <div onClick={handleOpen} className='fastViewDetails'><GridMaximize2O className='iconFastView' /></div>

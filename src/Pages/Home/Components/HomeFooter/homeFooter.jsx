@@ -57,7 +57,9 @@ export default function HomeFooter() {
                     </Grid>
                 </Box>
             </Box>
-            <GlobalFooter />
+            <GlobalFooter style={{
+                backgroundColor: '#e7e7e7',
+            }} />
         </>
     )
 }
