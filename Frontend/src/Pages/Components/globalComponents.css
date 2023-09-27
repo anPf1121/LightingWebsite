@@ -260,13 +260,25 @@ h6 {
 }
 /* end cart details */
 
-.top-btn--icon {
-    animation: gototop .2s linear infinite alternate-reverse;
+/* searchbar */
+.searchbar {
+    position: absolute;
+    top: 55px;
+    right: 1vw;
+    width: 98vw;
+    height: 30px;
+    border-radius: 20px;
+    border: 1px solid #eeeeee;
+    padding: 10px;
+    outline: none;
 }
-@keyframes gototop {
-    0% {
-        transform: translateY(-0.2rem);
-    } 100% {
-        transform: translateY(0.2rem);
-    }
+
+.btn-search {
+    position: absolute;
+    top: 58px;
+    right: 2vw;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
 }
+/* end searchbar */

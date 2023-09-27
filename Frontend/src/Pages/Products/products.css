@@ -16,3 +16,36 @@
 .menu-item:hover .menu-dropdown {
     display: block;
 }
+
+.filter-sidebar {
+    position: fixed;
+    width: 300px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    background-color: white;
+    z-index: 200;
+    transform: translateX(100%);
+    transition: .5s;
+}
+
+.btn-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-close:hover {
+    color: rgba(0, 0, 0, 0.452);
+}
+
+.filter-by-lighting-type {
+    margin-top: 50px;
+}
+
+.filter-active {
+    transform: translateX(0%);
+}

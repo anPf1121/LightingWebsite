@@ -19,6 +19,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 export default function StickyNav() {
     let [toggleCart, setToggleCart] = useState(false);
     const handleToggleCart = () => setToggleCart(!toggleCart);
+    let [toggleSearch, setToggleSearch] = useState(false);
+    const handleToggleSearch = () => setToggleSearch(!toggleSearch);
     return (
         <>
             <div className="nav-container">
@@ -68,12 +70,19 @@ export default function StickyNav() {
                                 </Link>
                             </Button>
                         </Stack>
-                        <IconButton size='large' aria-label='logo' sx={{ position: 'absolute', left: '50%', transform: 'translate(-50%)' }}>
+                        <IconButton size='large' aria-label='logo' sx={{
+                            position: 'absolute', left: '50%', transform: 'translate(-50%)',
+                            '&:hover': {
+                                bgcolor: '#ffffff00'
+                            }
+                        }}>
                             <div>
                                 <Link to='/' className="logo" style={{
                                     textDecoration: 'none', color: 'black'
                                 }}>
-                                    Vision Led
+                                    <Typography variant='h4'>
+                                        Vision Led
+                                    </Typography>
                                 </Link>
                             </div>
                         </IconButton>
@@ -95,7 +104,11 @@ export default function StickyNav() {
                                     </Box>
                                 </div> : ""}
                             </div>
-                            <div className='right-nav'><SearchIcon /></div>
+                            <div className='right-nav search-ic' onClick={handleToggleSearch}><SearchIcon /></div>
+                            <div className="gr-search">
+                                <input className={`searchbar ${(toggleSearch === true) ? 'searchbar-active' : ''} `} type="text" />
+                                <button className="btn-search"><SearchIcon /></button>
+                            </div>
                         </Stack>
                     </Toolbar>
                 </AppBar>

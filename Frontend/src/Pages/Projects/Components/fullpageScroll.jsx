@@ -43,7 +43,7 @@ export default function FullpageScroll() {
                                 },
                                 alignItems: 'center'
                             }}>
-                                <Typography variant='h3'>Title</Typography>
+                                <Typography variant='h3' sx={{ textAlign: 'center' }}>Title</Typography>
                                 <Typography sx={{margin: '20px 0'}} variant='h6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, est eaque minima id blanditiis et assumenda aliquid placeat! Distinctio veritatis sit, perspiciatis assumenda laboriosam delectus magni illo earum provident ullam.</Typography>
                             </Box>
                         </Grid>
@@ -68,7 +68,7 @@ export default function FullpageScroll() {
                                 },
                                 alignItems: 'center'
                             }}>
-                                <Typography variant='h3'>Title</Typography>
+                                <Typography variant='h3' sx={{ textAlign: 'center' }}>Title</Typography>
                                 <Typography sx={{margin: '20px 0'}} variant='h6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, est eaque minima id blanditiis et assumenda aliquid placeat! Distinctio veritatis sit, perspiciatis assumenda laboriosam delectus magni illo earum provident ullam.</Typography>
                             </Box>
                         </Grid>
@@ -87,7 +87,7 @@ export default function FullpageScroll() {
                                 },
                                 alignItems: 'center'
                             }}>
-                                <Typography variant='h3'>Title</Typography>
+                                <Typography variant='h3' sx={{ textAlign: 'center' }}>Title</Typography>
                                 <Typography sx={{margin: '20px 0'}} variant='h6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, est eaque minima id blanditiis et assumenda aliquid placeat! Distinctio veritatis sit, perspiciatis assumenda laboriosam delectus magni illo earum provident ullam.</Typography>
                             </Box>
                         </Grid>
@@ -134,7 +134,7 @@ export default function FullpageScroll() {
                                 },
                                 alignItems: 'center'
                             }}>
-                                <Typography variant='h3'>Title</Typography>
+                                <Typography variant='h3' sx={{ textAlign: 'center' }}>Title</Typography>
                                 <Typography sx={{margin: '20px 0'}} variant='h6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, est eaque minima id blanditiis et assumenda aliquid placeat! Distinctio veritatis sit, perspiciatis assumenda laboriosam delectus magni illo earum provident ullam.</Typography>
                             </Box>
                         </Grid>
@@ -159,7 +159,7 @@ export default function FullpageScroll() {
                                 },
                                 alignItems: 'center'
                             }}>
-                                <Typography variant='h3'>Title</Typography>
+                                <Typography variant='h3' sx={{ textAlign: 'center' }}>Title</Typography>
                                 <Typography sx={{margin: '20px 0'}} variant='h6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, est eaque minima id blanditiis et assumenda aliquid placeat! Distinctio veritatis sit, perspiciatis assumenda laboriosam delectus magni illo earum provident ullam.</Typography>
                             </Box>
                         </Grid>
@@ -178,7 +178,7 @@ export default function FullpageScroll() {
                                 },
                                 alignItems: 'center'
                             }}>
-                                <Typography variant='h3'>Title</Typography>
+                                <Typography variant='h3' sx={{ textAlign: 'center' }}>Title</Typography>
                                 <Typography sx={{margin: '20px 0'}} variant='h6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, est eaque minima id blanditiis et assumenda aliquid placeat! Distinctio veritatis sit, perspiciatis assumenda laboriosam delectus magni illo earum provident ullam.</Typography>
                             </Box>
                         </Grid>

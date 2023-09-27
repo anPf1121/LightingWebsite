@@ -12,7 +12,6 @@ export default function ProductCard() {
     return (
         <>
             <Card sx={{ cursor: 'pointer', border: '1px solid #f3f3f3' }} className='card'>
-
                 <Link to='/product-details' style={{
                     textDecoration: 'none',
                 }}>

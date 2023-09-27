@@ -1,11 +1,11 @@
-import { Accordion, AccordionDetails, Box, Button, Divider, Grid, List, ListItem, ListItemText, Pagination, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, Box, Divider, Grid, List, ListItem, ListItemText, Pagination, Typography } from "@mui/material";
 import React from "react";
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
 import ProductCard from "../../../Components/productCard";
 import ProductSlideShow from "../../../Components/productSlideShow";
 import StickyBox from "react-sticky-box";
-import { useState } from "react";
+import MobileProductsFilter from "../mobileProductsFilter";
 
 const theme = createTheme({
     typography: {
@@ -15,8 +15,6 @@ const theme = createTheme({
 
 
 export default function ProductsContent() {
-    let [toggleFilter, setToggleFilter] = useState(false);
-    const handleToggleFilter = () => setToggleFilter(!toggleFilter);
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -35,16 +33,7 @@ export default function ProductsContent() {
                     </Box>
                     <Box>
                         <Grid container sx={{ position: 'relative' }}>
-                            <Button sx={{
-                                color: 'black', border: '1px solid gray', display: {
-                                    xs: 'block',
-                                    md: 'none'
-                                },
-                                position: 'absolute',
-                                right: '15px',
-                                top: '-50px',
-                                textTransform: 'none'
-                            }} onClick={() => handleToggleFilter()}>Bộ lọc</Button>
+                            <MobileProductsFilter />
                             <Grid item xs={12} sm={12} md={4} lg={2} xl={2} sx={{
                                 display: {
                                     xs: 'none',
@@ -58,14 +47,14 @@ export default function ProductsContent() {
                                             <div className="menu-item">
                                                 Đèn downlight
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List>
@@ -73,154 +62,154 @@ export default function ProductsContent() {
                                             <div className="menu-item">Đèn ốp trần
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn sân vườn
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn rọi ray
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn panel
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn led dây
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn bulb
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn tuýp
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn smart
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn gắn tường
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn sự cố - emergency
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
                                             <div className="menu-item">Đèn pha
 
                                                 <List className="menu-dropdown" component="nav" aria-label="mailbox folders">
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Nhỏ" />
                                                     </ListItem>
                                                     <Divider />
-                                                    <ListItem button divider>
+                                                    <ListItem divider>
                                                         <ListItemText primary="Vừa" />
                                                     </ListItem>
-                                                    <ListItem button>
+                                                    <ListItem>
                                                         <ListItemText primary="Lớn" />
                                                     </ListItem>
                                                 </List></div>
