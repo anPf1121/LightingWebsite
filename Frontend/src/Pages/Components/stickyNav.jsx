@@ -94,6 +94,7 @@ export default function StickyNav() {
                                         <ShoppingCartIcon />
                                     </StyledBadge>
                                 </IconButton>
+                                {(toggleCart === true) ? <Overlay func={handleToggleCart} /> : ""}
                                 {(toggleCart === true) ? <div className="cart-details">
                                     <Box className='cart-content' sx={{ textAlign: 'center' }}>
                                         <Box sx={{ margin: '50px 0' }}>

@@ -252,11 +252,12 @@ h6 {
 
 .cart-details {
     width: 300px;
-    position: absolute;
-    right: -45px;
+    position: fixed;
+    right: 25px;
     border-radius: 5px;
     padding: 20px;
     background-color: white;
+    z-index: 100;
 }
 /* end cart details */
 

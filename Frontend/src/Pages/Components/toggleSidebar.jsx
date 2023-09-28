@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { TbAlignJustified } from "react-icons/tb";
 import { AiOutlineClose } from "react-icons/ai";
-import Overlay from './overlay';
 
 export default function ToggleSideBar() {
     const [open, openState] = useState(true);
