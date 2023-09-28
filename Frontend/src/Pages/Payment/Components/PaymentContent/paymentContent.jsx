@@ -1,5 +1,4 @@
-import { Check } from '@mui/icons-material';
-import { Box, Button, Divider, Grid, Paper, Step, StepLabel, Stepper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, styled } from '@mui/material'
+import { Box, Button, Divider, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom';
 function createData(
@@ -16,53 +15,9 @@ const rows = [
     createData('Đèn LED Ốp Trần Đổi Màu 490/40W Điều Khiển Remote LN19.RF', 'Đèn led', '10000000 đ', 2, '20000000 đ'),
 ];
 
-const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
-    color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
-    display: 'flex',
-    height: 22,
-    alignItems: 'center',
-    ...(ownerState.active && {
-        color: '#000000',
-    }),
-    '& .QontoStepIcon-completedIcon': {
-        color: '#000000',
-        zIndex: 1,
-        fontSize: 18,
-    },
-    '& .QontoStepIcon-circle': {
-        width: 8,
-        height: 8,
-        borderRadius: '50%',
-        backgroundColor: 'currentColor',
-    },
-}));
-
-
-
-function QontoStepIcon(props) {
-    const { active, completed, className } = props;
-
-    return (
-        <QontoStepIconRoot ownerState={{ active }} className={className}>
-            {completed ? (
-                <Check className="QontoStepIcon-completedIcon" />
-            ) : (
-                <div className="QontoStepIcon-circle" />
-            )}
-        </QontoStepIconRoot>
-    );
-}
-
-const steps = [
-    'Chọn sản phẩm',
-    'Xác nhận đơn hàng',
-    'Đặt hàng',
-];
-
 export default function PaymentContent() {
     return (
         <>
-
             <Box sx={{
                 padding: {
                     xs: "5px",
@@ -70,15 +25,6 @@ export default function PaymentContent() {
                 },
                 marginTop: '100px'
             }}>
-                <Box sx={{ margin: '25.5px 0' }}>
-                    <Stepper activeStep={1} alternativeLabel>
-                        {steps.map((label) => (
-                            <Step key={label}>
-                                <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
-                            </Step>
-                        ))}
-                    </Stepper>
-                </Box>
                 <Typography variant='h3' sx={{
                     padding: {
                         xs: "5px",
