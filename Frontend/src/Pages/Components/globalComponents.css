@@ -261,24 +261,56 @@ h6 {
 /* end cart details */
 
 /* searchbar */
+.search-box .search-ic {
+    display: block;
+}
+
+.searchbox-active .search-ic {
+    display: none;
+}
+
 .searchbar {
     position: absolute;
     top: 55px;
     right: 1vw;
-    width: 98vw;
-    height: 30px;
     border-radius: 20px;
     border: 1px solid #eeeeee;
     padding: 10px;
+    padding-right: 55px;
     outline: none;
+    display: none;
+    z-index: 100;
+}
+
+.searchbox-active .searchbar {
+    display: block;
 }
 
 .btn-search {
     position: absolute;
-    top: 58px;
+    top: 60px;
     right: 2vw;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0);
     border: none;
+    display: none;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.searchbox-active .btn-search {
+    display: block;
 }
 /* end searchbar */
+
+/* overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.26);
+    z-index: 50;
+}
+/* end overlay */

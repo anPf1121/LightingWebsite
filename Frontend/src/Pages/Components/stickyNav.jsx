@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ToggleSideBar from './toggleSidebar';
 import { useState } from 'react';
+import Overlay from './overlay';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -104,14 +105,18 @@ export default function StickyNav() {
                                     </Box>
                                 </div> : ""}
                             </div>
-                            <div className='right-nav search-ic' onClick={handleToggleSearch}><SearchIcon /></div>
-                            <div className="gr-search">
-                                <input className={`searchbar ${(toggleSearch === true) ? 'searchbar-active' : ''} `} type="text" />
-                                <button className="btn-search"><SearchIcon /></button>
+                            <div className={`searchbox ${(toggleSearch === true) ? 'searchbox-active' : ''} ${(toggleSearch === true) ? 'searchbar-active' : ''}`}>
+                                {(toggleSearch === true) ? <Overlay func={handleToggleSearch}/> : ""}
+                                <div className='right-nav search-ic' onClick={handleToggleSearch}><SearchIcon /></div>
+                                <div className="gr-search">
+                                    <input className={`searchbar`} type="text" />
+                                    <button className="btn-search"><SearchIcon /></button>
+                                </div>
                             </div>
                         </Stack>
                     </Toolbar>
                 </AppBar>
+
             </div>
         </>
     )

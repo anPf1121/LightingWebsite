@@ -2,6 +2,7 @@ import { Button, Collapse, List, ListItemButton, ListItemIcon, ListItemText } fr
 import React, { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
+import Overlay from '../../Components/overlay';
 export default function MobileProductsFilter() {
     let [toggleFilter, setToggleFilter] = useState(false);
     const [open, setOpen] = React.useState(true);
@@ -22,6 +23,7 @@ export default function MobileProductsFilter() {
                 top: '-50px',
                 textTransform: 'none'
             }} onClick={handleToggleFilter}>Bộ lọc</Button>
+            {(toggleFilter === true) ? <Overlay func={handleToggleFilter} /> : ""}
             <div className={`filter-sidebar ${(toggleFilter === true) ? 'filter-active' : ''}`}>
                 <div className="btn-close" onClick={handleToggleFilter}><CloseIcon /></div>
                 <div className="filter-by-lighting-type">
