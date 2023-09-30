@@ -7,6 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ToggleSideBar from './toggleSidebar';
 import { useState } from 'react';
 import Overlay from './overlay';
+import LoginForm from './loginForm';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -88,6 +89,7 @@ export default function StickyNav() {
                             </div>
                         </IconButton>
                         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
+                            <LoginForm />
                             <div className='right-nav' style={{ position: 'relative' }}>
                                 <IconButton aria-label="cart" onClick={() => handleToggleCart()}>
                                     <StyledBadge badgeContent={0} color="error">
@@ -107,7 +109,7 @@ export default function StickyNav() {
                                 </div> : ""}
                             </div>
                             <div className={`searchbox ${(toggleSearch === true) ? 'searchbox-active' : ''} ${(toggleSearch === true) ? 'searchbar-active' : ''}`}>
-                                {(toggleSearch === true) ? <Overlay func={handleToggleSearch}/> : ""}
+                                {(toggleSearch === true) ? <Overlay func={handleToggleSearch} /> : ""}
                                 <div className='right-nav search-ic' onClick={handleToggleSearch}><SearchIcon /></div>
                                 <div className="gr-search">
                                     <input className={`searchbar`} type="text" />
