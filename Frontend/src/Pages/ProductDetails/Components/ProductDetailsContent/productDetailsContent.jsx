@@ -466,7 +466,7 @@ export default function ProductDetailsContent() {
         <Grid item xs={1} lg={2} md={2}></Grid>
       </Grid>
       <Box
-        sx={{ margin: "50px 0", backgroundColor: "#f7f7f7", padding: "50px 0" }}
+        sx={{ margin: "50px 0", marginBottom: '0', backgroundColor: "#f7f7f7", padding: "50px 0" }}
       >
         <Box
           sx={{

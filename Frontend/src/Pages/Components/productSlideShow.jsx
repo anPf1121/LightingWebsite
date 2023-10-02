@@ -24,7 +24,7 @@ export default function ProductSlideShow() {
                     md: "0 50px",
                     lg: "0 150px",
                     xl: "0 250px"
-                }
+                },
             }}>
                 <Swiper
                     slidesPerView={3}

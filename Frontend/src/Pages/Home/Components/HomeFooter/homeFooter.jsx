@@ -11,7 +11,6 @@ export default function HomeFooter() {
                     md: '50px'
                 },
                 backgroundColor: 'rgba(50, 50, 50)',
-                marginBottom: '50px'
             }}>
                 <Box sx={{
                     width: '100%',
