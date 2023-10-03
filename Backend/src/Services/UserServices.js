@@ -1,6 +1,6 @@
 const User = require("../Models/User")
 const bcrypt = require("bcrypt")
-const { generalAccessToken } = require("./JwtServices")
+const { generalAccessToken, generalRefreshToken } = require("./JwtServices")
 
 const createUser = (newUser) => {
     return new Promise(async (resolve, reject) => {
@@ -49,7 +49,8 @@ const loginUser = (userLogin) => {
                     message: "the user is not defined"
                 })
             }
-            const comparePassword = bcrypt.compareSync(password, checkUser.password)
+
+            const comparePassword = bcrypt.compare(password, checkUser.password)
             if (!comparePassword) {
                 resolve({
                     status: "OK",
@@ -61,7 +62,7 @@ const loginUser = (userLogin) => {
                 isAdmin: checkUser.isAdmin
             })
 
-            const refresh_token = await generalAccessToken({
+            const refresh_token = await generalRefreshToken({
                 id: checkUser.id,
                 isAdmin: checkUser.isAdmin
             })
@@ -129,9 +130,50 @@ const deleteUser = (id) => {
     })
 }
 
+const getAllUser = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const allUser = await User.find(id)
+            resolve({
+                status: "OK",
+                message: "GET ALL USER SUCCESS",
+                data: allUser
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    })
+}
+
+const getDetailsUser = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await User.findOne({
+                _id: id
+            })
+            if (user === null) {
+                resolve({
+                    status: "OK",
+                    message: "The user is not defined"
+                })
+            }
+
+            resolve({
+                status: "OK",
+                message: "GET USER DETAILS SUCCESS",
+                data: user
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    })
+}
+
 module.exports = {
     createUser,
     loginUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getAllUser,
+    getDetailsUser
 }

@@ -1,4 +1,5 @@
 const UserService = require('../Services/UserServices')
+const JwtService = require('../Services/JwtServices')
 
 const createUser = async (req, res) => {
     try {
@@ -64,7 +65,7 @@ const updateUser = async (req, res) => {
     try {
         const userID = req.params.id
         const data = req.body
-        if(!userID) {
+        if (!userID) {
             return res.status(200).json({
                 status: 'ERR',
                 message: 'The user id is required'
@@ -82,7 +83,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const userID = req.params.id
-        if(!userID) {
+        if (!userID) {
             return res.status(200).json({
                 status: 'ERR',
                 message: 'The user id is required'
@@ -97,9 +98,59 @@ const deleteUser = async (req, res) => {
     }
 }
 
+const getAllUser = async (req, res) => {
+    try {
+        const response = await UserService.getAllUser();
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(404).json({
+            message: error
+        })
+    }
+}
+
+const getDetailsUser = async (req, res) => {
+    try {
+        const userID = req.params.id
+        if (!userID) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The user id is required'
+            })
+        }
+        const response = await UserService.getDetailsUser(userID);
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(404).json({
+            message: error
+        })
+    }
+}
+
+const refreshToken = async (req, res) => {
+    try {
+        const token = req.headers.token.split(' ')[1]
+        if (!token) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The token is required'
+            })
+        }
+        const response = await JwtService.refreshTokenService(token);
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(404).json({
+            message: error
+        })
+    }
+}
+
 module.exports = {
     createUser,
     loginUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getAllUser,
+    getDetailsUser,
+    refreshToken
 }
