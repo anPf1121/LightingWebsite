@@ -130,10 +130,10 @@ const deleteUser = (id) => {
     })
 }
 
-const getAllUser = (id) => {
+const getAllUser = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            const allUser = await User.find(id)
+            const allUser = await User.find()
             resolve({
                 status: "OK",
                 message: "GET ALL USER SUCCESS",

@@ -7,11 +7,6 @@ const productSchema = new mongoose.Schema(
     product_type: { type: String, required: true },
     descriptions: { type: String, required: false },
     protection_rating: { type: Number, required: true },
-    luminous_flux: { type: String, required: true },
-    warranty: { type: String, required: true },
-    CRI: { type: String, required: true },
-    dimension: { type: String, required: true },
-    lumens_color_temperature: { type: String, required: true },
   },
   {
     timestamps: true,
@@ -50,8 +45,14 @@ const productDetailsSchema = new mongoose.Schema({
   power: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductPower' },
   size: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductSize' },
   color: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductColor' },
+  voltage: { type: String, required: true },
+  CRI: { type: String, required: true },
+  dimension: { type: String, required: true },
+  lumens_color_temperature: { type: String, required: true }, // chỉ số hoàn màu
+  warranty: { type: String, required: true },
+  luminous_flux: { type: String, required: true },
   countInStock: { type: Number, required: true },
-  unit_price: { type: Number, required: true }
+  unit_price: { type: Number, required: true },
 });
 
 const ProductColor = mongoose.model("ProductColor", productColorSchema);

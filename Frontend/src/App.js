@@ -16,6 +16,8 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import Payment from './Pages/Payment/payment';
 import PaymentForm from './Pages/PaymentForm/paymentForm';
 import GoToTop from './Pages/Components/goToTop';
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query';
 
 const theme = createTheme({
   typography: {
@@ -25,21 +27,22 @@ const theme = createTheme({
 
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  useEffect(() => { // Giả lập việc tải dữ liệu hoặc các tác vụ khởi đầu khác
-    setTimeout(() => {
-      setLoading(false); // Kết thúc tải
-    }, 300); // Thời gian giả lập, có thể thay đổi
-  }, []);
+
+  // useEffect(() => {
+  //   fetchAPI()
+  // }, [])
+
+  const fetchAPI = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all`)
+    return res.data
+  }
+  const query = useQuery({queryKey: ['todos'], queryFn: fetchAPI })
+
+  console.log('query', query);
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        {loading ? (
-          // Hiển thị Spinner khi đang tải
-          <div className="spinner">
-            <ClimbingBoxLoader color={'#000000'} loading={loading} size={15} className='loadingItem' />
-          </div>
-        ) : (
           <Router>
             <GoToTop />
             <Routes>
@@ -53,7 +56,6 @@ function App() {
               <Route path='/payment/form' element={<PaymentForm />} />
             </Routes>
           </Router>
-        )}
       </ThemeProvider>
     </>
   );
