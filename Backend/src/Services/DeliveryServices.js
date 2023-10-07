@@ -20,7 +20,7 @@ const createDeliveryInfo = (newUser) => {
     })
 }
 
-const updateDeliveryStatus = (id) => {
+const updateDeliveryStatus = (id, status) => {
     return new Promise(async (resolve, reject) => {
         try {
             const checkDelivery = Delivery.findOne({
@@ -34,7 +34,7 @@ const updateDeliveryStatus = (id) => {
                 })
             }
 
-            const updatedDeliveryInfo = await Delivery.findByIdAndUpdate(id, { status: true }, { new: true })
+            const updatedDeliveryInfo = await Delivery.findByIdAndUpdate(id, status, { new: true })
 
             resolve({
                 status: "OK",

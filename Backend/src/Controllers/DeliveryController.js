@@ -21,7 +21,8 @@ const createDeliveryInfo = async (req, res) => {
 const updateDeliveryStatus = async (req, res) => {
     try {
         const deliveryID = req.params.id
-        const response = await DeliveryServices.updateDeliveryStatus(deliveryID);
+        const statusData = req.body
+        const response = await DeliveryServices.updateDeliveryStatus(deliveryID, statusData);
         return res.status(200).json(response)
     } catch (error) {
         return res.status(404).json({

@@ -42,15 +42,18 @@ const productSizeSchema = new mongoose.Schema(
 
 const productDetailsSchema = new mongoose.Schema({
   product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-  power: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductPower' },
+  power: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductPower' }, // công suất
   size: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductSize' },
   color: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductColor' },
-  voltage: { type: String, required: true },
-  CRI: { type: String, required: true },
-  dimension: { type: String, required: true },
-  lumens_color_temperature: { type: String, required: true }, // chỉ số hoàn màu
-  warranty: { type: String, required: true },
-  luminous_flux: { type: String, required: true },
+  voltage: { type: String, required: true }, // điện áp
+  CRI: { type: String, required: true }, // chỉ số hoàn màu
+  dimension: { type: String, required: true }, // kích thước
+  hole_dimension: { type: String, required: false }, // kích thước lỗ khoét >
+  chip_led: { type: String, required: false }, // >
+  projection_angle: { type: String, required: false }, // góc chiếu >
+  lumens_color_temperature: { type: String, required: true }, // nhiệt độ màu
+  warranty: { type: String, required: true }, 
+  luminous_flux: { type: String, required: true }, // quang thông
   countInStock: { type: Number, required: true },
   unit_price: { type: Number, required: true },
 });
