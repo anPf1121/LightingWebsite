@@ -1,5 +1,5 @@
 import { Button, FormControl, IconButton, Input, InputAdornment, InputLabel, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Overlay from './overlay'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CloseIcon from '@mui/icons-material/Close';
@@ -7,6 +7,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useMutation } from '@tanstack/react-query';
 import * as UserServices from './../../Services/UserServices';
 import { UseMutationHooks } from '../../Hooks/UseMutationHook';
+import jwt_decode from "jwt-decode";
 
 export default function LoginForm() {
     let [toggleLoginForm, setToggleLoginForm] = useState(false);
@@ -36,7 +37,23 @@ export default function LoginForm() {
         })
     }
 
-    const { data, isLoading } = mutation
+    const { data, isLoading, isSuccess } = mutation
+    useEffect(() => {
+        if(isSuccess) {
+            localStorage.setItem('access_token', data?.access_token);
+            if(data?.access_token) {
+                const decoded = jwt_decode(data?.access_token);
+                if(decoded?.id) {
+                    handleGetDetailsUser(decoded?.id, data?.access_token);
+                }
+            }
+        }
+    }, [isSuccess])
+
+    const handleGetDetailsUser = async (id, token) => {
+        const res = await UserServices.GetDetailsUser(id, token);
+        console.log(res);
+    }
     return (
         <>
             {(toggleLoginForm === true) ? <Overlay func={handleToggleLogin} /> : ""}

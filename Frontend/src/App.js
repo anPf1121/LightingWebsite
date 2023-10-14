@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ClimbingBoxLoader } from 'react-spinners';
 import Home from './Pages/Home/home';
 import './App.css'
 import {
@@ -16,8 +15,10 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import Payment from './Pages/Payment/payment';
 import PaymentForm from './Pages/PaymentForm/paymentForm';
 import GoToTop from './Pages/Components/goToTop';
-import axios from 'axios'
-import { useQuery } from '@tanstack/react-query';
+import { isJsonString } from './Ults';
+import jwt_decode from "jwt-decode";
+import * as UserServices from '../src/Services/UserServices';
+
 
 const theme = createTheme({
   typography: {
@@ -27,33 +28,58 @@ const theme = createTheme({
 
 
 function App() {
-  // useEffect(() => {
-  //   fetchAPI()
-  // }, [])
-  // const fetchAPI = async () => {
-  //   const res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all`)
-  //   return res.data
-  // }
-  // const query = useQuery({queryKey: ['todos'], queryFn: fetchAPI })
+  useEffect(() => {
+    const {storageData, decoded} = handleDecoded()
+    if (decoded?.id) {
+      handleGetDetailsUser(decoded?.id, storageData);
+    }
+  }, [])
 
-  // console.log('query', query);
+  const handleGetDetailsUser = async (id, token) => {
+    const res = await UserServices.GetDetailsUser(id, token);
+    console.log(res);
+  }
+
+  const handleDecoded = () => {
+    let storageData = localStorage.getItem('access_token')
+    let decoded = {}
+    let temp = storageData;
+    if (storageData && isJsonString(storageData)) {
+      storageData = JSON.stringify(storageData);
+      decoded = jwt_decode(storageData);
+    }
+    storageData = temp;
+    return { decoded, storageData }
+  }
+
+  UserServices.axiosJwt.interceptors.request.use(async (config) => {
+    const currentTime = new Date().getTime();
+    const {decoded} = handleDecoded()
+    if(decoded?.exp < (currentTime / 1000)) {
+      const data = await UserServices.RefreshToken()
+      config.headers['token'] = `Bearer ${data?.access_token}`
+    }
+    return config;
+  }, (err) => {
+    return Promise.reject(err);
+  })
 
   return (
     <>
       <ThemeProvider theme={theme}>
-          <Router>
-            <GoToTop />
-            <Routes>
-              <Route exact path='/' element={<Home />} />
-              <Route path='/product-details' element={<ProductDetails />} />
-              <Route path='/products' element={<Products />} />
-              <Route path='/collections' element={<Collections />} />
-              <Route path='/projects' element={<Projects />} />
-              <Route path='/about-us' element={<AboutUs />} />
-              <Route path='/payment' element={<Payment />} />
-              <Route path='/payment/form' element={<PaymentForm />} />
-            </Routes>
-          </Router>
+        <Router>
+          <GoToTop />
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route path='/product-details' element={<ProductDetails />} />
+            <Route path='/products' element={<Products />} />
+            <Route path='/collections' element={<Collections />} />
+            <Route path='/projects' element={<Projects />} />
+            <Route path='/about-us' element={<AboutUs />} />
+            <Route path='/payment' element={<Payment />} />
+            <Route path='/payment/form' element={<PaymentForm />} />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </>
   );
