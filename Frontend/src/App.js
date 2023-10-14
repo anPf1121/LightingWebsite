@@ -27,18 +27,16 @@ const theme = createTheme({
 
 
 function App() {
-
   // useEffect(() => {
   //   fetchAPI()
   // }, [])
+  // const fetchAPI = async () => {
+  //   const res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all`)
+  //   return res.data
+  // }
+  // const query = useQuery({queryKey: ['todos'], queryFn: fetchAPI })
 
-  const fetchAPI = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all`)
-    return res.data
-  }
-  const query = useQuery({queryKey: ['todos'], queryFn: fetchAPI })
-
-  console.log('query', query);
+  // console.log('query', query);
 
   return (
     <>
