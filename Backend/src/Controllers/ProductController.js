@@ -1,5 +1,22 @@
 const ProductServices = require('../Services/ProductServices')
 
+const createProductCollection = async (req, res) => {
+    const { collectionImage, collectionName, collectionDescription } = req.body
+    try {
+        if (!collectionImage || !collectionName || !collectionDescription) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The input is required'
+            })
+        }
+        const response = await ProductServices.createProductCollection(req.body);
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(404).json({
+            message: error
+        })
+    }
+}
 const createProductColor = async (req, res) => {
     const { colorName } = req.body
     try {
@@ -205,5 +222,6 @@ module.exports = {
     updateProduct,
     updateProductDetails,
     deleteProduct,
-    deleteProductDetails
+    deleteProductDetails,
+    createProductCollection
 }

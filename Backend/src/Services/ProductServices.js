@@ -1,5 +1,36 @@
 const Product = require('../Models/Product')
 
+const createProductCollection = (newColor) => {
+    return new Promise(async (resolve, reject) => {
+        const { collectionImage, collectionName, collectionDescription } = newColor
+        try {
+            const checkCollection = await Product.ProductCollection.findOne({
+                collectionName: collectionName
+            })
+            if (checkCollection !== null) {
+                resolve({
+                    status: "OK",
+                    message: "the collection name is already"
+                })
+            }
+            const createdCollection = await Product.ProductCollection.create({
+                collectionImage: collectionImage,
+                collectionName: collectionName,
+                collectionDescription: collectionDescription
+            })
+            if (createdCollection) {
+                resolve({
+                    status: "OK",
+                    message: "SUCCESS",
+                    data: createdCollection
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    })
+}
+
 const createProductColor = (newColor) => {
     return new Promise(async (resolve, reject) => {
         const { colorName } = newColor
@@ -340,5 +371,6 @@ module.exports = {
     updateProduct,
     updateProductDetails,
     deleteProduct,
-    deleteProductDetails
+    deleteProductDetails,
+    createProductCollection
 }

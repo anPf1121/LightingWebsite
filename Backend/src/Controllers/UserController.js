@@ -149,7 +149,6 @@ const refreshToken = async (req, res) => {
 const signOutUser = async (req, res) => {
     try {
         res.clearCookie('refresh_token');
-        const response = await JwtService.refreshTokenService(token);
         return res.status(200).json({
             status: "OK",
             message: "Logout Successfully"

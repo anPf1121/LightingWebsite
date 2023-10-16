@@ -1,67 +1,18 @@
 import { Button, FormControl, IconButton, Input, InputAdornment, InputLabel, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import Overlay from './overlay'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CloseIcon from '@mui/icons-material/Close';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useMutation } from '@tanstack/react-query';
-import * as UserServices from './../../Services/UserServices';
-import { UseMutationHooks } from '../../Hooks/UseMutationHook';
-import jwt_decode from "jwt-decode";
 
-export default function LoginForm() {
-    let [toggleLoginForm, setToggleLoginForm] = useState(false);
-    const handleToggleLogin = () => setToggleLoginForm(!toggleLoginForm);
+export default function LoginForm({ userNameValue, handleUserNameChange, passwordValue, handlePasswordChange, handleSignIn, data, toggleLoginForm, handleToggleLogin }) {
 
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    const [userNameValue, setUserNameValue] = useState('');
-    const [passwordValue, setPasswordValue] = useState('');
-
-    const handleUserNameChange = (e) => {
-        setUserNameValue(e.target.value);
-    };
-    const handlePasswordChange = (e) => {
-        setPasswordValue(e.target.value);
-    };
-
-    const mutation = UseMutationHooks(data => UserServices.LoginUser(data))
-    
-    const handleSignIn = () => {
-        mutation.mutate({
-            email: userNameValue,
-            password: passwordValue
-        })
-    }
-
-    const { data, isLoading, isSuccess } = mutation
-
-    useEffect(() => {
-        if(isSuccess) {
-            localStorage.setItem('access_token', data?.access_token);
-            if(data?.access_token) {
-                const decoded = jwt_decode(data?.access_token);
-                if(decoded?.id) {
-                    handleGetDetailsUser(decoded?.id, data?.access_token);
-                }
-            }
-        }
-    }, [isSuccess])
-
-    const handleGetDetailsUser = async (id, token) => {
-        const res = await UserServices.GetDetailsUser(id, token);
-        console.log(res);
-    }
     return (
         <>
-            {(toggleLoginForm === true) ? <Overlay func={handleToggleLogin} /> : ""}
             <div className='right-nav' style={{ position: 'relative' }}>
-                <IconButton aria-label="cart" onClick={() => handleToggleLogin()}>
-                    <AccountCircleIcon />
-                </IconButton>
                 <div className={`login-form ${(toggleLoginForm === true) ? "login-form-active" : ""}`}>
                     <IconButton aria-label="cart" sx={{
                         position: 'absolute', top: '0', right: '0', color: 'white'
@@ -82,7 +33,6 @@ export default function LoginForm() {
                                 value={userNameValue}
                                 onChange={handleUserNameChange}
                             />
-                            
                             <div>
                                 <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
                                     <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
@@ -104,10 +54,8 @@ export default function LoginForm() {
                                         }
                                     />
                                 </FormControl>
-                                
                             </div>
-                            
-                            {data?.status === 'ERR' ? <span>invalid username or password</span> : <span>loging in</span>}
+                            {data?.status === 'ERR' ? <span style={{color: 'red'}}>Invalid username or password</span> : ""}
                             <br />
                             <Button className='login-btn'
                                 onClick={handleSignIn}

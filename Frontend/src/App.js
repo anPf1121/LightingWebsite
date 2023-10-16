@@ -18,6 +18,8 @@ import GoToTop from './Pages/Components/goToTop';
 import { isJsonString } from './Ults';
 import jwt_decode from "jwt-decode";
 import * as UserServices from '../src/Services/UserServices';
+import { useDispatch } from 'react-redux';
+import { updateUser } from './Redux/Slides/userSlide';
 
 
 const theme = createTheme({
@@ -28,6 +30,7 @@ const theme = createTheme({
 
 
 function App() {
+  const dispatch = useDispatch();
   useEffect(() => {
     const {storageData, decoded} = handleDecoded()
     if (decoded?.id) {
@@ -37,7 +40,7 @@ function App() {
 
   const handleGetDetailsUser = async (id, token) => {
     const res = await UserServices.GetDetailsUser(id, token);
-    console.log(res);
+    dispatch(updateUser({...res?.data, access_token: token}))
   }
 
   const handleDecoded = () => {
