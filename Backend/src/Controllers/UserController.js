@@ -46,7 +46,7 @@ const loginUser = async (req, res) => {
                 status: 'ERR',
                 message: 'The input is email'
             })
-        } 
+        }
         const response = await UserService.loginUser(req.body);
         const { refresh_token, ...newResponse } = response;
         res.cookie('refresh_token', refresh_token, {
@@ -146,6 +146,23 @@ const refreshToken = async (req, res) => {
     }
 }
 
+const signOutUser = async (req, res) => {
+    try {
+        res.clearCookie('refresh_token');
+        const response = await JwtService.refreshTokenService(token);
+        return res.status(200).json({
+            status: "OK",
+            message: "Logout Successfully"
+        })
+    } catch (error) {
+        return res.status(404).json({
+            message: error
+        })
+    }
+}
+
+
+
 module.exports = {
     createUser,
     loginUser,
@@ -153,5 +170,6 @@ module.exports = {
     deleteUser,
     getAllUser,
     getDetailsUser,
-    refreshToken
+    refreshToken,
+    signOutUser
 }

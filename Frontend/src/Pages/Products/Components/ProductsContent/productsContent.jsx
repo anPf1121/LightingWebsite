@@ -1,11 +1,13 @@
 import { Accordion, AccordionDetails, Box, Divider, Grid, List, ListItem, ListItemText, Pagination, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
 import ProductCard from "../../../Components/productCard";
 import ProductSlideShow from "../../../Components/productSlideShow";
 import StickyBox from "react-sticky-box";
 import MobileProductsFilter from "../mobileProductsFilter";
+import * as ProductServices from "../../../../Services/ProductServices"
+import { UseMutationHooks } from "../../../../Hooks/UseMutationHook";
 
 const theme = createTheme({
     typography: {
@@ -15,6 +17,17 @@ const theme = createTheme({
 
 
 export default function ProductsContent() {
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        handleGetAllProduct();
+    }, [])
+
+    const handleGetAllProduct = async () => {
+        const res = await ProductServices.GetAllProduct();
+        setProducts(res.data);
+    }
+    console.log("products", products);
+
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -217,68 +230,18 @@ export default function ProductsContent() {
                                     </Accordion>
                                 </StickyBox>
                             </Grid>
+
                             <Grid item xs={12} sm={12} md={8} lg={10} xl={10}>
                                 <Grid container sx={{ alignItems: 'center', textAlign: 'center' }}>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                        <Box sx={{ padding: '10px' }}>
-                                            <ProductCard />
-                                        </Box>
-                                    </Grid>
+                                    {
+                                        products.map((item) => {
+                                            return <>
+                                                <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+                                                    <ProductCard key={item._id} productImg={item.image} productName={item.name}/>
+                                                </Grid>
+                                            </>
+                                        })
+                                    }
                                     <Box sx={{ marginLeft: '50%', transform: 'translateX(-50%)' }}>
                                         <Pagination count={10} page={20} />
                                     </Box>
