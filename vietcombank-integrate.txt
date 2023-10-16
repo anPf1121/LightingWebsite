@@ -1,0 +1,3 @@
+Sử dụng API của Vietcombank:
+
+Liên hệ với Vietcombank để đăng ký và sử dụng API thanh toán của họ. Vietcombank có thể cung cấp cho bạn tài liệu và thông tin cần thiết để tích hợp API này vào ứng dụng của bạn.
