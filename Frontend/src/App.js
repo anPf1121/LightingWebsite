@@ -20,6 +20,7 @@ import jwt_decode from "jwt-decode";
 import * as UserServices from '../src/Services/UserServices';
 import { useDispatch } from 'react-redux';
 import { updateUser } from './Redux/Slides/userSlide';
+import Admin from './Pages/Adminstrator/Admin';
 
 
 const theme = createTheme({
@@ -81,6 +82,7 @@ function App() {
             <Route path='/about-us' element={<AboutUs />} />
             <Route path='/payment' element={<Payment />} />
             <Route path='/payment/form' element={<PaymentForm />} />
+            <Route path='/admin' element={<Admin />} />
           </Routes>
         </Router>
       </ThemeProvider>
