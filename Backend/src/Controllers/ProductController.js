@@ -72,9 +72,26 @@ const createProductSize = async (req, res) => {
 }
 
 const createProductDetails = async (req, res) => {
-    const { product, power, size, color, voltage, CRI, dimension, lumens_color_temperature, warranty, luminous_flux, countInStock, unit_price } = req.body
+    const { 
+        product,
+        power,
+        size,
+        color,
+        voltage,
+        CRI,
+        dimension,
+        hole_dimension,
+        chip_led,
+        projection_angle,
+        lumens_color_temperature,
+        warranty,
+        luminous_flux,
+        unit_price,
+        product_type,
+        image,
+        countInStock } = req.body
     try {
-        if (!product || !power || !size || !color || !countInStock || !unit_price || !voltage || !CRI || !dimension || !lumens_color_temperature || !warranty || !luminous_flux) {
+        if (!product || !power || !hole_dimension || !chip_led || !projection_angle || !product_type || !image || !size || !color || !countInStock || !unit_price || !voltage || !CRI || !dimension || !lumens_color_temperature || !warranty || !luminous_flux) {
             return res.status(200).json({
                 status: 'ERR',
                 message: 'The input is required'

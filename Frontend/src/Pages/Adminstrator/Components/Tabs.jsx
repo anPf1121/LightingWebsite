@@ -22,7 +22,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    <Typography component={'span'}>{children}</Typography>
                 </Box>
             )}
         </div>
@@ -73,7 +73,7 @@ export default function VerticalTabs() {
             </Tabs>
             <TabPanel value={value} index={0}>
                 <Container fixed>
-                    <Typography variant='h6' sx={{ fontFamily: 'initial' }}>
+                    <Typography component={'div'} variant='h5' sx={{ fontFamily: 'initial' }}>
                         Quản lý người dùng
                     </Typography>
                     <Button sx={{ width: '200px', height: '200px', border: '1px solid #dfdfdff2', background: '#dfdfdf7a', margin: '20px 0' }}>
@@ -82,7 +82,7 @@ export default function VerticalTabs() {
                 </Container>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Typography variant='h6' sx={{ fontFamily: 'initial' }}>Quản lý sản phẩm</Typography>
+                <Typography component={'div'} variant='h5' sx={{ fontFamily: 'initial' }}>Quản lý sản phẩm</Typography>
                 <AddProductButton />
                 <ProductTable />
             </TabPanel>

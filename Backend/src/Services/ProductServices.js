@@ -120,8 +120,36 @@ const createProductSize = (newSize) => {
 
 const createProductDetails = (newProductDetails) => {
     return new Promise(async (resolve, reject) => {
-        const { product, power, size, color, voltage, CRI, dimension, lumens_color_temperature, warranty, luminous_flux, countInStock, unit_price } = newProductDetails
+        const {
+            product,
+            power,
+            size,
+            color,
+            voltage,
+            CRI,
+            dimension,
+            hole_dimension,
+            chip_led,
+            projection_angle,
+            lumens_color_temperature,
+            warranty,
+            luminous_flux,
+            unit_price,
+            product_type,
+            image,
+            countInStock } = newProductDetails
         try {
+            const checkProductFirst = await Product.Product.findOne({
+                name: product
+            });
+            if (!checkProductFirst) {
+                await Product.Product.create({
+                    name: product,
+                    image: image,
+                    product_type: product_type,
+                    protection_rating: "0"
+                })
+            }
             const checkProduct = await Product.Product.findOne({
                 name: product
             });
@@ -148,7 +176,10 @@ const createProductDetails = (newProductDetails) => {
                 dimension,
                 lumens_color_temperature,
                 warranty,
-                luminous_flux
+                luminous_flux,
+                hole_dimension,
+                chip_led,
+                projection_angle
             })
 
             if (checkProduct === null || checkPower === null || checkSize === null || checkColor === null || voltage === null || CRI === null || dimension === null || lumens_color_temperature === null || warranty === null || luminous_flux === null) {
