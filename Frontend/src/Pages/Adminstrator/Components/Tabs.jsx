@@ -67,11 +67,21 @@ export default function VerticalTabs() {
                 aria-label="Vertical tabs example"
                 sx={{ borderRight: 1, borderColor: 'divider' }}
             >
-                <Tab label="Người Dùng" {...a11yProps(0)} />
+                <Tab label="Đơn Hàng" {...a11yProps(0)} />
                 <Tab label="Sản Phẩm" {...a11yProps(1)} />
-                <Tab label="Đơn Hàng" {...a11yProps(2)} />
+                <Tab label="Người Dùng" {...a11yProps(2)} />
             </Tabs>
             <TabPanel value={value} index={0}>
+                <Typography component={'div'} variant='h5' sx={{ fontFamily: 'initial' }}>
+                    Quản lý đơn hàng
+                </Typography>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <Typography component={'div'} variant='h5' sx={{ fontFamily: 'initial' }}>Quản lý sản phẩm</Typography>
+                <AddProductButton handleCloseForm={handleClick} isOpen={open} />
+                <ProductTable />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
                 <Container fixed>
                     <Typography component={'div'} variant='h5' sx={{ fontFamily: 'initial' }}>
                         Quản lý người dùng
@@ -80,14 +90,6 @@ export default function VerticalTabs() {
                         <AddIcon sx={{ color: 'black' }} />
                     </Button>
                 </Container>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <Typography component={'div'} variant='h5' sx={{ fontFamily: 'initial' }}>Quản lý sản phẩm</Typography>
-                <AddProductButton />
-                <ProductTable />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
             </TabPanel>
         </Box>
     );

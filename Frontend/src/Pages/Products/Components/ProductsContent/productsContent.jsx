@@ -7,7 +7,7 @@ import ProductSlideShow from "../../../Components/productSlideShow";
 import StickyBox from "react-sticky-box";
 import MobileProductsFilter from "../mobileProductsFilter";
 import * as ProductServices from "../../../../Services/ProductServices"
-import { UseMutationHooks } from "../../../../Hooks/UseMutationHook";
+import { useQuery } from "@tanstack/react-query";
 
 const theme = createTheme({
     typography: {
@@ -15,18 +15,13 @@ const theme = createTheme({
     },
 })
 
-
 export default function ProductsContent() {
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        handleGetAllProduct();
-    }, [])
-
-    const handleGetAllProduct = async () => {
+    const getAllProducts = async () => {
         const res = await ProductServices.GetAllProduct();
-        setProducts(res.data);
+        return res;
     }
-    console.log("products", products);
+
+    const { isLoading, data } = useQuery({ queryKey: ['products'], queryFn: getAllProducts })
 
     return (
         <>
@@ -234,10 +229,10 @@ export default function ProductsContent() {
                             <Grid item xs={12} sm={12} md={8} lg={10} xl={10}>
                                 <Grid container sx={{ alignItems: 'center', textAlign: 'center' }}>
                                     {
-                                        products.map((item) => {
+                                        data?.data.map((item) => {
                                             return <>
                                                 <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                                    <ProductCard key={item._id} productImg={item.image} productName={item.name}/>
+                                                    <ProductCard key={item._id} productImg={item.image} productName={item.name} />
                                                 </Grid>
                                             </>
                                         })

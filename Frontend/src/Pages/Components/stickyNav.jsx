@@ -95,7 +95,6 @@ export default function StickyNav() {
         if (toggleAccountOption === true)
             handleToggleAccountOption()
     }, [isLoggedIn])
-    console.log("isLoggedIn", isLoggedIn);
     return (
         <>
             <div className="nav-container">

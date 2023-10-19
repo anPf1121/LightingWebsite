@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
-import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -10,7 +9,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import InputInForm from './InputInForm';
-import { getBase64 } from '../../../Ults';
 import { UseMutationHooks } from '../../../Hooks/UseMutationHook';
 import * as ProductServices from '../../../Services/ProductServices'
 
@@ -27,7 +25,7 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 export default function AddProductForm(props) {
-
+   
     const handleRadioChange = (event) => {
         setproductState({
             ...productState,
@@ -66,6 +64,7 @@ export default function AddProductForm(props) {
     }
     const handleSubmit = () => {
         mutation.mutate(productState);
+        props.func();
     }
     const mutation = UseMutationHooks(
         (data) => {
@@ -131,10 +130,6 @@ export default function AddProductForm(props) {
         }
     };
     const { data, isSuccess } = mutation
-    useEffect(() => {
-        if (isSuccess === true)
-            handleClose();
-    }, [isSuccess])
     return (
         <>
             {(isOpen === true) ?
