@@ -11,6 +11,8 @@ router.post('/create-product-collection', productController.createProductCollect
 // router.put('/update-product-collection/:id', productController.updateProductCollection)
 // router.get('/get-all-product-collection/', productController.getAllProductCollection)
 // router.delete('/delete-product-collection/:id', productController.updateProductCollection)
+router.get('/get-product/:id', productController.getProduct)
+router.get('/get-all-product-type', productController.getAllProductType)
 router.get('/get-all', productController.getAllProduct)
 router.get('/get-product-details/:id', productController.getProductDetails)
 router.put('/update-product/:id', productController.updateProduct)

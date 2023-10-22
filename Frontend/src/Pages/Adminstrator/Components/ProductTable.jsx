@@ -9,11 +9,15 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useState } from 'react';
 import EditForm from './EditProductForm';
 import Overlay from '../../Components/overlay';
+import ViewDetailsProduct from './ViewDetailsProduct';
+import { useSelector } from 'react-redux';
 
 
 
 
 export default function ProductTable() {
+  const userSelector = useSelector((state) => state.user)
+
   const columns = [
     { field: 'idDisplay', headerName: 'ID', width: 70 },
     {
@@ -39,7 +43,7 @@ export default function ProductTable() {
         <div>
           <VisibilityIcon
             style={{ cursor: 'pointer', marginRight: '10px', color: 'gray' }}
-          // onClick={() => getDataUpdate(params.row._id, params.row.name, params.row.image, params.row.product_type, params.row.protection_rating)} // Thực hiện hành động xem chi tiết
+            onClick={() => viewDetailsHandle(params.row._id)} 
           />
           <EditIcon
             style={{ cursor: 'pointer', marginRight: '10px', color: '#e5a960' }}
@@ -47,16 +51,13 @@ export default function ProductTable() {
           />
           <DeleteIcon
             style={{ cursor: 'pointer', color: '#f16262' }}
-          // onClick={() => handleDelete(params.row.id)} // Thực hiện hành động xóa
+            onClick={() => deleteHandle(params.row._id)} 
           />
         </div>
       ),
     }
   ];
   const getRowId = (row) => row.idDisplay;
-
-
-
 
   const getAllProducts = async () => {
     const res = await ProductServices.GetAllProduct();
@@ -77,12 +78,44 @@ export default function ProductTable() {
   const [editingItem, setEditingItem] = useState(null);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const handleOpenEdit = () => setIsOpenEdit(!isOpenEdit)
+  const [viewDetailsItem, setViewDetailsItem] = useState(null);
+  const [isOpenDetails, setIsOpenDetails] = useState(false);
+  const handleOpenDetails = () => setIsOpenDetails(!isOpenDetails)
 
   const handleUpdate = (...rest) => {
     let result = { ...rest }
     setEditingItem(result[0])
     handleOpenEdit();
   }
+
+  const mutationDelete = UseMutationHooks((data) => {
+    const {
+        id,
+        access_token
+    } = data
+    
+    return ProductServices.DeleteProduct({
+        id,
+        access_token
+    })
+})
+
+  const deleteHandle = (id) => {
+    mutationDelete.mutate({ id: id, access_token: userSelector?.access_token });
+  }
+
+
+  const viewDetailsHandle = (id) => {
+    handleOpenDetails()
+    setViewDetailsItem(id)
+  }
+
+  const GetProductDetails = async (id) => {
+    const res = await ProductServices.GetProductDetails(id);
+    return res;
+  }
+
+  const { isLoading: isLoadingDetails, data: dataDetails } = useQuery({ queryKey: ['product-details', viewDetailsItem], queryFn: () => GetProductDetails(viewDetailsItem) })
 
   return (
     <>
@@ -102,9 +135,11 @@ export default function ProductTable() {
           />
           : ""}
         {(isOpenEdit === true) ? <Overlay func={handleOpenEdit} /> : ""}
-        {(isOpenEdit === true) ?
-          <EditForm editingItem={editingItem}/>
-          : ""}
+        {(isOpenEdit === true) ? <EditForm editingItem={editingItem} /> : ""}
+
+        {(isOpenDetails === true) ? <Overlay func={handleOpenDetails} /> : ""}
+        {(isOpenDetails === true) ? <ViewDetailsProduct data={dataDetails} /> : ""}
+
       </div>
     </>
   );

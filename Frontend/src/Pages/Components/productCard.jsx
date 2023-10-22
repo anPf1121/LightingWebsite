@@ -3,36 +3,39 @@ import React from 'react'
 import './globalComponents.css';
 import { GridMaximize2O } from "lovedicons/dist/gridO";
 import { Box, Card, CardContent, CardMedia, Typography, Modal } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ProductCard(props) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const navigate = useNavigate();
+    const handleLink = () => {
+        navigate(`/product-details/${props.index}`)
+    }
     return (
         <>
             <Box sx={{ padding: '10px' }}>
                 <Card sx={{ cursor: 'pointer', border: '1px solid #f3f3f3' }} className='card'>
-                    <Link to='/product-details' style={{
-                        textDecoration: 'none',
-                    }}>
-                        <CardMedia alt='unsplash image' component="img" image={props.productImg} />
-                        <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant='h5'
-                                sx={{
-                                    textAlign: 'center',
-                                    color: 'black'
-                                }}
-                            >{props.productName}</Typography>
-                            <Typography variant='body1' sx={{
-                                color: 'gray',
+                    <span onClick={handleLink}>
+
+                    <CardMedia alt='unsplash image' component="img" image={props.productImg} />
+                    <CardContent>
+                        <Typography
+                            gutterBottom
+                            variant='h5'
+                            sx={{
                                 textAlign: 'center',
-                            }}>20.000.000 VND</Typography>
-                            <Box className="card-overlay"></Box>
-                        </CardContent>
-                    </Link>
+                                color: 'black'
+                            }}
+                        >{props.productName}</Typography>
+                        <Typography variant='body1' sx={{
+                            color: 'gray',
+                            textAlign: 'center',
+                        }}>20.000.000 VND</Typography>
+                        <Box className="card-overlay"></Box>
+                    </CardContent>
+                    </span>
                     <div onClick={handleOpen} className='fastViewDetails'><GridMaximize2O className='iconFastView' /></div>
                     <Modal
                         open={open}

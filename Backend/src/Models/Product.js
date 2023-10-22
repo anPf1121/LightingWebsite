@@ -40,7 +40,7 @@ const productSizeSchema = new mongoose.Schema(
   }
 );
 
-const productCollection = new mongoose.Schema(
+const productCollectionSchema = new mongoose.Schema(
   {
     collectionImage: { type: String },
     collectionName: { type: String },
@@ -64,7 +64,7 @@ const productDetailsSchema = new mongoose.Schema({
   chip_led: { type: String, required: false }, // >
   projection_angle: { type: String, required: false }, // góc chiếu >
   lumens_color_temperature: { type: String, required: true }, // nhiệt độ màu
-  warranty: { type: String, required: true }, 
+  warranty: { type: String, required: true },
   luminous_flux: { type: String, required: true }, // quang thông
   countInStock: { type: Number, required: true },
   unit_price: { type: Number, required: true },
@@ -73,7 +73,7 @@ const productDetailsSchema = new mongoose.Schema({
 const ProductColor = mongoose.model("ProductColor", productColorSchema);
 const ProductPower = mongoose.model("ProductPower", productPowerSchema);
 const ProductSize = mongoose.model("ProductSize", productSizeSchema);
-const ProductCollection = mongoose.model('ProductCollection', productCollection);
+const ProductCollection = mongoose.model('ProductCollection', productCollectionSchema);
 const ProductDetails = mongoose.model('ProductDetails', productDetailsSchema);
 const Product = mongoose.model("Product", productSchema);
 

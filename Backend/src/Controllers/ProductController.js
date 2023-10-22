@@ -3,7 +3,7 @@ const ProductServices = require('../Services/ProductServices')
 const createProductCollection = async (req, res) => {
     const { collectionImage, collectionName, collectionDescription } = req.body
     try {
-        if (!collectionImage || !collectionName || !collectionDescription) {
+        if (!collectionImage || !collectionName) {
             return res.status(200).json({
                 status: 'ERR',
                 message: 'The input is required'
@@ -136,6 +136,17 @@ const getAllProduct = async (req, res) => {
     }
 }
 
+const getAllProductType = async (req, res) => {
+    try {
+        const response = await ProductServices.getAllProductType();
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(404).json({
+            message: error
+        })
+    }
+}
+
 const getProductDetails = async (req, res) => {
     try {
         const productID = req.params.id
@@ -146,6 +157,24 @@ const getProductDetails = async (req, res) => {
             })
         }
         const response = await ProductServices.getProductDetails(productID);
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(404).json({
+            message: error
+        })
+    }
+}
+
+const getProduct = async (req, res) => {
+    try {
+        const productID = req.params.id
+        if (!productID) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The product id is required'
+            })
+        }
+        const response = await ProductServices.getProduct(productID);
         return res.status(200).json(response)
     } catch (error) {
         return res.status(404).json({
@@ -228,6 +257,8 @@ const deleteProductDetails = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
     createProduct,
     createProductColor,
@@ -240,5 +271,7 @@ module.exports = {
     updateProductDetails,
     deleteProduct,
     deleteProductDetails,
-    createProductCollection
+    createProductCollection,
+    getAllProductType,
+    getProduct,
 }

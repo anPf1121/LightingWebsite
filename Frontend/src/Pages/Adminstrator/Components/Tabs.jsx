@@ -4,7 +4,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { Button, Container } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ProductTable from './ProductTable';

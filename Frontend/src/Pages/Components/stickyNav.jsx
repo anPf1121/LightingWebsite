@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './globalComponents.css';
 import { IconButton, Toolbar, AppBar, Stack, Button, styled, Badge, Typography, Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -25,6 +25,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 export default function StickyNav() {
+    const navigate = useNavigate();
+    const handleLink = (link) => {
+        navigate(`/${link}`);
+    }
+
     // redux
     const dispatch = useDispatch();
     const userSelector = useSelector((state) => state.user)
@@ -108,58 +113,46 @@ export default function StickyNav() {
                                     boxShadow: 'none'
                                 }
                             }}>
-                                <Link to='/products' className='nav-link' >
-                                    <Typography sx={{
-                                        borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
-                                            color: '#000',
-                                        }
-                                    }}>SẢN PHẨM</Typography>
-                                </Link>
+                                <Typography onClick={() => handleLink("products")} sx={{
+                                    borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        color: '#000',
+                                    }
+                                }}>SẢN PHẨM</Typography>
                             </Button>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontWeight: 'bold', fontSize: '1.5rem' }}>
-                                <Link to='/collections' className='nav-link'>
-                                    <Typography sx={{
-                                        borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
-                                            color: '#000',
-                                        }
-                                    }}>BỘ SƯU TẬP</Typography>
-                                </Link>
+                                <Typography onClick={() => handleLink("collections")} sx={{
+                                    borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        color: '#000',
+                                    }
+                                }}>BỘ SƯU TẬP</Typography>
                             </Button>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontWeight: 'bold', fontSize: '1.5rem' }}>
-                                <Link to='/projects' className='nav-link'>
-                                    <Typography sx={{
-                                        borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
-                                            color: '#000',
-                                        }
-                                    }}>DỰ ÁN</Typography>
-                                </Link>
+                                <Typography onClick={() => handleLink("projects")} sx={{
+                                    borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        color: '#000',
+                                    }
+                                }}>DỰ ÁN</Typography>
                             </Button>
                             <Button color='inherit' sx={{ display: { xs: 'none', md: 'flex' }, textTransform: 'none', fontFamily: "'Cormorant Garamond', serif", fontWeight: 'bold', fontSize: '1.5rem' }}>
-                                <Link to='/about-us' className='nav-link'>
-                                    <Typography sx={{
-                                        borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
-                                            color: '#000',
-                                        }
-                                    }}>VỀ CHÚNG TÔI</Typography>
-                                </Link>
+                                <Typography onClick={() => handleLink("about-us")} sx={{
+                                    borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
+                                        color: '#000',
+                                    }
+                                }}>VỀ CHÚNG TÔI</Typography>
                             </Button>
                         </Stack>
-                        <IconButton size='large' aria-label='logo' sx={{
+                        <div style={{
                             position: 'absolute', left: '50%', transform: 'translate(-50%)',
+                            cursor: 'pointer',
+                            color: 'black',
                             '&:hover': {
                                 bgcolor: '#ffffff00'
                             }
                         }}>
-                            <div>
-                                <Link to='/' className="logo" style={{
-                                    textDecoration: 'none', color: 'black'
-                                }}>
-                                    <Typography variant='h4'>
-                                        Vision Led
-                                    </Typography>
-                                </Link>
-                            </div>
-                        </IconButton>
+                            <Typography onClick={() => handleLink("")} variant='h4'>
+                                Vision Led
+                            </Typography>
+                        </div>
                         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
                             <div className="right-nav" style={{ position: 'relative' }}>
                                 {((toggleLoginForm === true) ? <Overlay func={handleToggleLogin} /> : "") || ((toggleAccountOption === true) ? <Overlay func={handleToggleAccountOption} /> : "")}

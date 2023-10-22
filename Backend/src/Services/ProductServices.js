@@ -280,11 +280,43 @@ const getProductDetails = (id) => {
         try {
             const productDetails = await Product.ProductDetails.find({
                 product: id
-            })
+            }).populate('size').populate('power').populate('color')
             resolve({
                 status: "OK",
                 message: "GET PRODUCT DETAILS SUCCESS",
                 data: productDetails
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    })
+}
+
+const getProduct = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const product = await Product.Product.findOne({
+                _id: id
+            })
+            resolve({
+                status: "OK",
+                message: "GET PRODUCT BY ID SUCCESS",
+                data: product
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    })
+}
+const getAllProductType = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const allProduct = await Product.Product.find();
+            const uniqueProductTypes = [...new Set(allProduct.map(product => product.product_type))];
+            resolve({
+                status: "OK",
+                message: "GET PRODUCT TYPES SUCCESS",
+                data: uniqueProductTypes
             })
         } catch (error) {
             console.log(error);
@@ -403,5 +435,7 @@ module.exports = {
     updateProductDetails,
     deleteProduct,
     deleteProductDetails,
-    createProductCollection
+    createProductCollection,
+    getAllProductType,
+    getProduct,
 }

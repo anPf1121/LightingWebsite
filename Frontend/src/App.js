@@ -75,8 +75,9 @@ function App() {
           <GoToTop />
           <Routes>
             <Route exact path='/' element={<Home />} />
-            <Route path='/product-details' element={<ProductDetails />} />
+            <Route path='/product-details/:productId' element={<ProductDetails />} />
             <Route path='/products' element={<Products />} />
+            <Route path='/products/:typeId' element={<Products />} />
             <Route path='/collections' element={<Collections />} />
             <Route path='/projects' element={<Projects />} />
             <Route path='/about-us' element={<AboutUs />} />
