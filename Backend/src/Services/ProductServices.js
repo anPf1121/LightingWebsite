@@ -146,8 +146,7 @@ const createProductDetails = (newProductDetails) => {
                 await Product.Product.create({
                     name: product,
                     image: image,
-                    product_type: product_type,
-                    protection_rating: "0"
+                    product_type: product_type
                 })
             }
             const checkProduct = await Product.Product.findOne({
@@ -168,9 +167,9 @@ const createProductDetails = (newProductDetails) => {
 
             const checkProductDetails = await Product.ProductDetails.findOne({
                 product: checkProduct._id,
-                power: checkPower._id,
-                size: checkSize._id,
-                color: checkColor._id,
+                power: checkPower ? checkPower._id : null,
+                size: checkSize ? checkSize._id : null,
+                color: checkColor ? checkColor._id : null,
                 voltage,
                 CRI,
                 dimension,
@@ -182,25 +181,18 @@ const createProductDetails = (newProductDetails) => {
                 projection_angle
             })
 
-            if (checkProduct === null || checkPower === null || checkSize === null || checkColor === null || voltage === null || CRI === null || dimension === null || lumens_color_temperature === null || warranty === null || luminous_flux === null) {
-                resolve({
-                    status: "OK",
-                    message: "some properties is not defined",
-                })
-            }
-
             if (checkProductDetails !== null) {
                 resolve({
                     status: "OK",
                     message: "the product details is already",
                 })
             }
-
+            
             const createdProductDetails = await Product.ProductDetails.create({
                 product: checkProduct._id,
-                power: checkPower._id,
-                size: checkSize._id,
-                color: checkColor._id,
+                power: checkPower ? checkPower._id : null,
+                size: checkSize ? checkSize._id : null,
+                color: checkColor ? checkColor._id : null,
                 voltage,
                 CRI,
                 dimension,
@@ -240,8 +232,7 @@ const createProduct = (newProduct) => {
             const createdProduct = await Product.Product.create({
                 name,
                 image,
-                product_type,
-                protection_rating
+                product_type
             })
             if (createdProduct) {
                 resolve({
@@ -336,7 +327,9 @@ const updateProduct = (id, data) => {
                     message: "The product is not defined"
                 })
             }
+
             const updatedProduct = await Product.Product.findByIdAndUpdate(id, data, { new: true })
+
             resolve({
                 status: "OK",
                 message: "SUCCESS",

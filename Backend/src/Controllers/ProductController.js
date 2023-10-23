@@ -91,7 +91,7 @@ const createProductDetails = async (req, res) => {
         image,
         countInStock } = req.body
     try {
-        if (!product || !power || !hole_dimension || !chip_led || !projection_angle || !product_type || !image || !size || !color || !countInStock || !unit_price || !voltage || !CRI || !dimension || !lumens_color_temperature || !warranty || !luminous_flux) {
+        if (!product || !countInStock || !unit_price) {
             return res.status(200).json({
                 status: 'ERR',
                 message: 'The input is required'
@@ -109,7 +109,7 @@ const createProductDetails = async (req, res) => {
 const createProduct = async (req, res) => {
     const { name, image, product_type, protection_rating } = req.body
     try {
-        if (!name || !image || !product_type || !protection_rating) {
+        if (!name || !image || !product_type) {
             return res.status(200).json({
                 status: 'ERR',
                 message: 'The input is required'
@@ -127,7 +127,7 @@ const createProduct = async (req, res) => {
 const getAllProduct = async (req, res) => {
     try {
         const { limit, page } = req.query
-        const response = await ProductServices.getAllProduct(Number(limit) || 8, Number(page) || 0);
+        const response = await ProductServices.getAllProduct(Number(limit) || 12, Number(page) || 0);
         return res.status(200).json(response)
     } catch (error) {
         return res.status(404).json({

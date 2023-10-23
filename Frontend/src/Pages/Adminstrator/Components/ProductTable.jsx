@@ -65,6 +65,7 @@ export default function ProductTable() {
   }
 
   const { isLoading, data } = useQuery({ queryKey: ['products'], queryFn: getAllProducts })
+  console.log("dt", data);
   let dataIdHandle = []
   if (data?.data.length > 0) {
     dataIdHandle = data?.data.map((product, index) => ({

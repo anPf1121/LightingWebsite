@@ -19,7 +19,7 @@ export default function ProductCard(props) {
                 <Card sx={{ cursor: 'pointer', border: '1px solid #f3f3f3' }} className='card'>
                     <span onClick={handleLink}>
 
-                    <CardMedia alt='unsplash image' component="img" image={props.productImg} />
+                    <CardMedia alt='unsplash image' component="img" image={props.productImg ? props.productImg : ""} />
                     <CardContent>
                         <Typography
                             gutterBottom

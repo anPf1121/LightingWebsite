@@ -25,21 +25,25 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import * as ProductServices from "../../../../Services/ProductServices"
 import { useQuery } from "@tanstack/react-query";
 export default function ProductDetailsContent() {
-
   const { productId } = useParams();
-  const GetProductDetails = async (id) => {
-    const res = await ProductServices.GetProductDetails(id);
-    return res;
-  }
-
-  const { isLoading: isLoadingDetails, data: dataDetails } = useQuery({ queryKey: ['product-details', productId], queryFn: () => GetProductDetails(productId) })
 
   const GetProduct = async (id) => {
     const res = await ProductServices.GetProduct(id);
     return res;
   }
-
   const { isLoading: isLoadingProduct, data: dataProduct } = useQuery({ queryKey: ['product'], queryFn: () => dataDetails?.data[0].product ? GetProduct(dataDetails?.data[0].product) : null })
+
+  const GetProductDetails = async (id) => {
+    const res = await ProductServices.GetProductDetails(id);
+    return res;
+  }
+  const { isLoading: isLoadingDetails, data: dataDetails } = useQuery({ queryKey: ['product-details', productId], queryFn: () => GetProductDetails(productId) })
+  
+  const GetAllProduct = async (id) => {
+    const res = await ProductServices.GetAllProduct();
+    return res;
+  }
+  const { data: dataAllProduct } = useQuery({ queryKey: ['products', productId], queryFn: GetAllProduct })
 
 
   function CustomTabPanel(props) {
@@ -110,6 +114,29 @@ export default function ProductDetailsContent() {
     // Xử lý khi người dùng nhấn nút Instagram
     window.open("https://www.instagram.com", "_blank");
   };
+
+  let powerSet = new Set();
+  dataDetails?.data.map((item) => {
+    powerSet.add(item.power.powerValue)
+  })
+  powerSet = [...powerSet]
+
+  let sizeSet = new Set();
+  dataDetails?.data.map((item) => {
+    sizeSet.add(item.size.sizeName)
+  })
+  sizeSet = [...sizeSet]
+
+  let colorSet = new Set();
+  dataDetails?.data.map((item) => {
+    colorSet.add(item.color.colorName)
+  })
+  colorSet = [...colorSet]
+
+
+  const referenceProduct = dataProduct?.data
+  const similarProducts = dataAllProduct?.data.filter(product => product?.product_type === referenceProduct?.product_type).slice(0, 5);
+  console.log("similarProducts1", similarProducts);
   return (
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px' }}>
@@ -146,6 +173,69 @@ export default function ProductDetailsContent() {
                   500 - 1000 $
                 </Typography>
               </div>
+              <Box sx={{ margin: '20px 0' }}>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="product_type"
+                  // value={productState.product_type}
+                  // onChange={handleRadioChange}
+                  style={{ display: "flex", alignItems: 'center' }}
+                >
+                  <div style={{ marginRight: '20px' }}>
+                    Công xuất:
+                  </div>
+                  {
+                    powerSet.map((item, index) => {
+                      if (item) {
+                        return <FormControlLabel key={index} value={item} control={<Radio />} label={item} />
+                      }
+                    })
+                  }
+                </RadioGroup>
+
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="product_type"
+                  // value={productState.product_type}
+                  // onChange={handleRadioChange}
+                  style={{ display: "flex", alignItems: 'center' }}
+                >
+                  <div style={{ marginRight: '20px' }}>
+                    Ánh sáng:
+                  </div>
+                  {
+                    colorSet.map((item, index) => {
+                      if (item) {
+                        return <FormControlLabel key={index} value={item} control={<Radio />} label={item} />
+                      }
+                    })
+                  }
+                </RadioGroup>
+
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="product_type"
+                  // value={productState.product_type}
+                  // onChange={handleRadioChange}
+                  style={{ display: "flex", alignItems: 'center' }}
+                >
+                  <div style={{ marginRight: '20px' }}>
+                    Kích cỡ:
+                  </div>
+                  {
+                    sizeSet.map((item, index) => {
+                      if (item) {
+                        return <FormControlLabel key={index} value={item} control={<Radio />} label={item} />
+                      }
+                    })
+                  }
+                </RadioGroup>
+
+              </Box>
+
               <div className="product-options-input">
                 <div className="quantity">
                   <div
@@ -314,21 +404,6 @@ export default function ProductDetailsContent() {
                   />
                 </button>
               </div>
-              <div>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="product_type"
-                // value={productState.product_type}
-                // onChange={handleRadioChange}
-                >
-                  {
-                    dataDetails?.data.map((item, index) => {
-                      return <FormControlLabel key={index} value={item.size.sizeName} control={<Radio />} label={item.size.sizeName} />
-                    })
-                  }
-                </RadioGroup>
-              </div>
             </div>
             <div>
               <Toolbar style={{ padding: "0px" }}>
@@ -372,6 +447,7 @@ export default function ProductDetailsContent() {
               </Box>
               <CustomTabPanel value={value} index={0}>
                 <Typography
+                  component="span"
                   variant="h3"
                   sx={{
                     userSelect: "none",
@@ -382,9 +458,11 @@ export default function ProductDetailsContent() {
                 >
                   {dataProduct?.data.description}
                 </Typography>
+                <br />
               </CustomTabPanel>
               <CustomTabPanel value={value} index={1}>
                 <Typography
+                  component="span"
                   variant="h3"
                   sx={{
                     userSelect: "none",
@@ -392,9 +470,22 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Voltage: {dataDetails?.data[0].voltage}
+                  Voltage: {dataDetails?.data[0]?.voltage}
+                </Typography>
+                <br />
+                <Typography
+                  component="span"
+                  variant="h3"
+                  sx={{
+                    userSelect: "none",
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "1.1em",
+                  }}
+                >
+                  Power: {dataDetails?.data[0]?.power.powerValue}
                 </Typography>
                 <Typography
+                  component="span"
                   variant="h3"
                   sx={{
                     userSelect: "none",
@@ -402,9 +493,10 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Power: {dataDetails?.data[0].power.powerValue}
                 </Typography>
+                <br />
                 <Typography
+                  component="span"
                   variant="h3"
                   sx={{
                     userSelect: "none",
@@ -412,9 +504,11 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  {/* Protection Rating: {dataProduct?.data.rating} */}
+                  Luminous Flux: {dataDetails?.data[0]?.luminous_flux}
                 </Typography>
+                <br />
                 <Typography
+                  component="span"
                   variant="h3"
                   sx={{
                     userSelect: "none",
@@ -422,9 +516,11 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Luminous Flux: {dataDetails?.data[0].luminous_flux}
+                  Lumens Color Temperature: {dataDetails?.data[0]?.lumens_color_temperature}
                 </Typography>
+                <br />
                 <Typography
+                  component="span"
                   variant="h3"
                   sx={{
                     userSelect: "none",
@@ -432,9 +528,11 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Lumens Color Temperature: {dataDetails?.data[0].lumens_color_temperature}
+                  Color Rendering Index (CRI): {dataDetails?.data[0]?.CRI}
                 </Typography>
+                <br />
                 <Typography
+                  component="span"
                   variant="h3"
                   sx={{
                     userSelect: "none",
@@ -442,9 +540,11 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Color Rendering Index (CRI): {dataDetails?.data[0].CRI}
+                  Dimensions: {dataDetails?.data[0]?.dimension}
                 </Typography>
+                <br />
                 <Typography
+                  component="span"
                   variant="h3"
                   sx={{
                     userSelect: "none",
@@ -452,18 +552,9 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Dimensions: {dataDetails?.data[0].dimension}
+                  Warranty: {dataDetails?.data[0]?.warranty}
                 </Typography>
-                <Typography
-                  variant="h3"
-                  sx={{
-                    userSelect: "none",
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "1.1em",
-                  }}
-                >
-                  Warranty: {dataDetails?.data[0].warranty}
-                </Typography>
+                <br />
               </CustomTabPanel>
             </Box>
           </Box>
@@ -499,7 +590,7 @@ export default function ProductDetailsContent() {
           </Typography>
           <div className="btn-see-more">Xem Thêm</div>
         </Box>
-        <ProductSlideShow />
+        <ProductSlideShow products={similarProducts}/>
       </Box>
     </>
   );

@@ -85,20 +85,20 @@ export default function ProductsContent() {
                                             if (typeId !== 0 && item.product_type === typeId) {
                                                 return <>
                                                     <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                                        <ProductCard key={item._id} productImg={item.image} productName={item.name} index={item._id} />
+                                                        <ProductCard key={item._id} productImg={item.image[0]} productName={item.name} index={item._id} />
                                                     </Grid>
                                                 </>
                                             } else if (typeId === 0) {
                                                 return <>
                                                     <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                                                        <ProductCard key={item._id} productImg={item.image} productName={item.name} index={item._id} />
+                                                        <ProductCard key={item._id} productImg={item.image[0]} productName={item.name} index={item._id} />
                                                     </Grid>
                                                 </>
                                             }
                                         })
                                     }
                                     <Box sx={{ marginLeft: '50%', transform: 'translateX(-50%)' }}>
-                                        <Pagination count={10} page={20} />
+                                        <Pagination count={data?.totalPage} page={data?.currentPage} />
                                     </Box>
                                 </Grid>
                             </Grid>

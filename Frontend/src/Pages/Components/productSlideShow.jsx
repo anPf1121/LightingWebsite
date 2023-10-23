@@ -14,7 +14,7 @@ import ProductCard from './productCard';
 
 
 
-export default function ProductSlideShow() {
+export default function ProductSlideShow(props) {
     return (
         <>
             <Box sx={{
@@ -27,7 +27,7 @@ export default function ProductSlideShow() {
                 },
             }}>
                 <Swiper
-                    slidesPerView={3}
+                    slidesPerView={props.products?.length || 5}
                     breakpoints={{ 1536: { slidesPerView: 4, }, 900: { slidesPerView: 3, }, 600: { slidesPerView: 3, }, 0: { slidesPerView: 1, } }}
                     centeredSlides={true}
                     spaceBetween={30}
@@ -36,21 +36,15 @@ export default function ProductSlideShow() {
                     navigation={true}
                     modules={[Pagination, Navigation]}
                     className="swiper-container">
-                    <SwiperSlide><Box>
-                        <ProductCard />
-                    </Box></SwiperSlide>
-                    <SwiperSlide><Box>
-                        <ProductCard />
-                    </Box></SwiperSlide>
-                    <SwiperSlide><Box>
-                        <ProductCard />
-                    </Box></SwiperSlide>
-                    <SwiperSlide><Box>
-                        <ProductCard />
-                    </Box></SwiperSlide>
-                    <SwiperSlide><Box>
-                        <ProductCard />
-                    </Box></SwiperSlide>
+                    {
+                        props.products?.map((item, index) => {
+                            return <>
+                                <SwiperSlide key={index}><Box>
+                                    <ProductCard productName={item.name} productImg={item.image[0]} />
+                                </Box></SwiperSlide>
+                            </>
+                        })
+                    }
                 </Swiper >
             </Box>
         </>

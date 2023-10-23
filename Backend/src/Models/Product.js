@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    image: { type: String, required: true },
+    image: [{ type: String, required: true }],
     product_type: { type: String, required: true },
-    descriptions: { type: String, required: false },
-    protection_rating: { type: Number, required: true },
+    descriptions: { type: String, required: false, default: "" },
+    protection_rating: { type: Number, required: true, default: "0" },
   },
   {
     timestamps: true,
@@ -53,19 +53,19 @@ const productCollectionSchema = new mongoose.Schema(
 
 const productDetailsSchema = new mongoose.Schema({
   product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true }, // changed
-  power: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductPower' }, // công suất
-  size: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductSize' },
-  color: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductColor' },
-  inCollection: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductCollection' },
-  voltage: { type: String, required: true }, // điện áp
-  CRI: { type: String, required: true }, // chỉ số hoàn màu
-  dimension: { type: String, required: true }, // kích thước
+  power: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductPower', required: false }, // công suất
+  size: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductSize', required: false },
+  color: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductColor', required: false },
+  inCollection: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductCollection', required: false },
+  voltage: { type: String, required: false }, // điện áp
+  CRI: { type: String, required: false }, // chỉ số hoàn màu
+  dimension: { type: String, required: false }, // kích thước
   hole_dimension: { type: String, required: false }, // kích thước lỗ khoét >
   chip_led: { type: String, required: false }, // >
   projection_angle: { type: String, required: false }, // góc chiếu >
-  lumens_color_temperature: { type: String, required: true }, // nhiệt độ màu
-  warranty: { type: String, required: true },
-  luminous_flux: { type: String, required: true }, // quang thông
+  lumens_color_temperature: { type: String, required: false }, // nhiệt độ màu
+  warranty: { type: String, required: false },
+  luminous_flux: { type: String, required: false }, // quang thông
   countInStock: { type: Number, required: true },
   unit_price: { type: Number, required: true },
 });
