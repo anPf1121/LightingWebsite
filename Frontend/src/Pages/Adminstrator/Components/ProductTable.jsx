@@ -12,9 +12,6 @@ import Overlay from '../../Components/overlay';
 import ViewDetailsProduct from './ViewDetailsProduct';
 import { useSelector } from 'react-redux';
 
-
-
-
 export default function ProductTable() {
   const userSelector = useSelector((state) => state.user)
 
