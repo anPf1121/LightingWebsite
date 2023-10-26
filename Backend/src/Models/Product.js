@@ -79,7 +79,7 @@ const Product = mongoose.model("Product", productSchema);
 
 module.exports = {
   Product,
-  ProductColor,
+  ProductColor, 
   ProductDetails,
   ProductPower,
   ProductSize,

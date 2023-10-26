@@ -27,23 +27,17 @@ import { useQuery } from "@tanstack/react-query";
 export default function ProductDetailsContent() {
   const { productId } = useParams();
 
-  const GetProduct = async (id) => {
-    const res = await ProductServices.GetProduct(id);
-    return res;
-  }
-  const { isLoading: isLoadingProduct, data: dataProduct } = useQuery({ queryKey: ['product'], queryFn: () => dataDetails?.data[0].product ? GetProduct(dataDetails?.data[0].product) : null })
-
   const GetProductDetails = async (id) => {
     const res = await ProductServices.GetProductDetails(id);
     return res;
   }
   const { isLoading: isLoadingDetails, data: dataDetails } = useQuery({ queryKey: ['product-details', productId], queryFn: () => GetProductDetails(productId) })
   
-  const GetAllProduct = async (id) => {
+  const GetAllProduct = async () => {
     const res = await ProductServices.GetAllProduct();
     return res;
   }
-  const { data: dataAllProduct } = useQuery({ queryKey: ['products', productId], queryFn: GetAllProduct })
+  const { data: dataAllProduct } = useQuery({ queryKey: ['products'], queryFn: GetAllProduct })
 
 
   function CustomTabPanel(props) {
@@ -133,8 +127,7 @@ export default function ProductDetailsContent() {
   })
   colorSet = [...colorSet]
 
-
-  const referenceProduct = dataProduct?.data
+  const referenceProduct = dataDetails?.data[0].product
   const similarProducts = dataAllProduct?.data.filter(product => product?.product_type === referenceProduct?.product_type).slice(0, 5);
   console.log("similarProducts1", similarProducts);
   return (
@@ -142,7 +135,7 @@ export default function ProductDetailsContent() {
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px' }}>
         <Grid item xs={12} sm={12} md={6} >
           <Box sx={{ marginLeft: '20px' }}>
-            <ProductSwiper image={dataProduct?.data.image} />
+            <ProductSwiper image={dataDetails?.data[0].product.image} />
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
@@ -157,7 +150,7 @@ export default function ProductDetailsContent() {
                     fontSize: "2em",
                   }}
                 >
-                  {dataProduct?.data.name}
+                  {dataDetails?.data[0].product.name}
                 </Typography>
               </div>
               <div className="price">
@@ -456,7 +449,7 @@ export default function ProductDetailsContent() {
                     width: "100%",
                   }}
                 >
-                  {dataProduct?.data.description}
+                  {dataDetails?.data[0].product.description}
                 </Typography>
                 <br />
               </CustomTabPanel>

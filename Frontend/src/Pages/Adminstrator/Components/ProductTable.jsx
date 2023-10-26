@@ -62,7 +62,7 @@ export default function ProductTable() {
   }
 
   const { isLoading, data } = useQuery({ queryKey: ['products'], queryFn: getAllProducts })
-  console.log("dt", data);
+
   let dataIdHandle = []
   if (data?.data.length > 0) {
     dataIdHandle = data?.data.map((product, index) => ({
@@ -70,8 +70,6 @@ export default function ProductTable() {
       idDisplay: (index + 1).toString()
     }))
   }
-
-
 
   const [editingItem, setEditingItem] = useState(null);
   const [isOpenEdit, setIsOpenEdit] = useState(false);

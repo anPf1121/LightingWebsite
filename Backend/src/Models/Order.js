@@ -3,23 +3,27 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema({
   orderItems: [
     {
-      name: { type: String, required: true },
-      amount: { type: Number, required: true },
-      image: { type: String, required: true },
-      price: { type: Number, required: true },
-      product: {
+      quantity: { type: Number, required: true },
+      productDetails: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
+        ref: "ProductDetails",
         required: true,
       },
     },
   ],
-  customer: {
+  createdAt: { type: Date, required: true, default: Date.now },
+  itemsPrice: { type: Number, required: true },
+  taxPrice: { type: Number, required: true },
+  totalPrice: { type: Number, required: true },
+  status: { type: String, required: true },
+  paidAt: { type: Date, required: true },
+  deliveredAt: { type: Boolean, required: true }, 
+  shippingAddress: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+    ref: "Delivery",
+    required: true,
   }
 });
 
 const Order = mongoose.model("Order", orderSchema);
-
 module.exports = Order;

@@ -271,7 +271,7 @@ const getProductDetails = (id) => {
         try {
             const productDetails = await Product.ProductDetails.find({
                 product: id
-            }).populate('size').populate('power').populate('color')
+            }).populate('size').populate('power').populate('color').populate('product')
             resolve({
                 status: "OK",
                 message: "GET PRODUCT DETAILS SUCCESS",
