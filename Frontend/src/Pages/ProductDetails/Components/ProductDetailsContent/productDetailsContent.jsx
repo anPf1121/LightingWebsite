@@ -24,7 +24,10 @@ import ProductSlideShow from "../../../Components/productSlideShow";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import * as ProductServices from "../../../../Services/ProductServices"
 import { useQuery } from "@tanstack/react-query";
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct } from '../../../../Redux/Slides/orderSlide';
 export default function ProductDetailsContent() {
+  const dispatch = useDispatch();
   const { productId } = useParams();
 
   const GetProductDetails = async (id) => {
@@ -116,20 +119,34 @@ export default function ProductDetailsContent() {
   powerSet = [...powerSet]
 
   let sizeSet = new Set();
+
   dataDetails?.data.map((item) => {
     sizeSet.add(item.size.sizeName)
   })
+
   sizeSet = [...sizeSet]
 
   let colorSet = new Set();
+
   dataDetails?.data.map((item) => {
     colorSet.add(item.color.colorName)
   })
+
   colorSet = [...colorSet]
 
   const referenceProduct = dataDetails?.data[0].product
+
   const similarProducts = dataAllProduct?.data.filter(product => product?.product_type === referenceProduct?.product_type).slice(0, 5);
-  console.log("similarProducts1", similarProducts);
+
+  const handleAddOrderProduct = () => {
+    dispatch(addProduct({
+      orderItems: {
+        quantity: quantity,
+        productDetails: dataDetails?.data[0]._id,
+      },
+      shippingAddress: {},
+    }));
+  }
   return (
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px' }}>
@@ -163,7 +180,7 @@ export default function ProductDetailsContent() {
                     width: "100%",
                   }}
                 >
-                  500 - 1000 $
+                  {dataDetails?.data[0].unit_price} vnd
                 </Typography>
               </div>
               <Box sx={{ margin: '20px 0' }}>
@@ -356,6 +373,7 @@ export default function ProductDetailsContent() {
                         width: "2em",
                         height: "2em",
                       }}
+                      onClick={handleAddOrderProduct}
                     >
                       <AddShoppingCartIcon />
                     </div>

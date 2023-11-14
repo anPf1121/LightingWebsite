@@ -13,15 +13,18 @@ const orderSchema = new mongoose.Schema({
   ],
   createdAt: { type: Date, required: true, default: Date.now },
   itemsPrice: { type: Number, required: true },
-  taxPrice: { type: Number, required: true },
   totalPrice: { type: Number, required: true },
-  status: { type: String, required: true },
+  status: { type: String, required: true, default: "pending" },
   paidAt: { type: Date, required: true },
-  deliveredAt: { type: Boolean, required: true }, 
+  deliveredAt: { type: Boolean, required: true },
   shippingAddress: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Delivery",
-    required: true,
+    address: { type: String, required: false },
+    phoneNumber: { type: String, required: false },
+    customer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: false,
+    },
   }
 });
 
