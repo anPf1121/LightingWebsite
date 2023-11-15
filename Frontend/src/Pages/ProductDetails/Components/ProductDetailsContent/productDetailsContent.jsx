@@ -26,6 +26,8 @@ import * as ProductServices from "../../../../Services/ProductServices"
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../../../../Redux/Slides/orderSlide';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 export default function ProductDetailsContent() {
   const dispatch = useDispatch();
   const { productId } = useParams();
@@ -35,13 +37,12 @@ export default function ProductDetailsContent() {
     return res;
   }
   const { isLoading: isLoadingDetails, data: dataDetails } = useQuery({ queryKey: ['product-details', productId], queryFn: () => GetProductDetails(productId) })
-  
+
   const GetAllProduct = async () => {
     const res = await ProductServices.GetAllProduct();
     return res;
   }
   const { data: dataAllProduct } = useQuery({ queryKey: ['products'], queryFn: GetAllProduct })
-
 
   function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -137,16 +138,25 @@ export default function ProductDetailsContent() {
   const referenceProduct = dataDetails?.data[0].product
 
   const similarProducts = dataAllProduct?.data.filter(product => product?.product_type === referenceProduct?.product_type).slice(0, 5);
+  const [productDetail, setProductDetail] = useState(dataDetails?.data[0]);
+
+  const [alignment, setAlignment] = React.useState(dataDetails?.data[0]._id);
+
+  const handleChangeModel = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
 
   const handleAddOrderProduct = () => {
     dispatch(addProduct({
-      orderItems: {
+      orderItem: {
         quantity: quantity,
-        productDetails: dataDetails?.data[0]._id,
+        productDetails: alignment,
+        itemName: dataDetails?.data[0].product.name + " " + dataDetails?.data[0].power.powerValue + " " + dataDetails?.data[0].size.sizeName + " " + dataDetails?.data[0].color.colorName,
+        main_image: dataDetails?.data[0].product.image[0],
       },
-      shippingAddress: {},
     }));
   }
+  console.log("productDetail?.data: ", dataDetails?.data);
   return (
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px' }}>
@@ -183,69 +193,21 @@ export default function ProductDetailsContent() {
                   {dataDetails?.data[0].unit_price} vnd
                 </Typography>
               </div>
-              <Box sx={{ margin: '20px 0' }}>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="product_type"
-                  // value={productState.product_type}
-                  // onChange={handleRadioChange}
-                  style={{ display: "flex", alignItems: 'center' }}
+              <div className="model">
+                <ToggleButtonGroup
+                  color="primary"
+                  value={alignment}
+                  exclusive
+                  onChange={handleChangeModel}
+                  aria-label="Platform"
                 >
-                  <div style={{ marginRight: '20px' }}>
-                    Công xuất:
-                  </div>
                   {
-                    powerSet.map((item, index) => {
-                      if (item) {
-                        return <FormControlLabel key={index} value={item} control={<Radio />} label={item} />
-                      }
+                    dataDetails?.data.map((item, id) => {
+                      return <ToggleButton value={item._id} key={id}>{item.power.powerValue == "" ? "" : item.power.powerValue} {item.color.colorName == "" ? "" : item.color.colorName} {(item.size.sizeName == "" ? "" : item.size.sizeName)}</ToggleButton>
                     })
                   }
-                </RadioGroup>
-
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="product_type"
-                  // value={productState.product_type}
-                  // onChange={handleRadioChange}
-                  style={{ display: "flex", alignItems: 'center' }}
-                >
-                  <div style={{ marginRight: '20px' }}>
-                    Ánh sáng:
-                  </div>
-                  {
-                    colorSet.map((item, index) => {
-                      if (item) {
-                        return <FormControlLabel key={index} value={item} control={<Radio />} label={item} />
-                      }
-                    })
-                  }
-                </RadioGroup>
-
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="product_type"
-                  // value={productState.product_type}
-                  // onChange={handleRadioChange}
-                  style={{ display: "flex", alignItems: 'center' }}
-                >
-                  <div style={{ marginRight: '20px' }}>
-                    Kích cỡ:
-                  </div>
-                  {
-                    sizeSet.map((item, index) => {
-                      if (item) {
-                        return <FormControlLabel key={index} value={item} control={<Radio />} label={item} />
-                      }
-                    })
-                  }
-                </RadioGroup>
-
-              </Box>
-
+                </ToggleButtonGroup>
+              </div>
               <div className="product-options-input">
                 <div className="quantity">
                   <div
@@ -601,7 +563,7 @@ export default function ProductDetailsContent() {
           </Typography>
           <div className="btn-see-more">Xem Thêm</div>
         </Box>
-        <ProductSlideShow products={similarProducts}/>
+        <ProductSlideShow products={similarProducts} />
       </Box>
     </>
   );

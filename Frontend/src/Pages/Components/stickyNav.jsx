@@ -14,6 +14,7 @@ import jwt_decode from "jwt-decode";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetUser, updateUser } from '../../Redux/Slides/userSlide';
+import { removeProduct } from '../../Redux/Slides/orderSlide';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -33,6 +34,7 @@ export default function StickyNav() {
     // redux
     const dispatch = useDispatch();
     const userSelector = useSelector((state) => state.user)
+    const orderSelector = useSelector((state) => state.order)
 
     // State
     let [toggleCart, setToggleCart] = useState(false);
@@ -90,7 +92,10 @@ export default function StickyNav() {
     const handleGetDetailsUser = async (id, token) => {
         const res = await UserServices.GetDetailsUser(id, token);
         dispatch(updateUser({ ...res?.data, access_token: token }))
+    }
 
+    const handleRemoveItemInCart = (id) => {
+        dispatch(removeProduct({productId: id}))
     }
 
     let isLoggedIn = userSelector.email !== "" ? true : false
@@ -191,19 +196,46 @@ export default function StickyNav() {
                             </div>
                             <div className='right-nav' style={{ position: 'relative' }}>
                                 <IconButton aria-label="cart" onClick={() => handleToggleCart()}>
-                                    <StyledBadge badgeContent={0} color="error">
+                                    <StyledBadge badgeContent={orderSelector.orderItems.length} color="error">
                                         <ShoppingCartIcon />
                                     </StyledBadge>
                                 </IconButton>
                                 {(toggleCart === true) ? <Overlay func={handleToggleCart} /> : ""}
                                 {(toggleCart === true) ? <div className="cart-details">
                                     <Box className='cart-content' sx={{ textAlign: 'center' }}>
-                                        <Box sx={{ margin: '50px 0' }}>
-                                            <div className="img-empty-cart">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="" />
-                                            </div>
-                                            <Typography style={{ marginTop: '20px' }} variant='body2'>Không có sản phẩm trong giỏ hàng!</Typography>
-                                        </Box>
+                                        {
+                                            (orderSelector.orderItems.length > 0) ? <Typography variant='h4'>Giỏ hàng</Typography> : ""
+                                        }
+                                        {
+                                            (orderSelector.orderItems.length > 0) ? orderSelector?.orderItems?.map((item, index) => {
+                                                return <div className="item-in-cart-wrapper" key={index}>
+                                                    <div className="item-in-cart">
+                                                        <div className="left">
+                                                            <div className="img-item">
+                                                                <img src={item.main_image} alt="this is lamp" />
+                                                            </div>
+                                                            <div className="item-name">
+                                                                {item.itemName}
+                                                            </div>
+                                                            <div className="item-quantity">
+                                                                {item.quantity}
+                                                            </div>
+                                                        </div>
+                                                        <div className="remove-item" onClick={() => handleRemoveItemInCart(item.productDetails)}>x</div>
+                                                    </div>
+                                                </div>
+                                            }) : <Box sx={{ margin: '50px 0' }}>
+                                                <div className="img-empty-cart">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="" />
+                                                </div>
+                                                <Typography style={{ marginTop: '20px' }} variant='body2'>Không có sản phẩm trong giỏ hàng!</Typography>
+                                            </Box>
+                                        }
+                                        {
+                                            (orderSelector.orderItems.length > 0) ? <Button className="to-payment">
+                                                Xem chi tiết đơn hàng
+                                            </Button> : ""
+                                        }
                                     </Box>
                                 </div> : ""}
                             </div>
