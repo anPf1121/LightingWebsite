@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../../../../Redux/Slides/orderSlide';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import QuantityInput from "../../../Components/quantityInput";
 export default function ProductDetailsContent() {
   const dispatch = useDispatch();
   const { productId } = useParams();
@@ -155,7 +156,6 @@ export default function ProductDetailsContent() {
     });
     setProductDetail(newProduct);
   }
-
   const handleAddOrderProduct = () => {
     dispatch(addProduct({
       orderItem: {
@@ -163,10 +163,12 @@ export default function ProductDetailsContent() {
         productDetails: alignment,
         itemName: productDetail?.product.name + " " + productDetail?.power.powerValue + " " + productDetail?.size.sizeName + " " + productDetail?.color.colorName,
         main_image: productDetail?.product.image[0],
+        product_type: similarProducts[0].product_type,
+        unit_price: productDetail?.unit_price
       },
     }));
   }
-  
+
   return (
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px' }}>
@@ -218,109 +220,7 @@ export default function ProductDetailsContent() {
                   }
                 </ToggleButtonGroup>
               </div>
-              <div className="product-options-input">
-                <div className="quantity">
-                  <div
-                    className="input-quantity"
-                    style={{
-                      position: "relative",
-                      display: "inline-block",
-                      marginTop: "1em",
-                      marginBottom: "2em",
-                    }}
-                  >
-                    <div className="number-input-title"></div>
-                    <label htmlFor="Quantity">
-                      <Typography
-                        variant="h4"
-                        sx={{
-                          userSelect: "none",
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: "1.2em",
-                          display: "block",
-                        }}
-                      >
-                        Số Lượng
-                      </Typography>
-                      <div
-                        style={{
-                          display: "inline-block",
-                          position: "relative",
-                          width: "6em",
-                        }}
-                      >
-                        <input
-                          type="number"
-                          id="Quantity"
-                          value={quantity}
-                          onChange={handleInputChange}
-                          min={1}
-                          max={100}
-                          readOnly
-                          style={{
-                            height: "3em",
-                            width: "100%",
-                            paddingLeft: "1em",
-                            paddingRight: "2em",
-                            border: "1px solid #5757",
-                            borderRadius: "3px",
-                            cursor: "default",
-                          }}
-                        />
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "10%",
-                            right: "1.6em",
-                            width: "1.5em",
-                            height: "2em",
-                            backgroundColor: "#ffff",
-                            display: "block",
-                            cursor: "default",
-                          }}
-                        ></div>
-                        <Box
-                          className="quantity-input-spinner-arrows-container"
-                          sx={{
-                            position: "absolute",
-                            top: "10%",
-                            right: "0.5em",
-                            opacity: "0",
-                            "&:hover": {
-                              opacity: "1",
-                            },
-                          }}
-                        >
-                          <span
-                            onClick={handleIncrease}
-                            style={{
-                              backgroundImage:
-                                "url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4IiB2aWV3Qm94PSIwIDAgMTYgMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+ICAgICAgICA8dGl0bGU+RGVza3RvcCAxOTIwIC8gMTA4MDwvdGl0bGU+ICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPiAgICA8ZGVmcz48L2RlZnM+ICAgIDxnIGlkPSJQYWdlLTIiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiAgICAgICAgPGcgaWQ9IkRlc2t0b3AtMTkyMC0vLTEwODAiIHN0cm9rZT0iIzEyMTIxMiI+ICAgICAgICAgICAgPGcgaWQ9InF0eSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMy4wMDAwMDAsIDUuMDAwMDAwKSI+ICAgICAgICAgICAgICAgIDxwb2x5bGluZSBpZD0iUmVjdGFuZ2xlLTMtQ29weSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNS4wMDAwMDAsIDUuMDAwMDAwKSByb3RhdGUoLTIyNS4wMDAwMDApIHRyYW5zbGF0ZSgtNS4wMDAwMDAsIC01LjAwMDAwMCkgIiBwb2ludHM9IjggOCAyIDggMiAyIj48L3BvbHlsaW5lPiAgICAgICAgICAgIDwvZz4gICAgICAgIDwvZz4gICAgPC9nPjwvc3ZnPg==)",
-                              width: "1em",
-                              height: "1em",
-                              display: "block",
-                              cursor: "pointer",
-                              userSelect: "none",
-                            }}
-                          ></span>
-                          <span
-                            onClick={handleDecrease}
-                            style={{
-                              backgroundImage:
-                                "url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4IiB2aWV3Qm94PSIwIDAgMTYgMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+ICAgICAgICA8dGl0bGU+RGVza3RvcCAxOTIwIC8gMTA4MDwvdGl0bGU+ICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPiAgICA8ZGVmcz48L2RlZnM+ICAgIDxnIGlkPSJQYWdlLTIiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiAgICAgICAgPGcgaWQ9IkRlc2t0b3AtMTkyMC0vLTEwODAiIHN0cm9rZT0iIzEyMTIxMiI+ICAgICAgICAgICAgPGcgaWQ9InF0eSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOC4wMDAwMDAsIDYuMDAwMDAwKSByb3RhdGUoLTE4MC4wMDAwMDApIHRyYW5zbGF0ZSgtOC4wMDAwMDAsIC02LjAwMDAwMCkgdHJhbnNsYXRlKDMuMDAwMDAwLCAxLjAwMDAwMCkiPiAgICAgICAgICAgICAgICA8cG9seWxpbmUgaWQ9IlJlY3RhbmdsZS0zLUNvcHkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUuMDAwMDAwLCA1LjAwMDAwMCkgcm90YXRlKC0yMjUuMDAwMDAwKSB0cmFuc2xhdGUoLTUuMDAwMDAwLCAtNS4wMDAwMDApICIgcG9pbnRzPSI4IDggMiA4IDIgMiI+PC9wb2x5bGluZT4gICAgICAgICAgICA8L2c+ICAgICAgICA8L2c+ICAgIDwvZz48L3N2Zz4=)",
-                              width: "1em",
-                              height: "1em",
-                              display: "block",
-                              cursor: "pointer",
-                              userSelect: "none",
-                            }}
-                          ></span>
-                        </Box>
-                      </div>
-                    </label>
-                  </div>
-                </div>
-              </div>
+              <QuantityInput quantity={quantity} handleInputChange={handleInputChange} handleIncrease={handleIncrease} handleDecrease={handleDecrease}/>
               <div className="btn-options" style={{ display: "flex" }}>
                 <Button
                   className="Add-to-bag"

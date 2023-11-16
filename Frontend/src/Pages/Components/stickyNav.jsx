@@ -15,6 +15,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetUser, updateUser } from '../../Redux/Slides/userSlide';
 import { removeProduct } from '../../Redux/Slides/orderSlide';
+import QuantityInput from './quantityInput';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -218,7 +219,7 @@ export default function StickyNav() {
                                                                 {item.itemName}
                                                             </div>
                                                             <div className="item-quantity">
-                                                                {item.quantity}
+                                                                 số lượng: {item.quantity}
                                                             </div>
                                                         </div>
                                                         <div className="remove-item" onClick={() => handleRemoveItemInCart(item.productDetails)}>x</div>
