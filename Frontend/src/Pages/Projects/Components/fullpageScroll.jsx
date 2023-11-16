@@ -4,7 +4,12 @@ import React from 'react'
 export default function FullpageScroll() {
     return (
         <>
-            <div className="container">
+            <Box className="container" sx={{
+                padding: {
+                    sm: "150px",
+                    md: "0",
+                }
+            }}>
                 <section className='fp'>
                     <Grid container sx={{
                         padding: {
@@ -187,7 +192,7 @@ export default function FullpageScroll() {
                         </Grid>
                     </Grid>
                 </section>
-            </div>
+            </Box>
         </>
     )
 }

@@ -146,23 +146,33 @@ export default function ProductDetailsContent() {
     setAlignment(newAlignment);
   };
 
+  const matchProductDetails = (id) => {
+    let newProduct = {};
+    dataDetails?.data.forEach(element => {
+      if (element._id === id) {
+        newProduct = element
+      }
+    });
+    setProductDetail(newProduct);
+  }
+
   const handleAddOrderProduct = () => {
     dispatch(addProduct({
       orderItem: {
         quantity: quantity,
         productDetails: alignment,
-        itemName: dataDetails?.data[0].product.name + " " + dataDetails?.data[0].power.powerValue + " " + dataDetails?.data[0].size.sizeName + " " + dataDetails?.data[0].color.colorName,
-        main_image: dataDetails?.data[0].product.image[0],
+        itemName: productDetail?.product.name + " " + productDetail?.power.powerValue + " " + productDetail?.size.sizeName + " " + productDetail?.color.colorName,
+        main_image: productDetail?.product.image[0],
       },
     }));
   }
-  console.log("productDetail?.data: ", dataDetails?.data);
+  
   return (
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px' }}>
         <Grid item xs={12} sm={12} md={6} >
           <Box sx={{ marginLeft: '20px' }}>
-            <ProductSwiper image={dataDetails?.data[0].product.image} />
+            <ProductSwiper image={productDetail?.product.image} />
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
@@ -177,7 +187,7 @@ export default function ProductDetailsContent() {
                     fontSize: "2em",
                   }}
                 >
-                  {dataDetails?.data[0].product.name}
+                  {productDetail?.product.name}
                 </Typography>
               </div>
               <div className="price">
@@ -190,7 +200,7 @@ export default function ProductDetailsContent() {
                     width: "100%",
                   }}
                 >
-                  {dataDetails?.data[0].unit_price} vnd
+                  {productDetail?.unit_price} vnd
                 </Typography>
               </div>
               <div className="model">
@@ -203,7 +213,7 @@ export default function ProductDetailsContent() {
                 >
                   {
                     dataDetails?.data.map((item, id) => {
-                      return <ToggleButton value={item._id} key={id}>{item.power.powerValue == "" ? "" : item.power.powerValue} {item.color.colorName == "" ? "" : item.color.colorName} {(item.size.sizeName == "" ? "" : item.size.sizeName)}</ToggleButton>
+                      return <ToggleButton onClick={() => matchProductDetails(item._id)} value={item._id} key={id}>{item.power.powerValue == "" ? "" : item.power.powerValue} {item.color.colorName == "" ? "" : item.color.colorName} {(item.size.sizeName == "" ? "" : item.size.sizeName)}</ToggleButton>
                     })
                   }
                 </ToggleButtonGroup>
@@ -429,7 +439,7 @@ export default function ProductDetailsContent() {
                     width: "100%",
                   }}
                 >
-                  {dataDetails?.data[0].product.description}
+                  {productDetail?.product.description}
                 </Typography>
                 <br />
               </CustomTabPanel>
@@ -443,7 +453,7 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Voltage: {dataDetails?.data[0]?.voltage}
+                  Voltage: {productDetail?.voltage}
                 </Typography>
                 <br />
                 <Typography
@@ -455,7 +465,7 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Power: {dataDetails?.data[0]?.power.powerValue}
+                  Power: {productDetail?.power.powerValue}
                 </Typography>
                 <Typography
                   component="span"
@@ -477,7 +487,7 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Luminous Flux: {dataDetails?.data[0]?.luminous_flux}
+                  Luminous Flux: {productDetail?.luminous_flux}
                 </Typography>
                 <br />
                 <Typography
@@ -489,7 +499,7 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Lumens Color Temperature: {dataDetails?.data[0]?.lumens_color_temperature}
+                  Lumens Color Temperature: {productDetail?.lumens_color_temperature}
                 </Typography>
                 <br />
                 <Typography
@@ -501,7 +511,7 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Color Rendering Index (CRI): {dataDetails?.data[0]?.CRI}
+                  Color Rendering Index (CRI): {productDetail?.CRI}
                 </Typography>
                 <br />
                 <Typography
@@ -513,7 +523,7 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Dimensions: {dataDetails?.data[0]?.dimension}
+                  Dimensions: {productDetail?.dimension}
                 </Typography>
                 <br />
                 <Typography
@@ -525,7 +535,7 @@ export default function ProductDetailsContent() {
                     fontSize: "1.1em",
                   }}
                 >
-                  Warranty: {dataDetails?.data[0]?.warranty}
+                  Warranty: {productDetail?.warranty}
                 </Typography>
                 <br />
               </CustomTabPanel>
