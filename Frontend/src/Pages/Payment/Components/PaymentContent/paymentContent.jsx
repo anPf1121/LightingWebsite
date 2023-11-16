@@ -30,7 +30,7 @@ export default function PaymentContent() {
     const newData = orderSelector.orderItems.map((item) => createData(
         item.main_image, 
         item.itemName, 
-        item.product_type,
+        "đèn",
         item.unit_price,  
         item.quantity,  
         item.unit_price * item.quantity,  
