@@ -1,42 +1,21 @@
 import { Box, Button, Divider, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import React from 'react'
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 function createData(
-    image, 
     name,
-    type,
-    unit_price,
-    quantity,
-    total_price,
+    calories,
+    fat,
+    carbs,
+    protein,
 ) {
-    return {
-        image, 
-        name, 
-        type,
-        unit_price,
-        quantity,
-        total_price
-    };
+    return { name, calories, fat, carbs, protein };
 }
 
+const rows = [
+    createData('Đèn LED Ốp Trần Đổi Màu 490/40W Điều Khiển Remote LN19.RF', 'Đèn led', '10000000 đ', 2, '20000000 đ'),
+];
 
 export default function PaymentContent() {
-    const orderSelector = useSelector((state) => state.order);
-    console.log("orderSelector.orderItems ", orderSelector.orderItems);
-        // orderSelector.orderItems.map((item, index) => {
-        // })
-    let rows = [];
-    const newData = orderSelector.orderItems.map((item) => createData(
-        item.main_image, 
-        item.itemName, 
-        item.product_type,
-        item.unit_price,  
-        item.quantity,  
-        item.unit_price * item.quantity,  
-      ));
-      rows = [...newData]
-    console.log("orderSelector ", orderSelector.orderItems);
     return (
         <>
             <Box sx={{
@@ -71,22 +50,20 @@ export default function PaymentContent() {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {rows.map((row) => { 
-                                        console.log("row.main_image ", row);
-                                        return <TableRow
+                                    {rows.map((row) => (
+                                        <TableRow
                                             key={row.name}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
-                                            <TableCell component="th" scope="row" style={{ display: "flex", alignItems: 'center', gap: '20px' }}>
-                                                <img style={{ width: '50px', height: '50px' }} src={row.image} alt="" />
+                                            <TableCell component="th" scope="row">
                                                 {row.name}
                                             </TableCell>
-                                            <TableCell align="right">{row.type}</TableCell>
-                                            <TableCell align="right">{row.unit_price}</TableCell>
-                                            <TableCell align="right">{row.quantity}</TableCell>
-                                            <TableCell align="right">{row.total_price}</TableCell>
+                                            <TableCell align="right">{row.calories}</TableCell>
+                                            <TableCell align="right">{row.fat}</TableCell>
+                                            <TableCell align="right">{row.carbs}</TableCell>
+                                            <TableCell align="right">{row.protein}</TableCell>
                                         </TableRow>
-                                    })}
+                                    ))}
                                 </TableBody>
                             </Table>
                         </TableContainer>

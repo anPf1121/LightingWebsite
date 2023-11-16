@@ -5,20 +5,14 @@ import BtnSeeMore from '../../Components/btnSeeMore'
 export default function FullpageScroll() {
     return (
         <>
-            <Box className="container" sx={{
-                padding: {
-                    sm: "150px",
-                    md: "0",
-                }
-            }}>
+            <div className="container">
                 <section className='fp'>
                     <Grid container sx={{
                         padding: {
                             xs: "5px",
                             md: "20px"
                         },
-                        alignItems: 'center',
-                        
+                        alignItems: 'center'
                     }}>
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6} sx={{ borderRadius: '20px', objectFit: 'cover', overflow: 'hidden' }} >
                             <img style={{ width: '100%', height: '100%', }} src="https://static.wixstatic.com/media/5b4b7e_d3b5a9141daf4f1dade9c5038dfd695b~mv2.webp" alt="none" />
@@ -202,7 +196,7 @@ export default function FullpageScroll() {
                         </Grid>
                     </Grid>
                 </section>
-            </Box>
+            </div>
         </>
     )
 }
