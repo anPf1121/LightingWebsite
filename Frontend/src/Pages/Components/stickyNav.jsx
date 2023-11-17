@@ -49,6 +49,17 @@ export default function StickyNav() {
     let [toggleAccountOption, setToggleAccountOption] = useState(false);
     const handleToggleAccountOption = () => setToggleAccountOption(!toggleAccountOption);
 
+    const [searchValue, setSearchValue] = useState("")
+    // SEARCH HANDLE
+    const onSearch = (e) => {
+        setSearchValue(e.target.value)
+    }
+    const handleSearch = (e) => {
+        if (searchValue) {
+            navigate(`/products?search=${searchValue}`);
+        }
+    }
+    console.log("se ", searchValue);
     // LOGIN HANDLE
 
     const [userNameValue, setUserNameValue] = useState('');
@@ -89,14 +100,13 @@ export default function StickyNav() {
         localStorage.removeItem('access_token');
     }
 
-
     const handleGetDetailsUser = async (id, token) => {
         const res = await UserServices.GetDetailsUser(id, token);
         dispatch(updateUser({ ...res?.data, access_token: token }))
     }
 
     const handleRemoveItemInCart = (id) => {
-        dispatch(removeProduct({productId: id}))
+        dispatch(removeProduct({ productId: id }))
     }
 
     let isLoggedIn = userSelector.email !== "" ? true : false
@@ -219,7 +229,7 @@ export default function StickyNav() {
                                                                 {item.itemName}
                                                             </div>
                                                             <div className="item-quantity">
-                                                                 số lượng: {item.quantity}
+                                                                số lượng: {item.quantity}
                                                             </div>
                                                         </div>
                                                         <div className="remove-item" onClick={() => handleRemoveItemInCart(item.productDetails)}>x</div>
@@ -244,8 +254,8 @@ export default function StickyNav() {
                                 {(toggleSearch === true) ? <Overlay func={handleToggleSearch} /> : ""}
                                 <div className='right-nav search-ic' onClick={handleToggleSearch}><SearchIcon /></div>
                                 <div className="gr-search">
-                                    <input className={`searchbar`} type="text" />
-                                    <button className="btn-search"><SearchIcon /></button>
+                                    <input className={`searchbar`} type="text" value={searchValue} onChange={onSearch} />
+                                    <button className="btn-search" onClick={handleSearch}><SearchIcon /></button>
                                 </div>
                             </div>
                         </Stack>

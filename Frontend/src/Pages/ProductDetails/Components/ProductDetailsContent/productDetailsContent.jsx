@@ -7,9 +7,6 @@ import {
   Grid,
   Toolbar,
   IconButton,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
@@ -24,7 +21,7 @@ import ProductSlideShow from "../../../Components/productSlideShow";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import * as ProductServices from "../../../../Services/ProductServices"
 import { useQuery } from "@tanstack/react-query";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addProduct } from '../../../../Redux/Slides/orderSlide';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -44,7 +41,6 @@ export default function ProductDetailsContent() {
     return res;
   }
   const { data: dataAllProduct } = useQuery({ queryKey: ['products'], queryFn: GetAllProduct })
-
   function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -141,7 +137,7 @@ export default function ProductDetailsContent() {
   const similarProducts = dataAllProduct?.data.filter(product => product?.product_type === referenceProduct?.product_type).slice(0, 5);
   const [productDetail, setProductDetail] = useState(dataDetails?.data[0]);
 
-  const [alignment, setAlignment] = React.useState(dataDetails?.data[0]._id);
+  const [alignment, setAlignment] = React.useState(null);
 
   const handleChangeModel = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -168,7 +164,14 @@ export default function ProductDetailsContent() {
       },
     }));
   }
-
+  
+  useEffect(() => {
+    if (isLoadingDetails === false) {
+      setAlignment(dataDetails?.data[0]._id);
+      setProductDetail(dataDetails?.data[0])
+    }
+  }, [isLoadingDetails]);
+  console.log("isLoadingDetails ", isLoadingDetails);
   return (
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px' }}>
@@ -215,7 +218,7 @@ export default function ProductDetailsContent() {
                 >
                   {
                     dataDetails?.data.map((item, id) => {
-                      return <ToggleButton onClick={() => matchProductDetails(item._id)} value={item._id} key={id}>{item.power.powerValue == "" ? "" : item.power.powerValue} {item.color.colorName == "" ? "" : item.color.colorName} {(item.size.sizeName == "" ? "" : item.size.sizeName)}</ToggleButton>
+                      return <ToggleButton onClick={() => matchProductDetails(item._id)}  value={item._id} key={id}>{item.power.powerValue == "" ? "" : item.power.powerValue} {item.color.colorName == "" ? "" : item.color.colorName} {(item.size.sizeName == "" ? "" : item.size.sizeName)}</ToggleButton>
                     })
                   }
                 </ToggleButtonGroup>

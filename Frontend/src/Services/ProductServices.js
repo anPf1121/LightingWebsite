@@ -1,7 +1,12 @@
 import axios from "axios"
 
-export const GetAllProduct = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all`)
+export const GetAllProduct = async (search) => {
+    let res = {}
+    if(search) {
+        res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all`)
+    } else {
+        res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all`)
+    }
     return res.data;
 }
 

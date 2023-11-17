@@ -8,7 +8,7 @@ import StickyBox from "react-sticky-box";
 import MobileProductsFilter from "../mobileProductsFilter";
 import * as ProductServices from "../../../../Services/ProductServices"
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const theme = createTheme({
     typography: {
@@ -18,6 +18,7 @@ const theme = createTheme({
 
 export default function ProductsContent() {
     const navigate = useNavigate();
+    const location = useLocation();
     let { typeId } = useParams();
     if (typeId === undefined) typeId = 0
 
@@ -25,17 +26,26 @@ export default function ProductsContent() {
         const res = await ProductServices.GetAllProduct();
         return res;
     }
-
+    const [products, setProducts] = useState(null);
     const { isLoading, data } = useQuery({ queryKey: ['products'], queryFn: getAllProducts })
     const getAllProductType = async () => {
         const res = await ProductServices.getAllProductType();
         return res;
     }
 
+    useEffect(() => {
+        if (data?.data?.length > 0) {
+            setProducts(data?.data);
+        }
+    }, [data])
+
     const { isLoading: isLoadingType, data: typeData } = useQuery({ queryKey: ['product-types'], queryFn: getAllProductType })
     const handleNavLink = (productId) => {
         navigate(`/products/${productId}`);
     }
+
+    const searchQuery = new URLSearchParams(location.search).get('search');
+    console.log("searchQuery ", searchQuery);
 
     return (
         <>
@@ -81,7 +91,7 @@ export default function ProductsContent() {
                             <Grid item xs={12} sm={12} md={8} lg={10} xl={10}>
                                 <Grid container sx={{ alignItems: 'center', textAlign: 'center' }}>
                                     {
-                                        data?.data.map((item) => {
+                                        products?.map((item) => {
                                             if (typeId !== 0 && item.product_type === typeId) {
                                                 return <>
                                                     <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>

@@ -11,3 +11,6 @@ Swiper Lib: https://swiperjs.com/demos
 Carousel Lib:    react-image-gallery         
 use:
 <ImageGallery items={images} infinite={true} showFullscreenButton={false} showPlayButton={false} slideDuration={4} useBrowserFullscreen={false} showNav={true} thumbnailPosition={'left'} disableThumbnailSwipe={false} originalHeight={'300vh'} />;
+
+
+https://www.youtube.com/watch?v=ia78r2zSbM0&list=PL_QEvEi9neNSOGrmYOZSYFk9DpYr-Zd9p&index=47
