@@ -37,33 +37,20 @@ export default function QuantityInput({ quantity, handleInputChange, handleIncre
    
 
     return <>
-        <div className="product-options-input">
+        <div className="product-options-input" style={{width: '300px'}}>
             <div className="quantity">
                 <div
                     className="input-quantity"
                     style={{
                         position: "relative",
-                        display: "inline-block",
-                        marginTop: "1em",
                         marginBottom: "2em",
                     }}
                 >
                     <div className="number-input-title"></div>
-                    <Typography
-                        variant="h4"
-                        sx={{
-                            userSelect: "none",
-                            fontFamily: "'Cormorant Garamond', serif",
-                            fontSize: "1.2em",
-                            display: "block",
-                        }}
-                    >
-                        Số Lượng
-                    </Typography>
+                  
                     <label htmlFor="Quantity">
                         <div
                             style={{
-                                display: "inline-block",
                                 position: "relative",
                                 width: "6em",
                             }}
@@ -94,7 +81,6 @@ export default function QuantityInput({ quantity, handleInputChange, handleIncre
                                     width: "1.5em",
                                     height: "2em",
                                     backgroundColor: "#ffff",
-                                    display: "block",
                                     cursor: "default",
                                 }}
                             ></div>

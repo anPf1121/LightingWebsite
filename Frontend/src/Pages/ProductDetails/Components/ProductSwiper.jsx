@@ -10,7 +10,7 @@ export default function SimpleSlider(props) {
   return (
     <>
       <div className="image-gallery-container">
-        <ImageGallery items={images} infinite={true} showFullscreenButton={false} showPlayButton={false} slideDuration={4} useBrowserFullscreen={false} showNav={true} thumbnailPosition={'left'} disableThumbnailSwipe={false} originalHeight={'300vh'} />
+        <ImageGallery items={images} infinite={true} showFullscreenButton={false} showPlayButton={false} slideDuration={4} useBrowserFullscreen={false} showNav={true} thumbnailPosition={'left'} disableThumbnailSwipe={false} originalHeight={'100%'} />
       </div>
     </>
   );

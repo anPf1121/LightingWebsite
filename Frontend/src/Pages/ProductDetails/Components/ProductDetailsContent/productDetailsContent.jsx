@@ -26,6 +26,8 @@ import { addProduct } from '../../../../Redux/Slides/orderSlide';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import QuantityInput from "../../../Components/quantityInput";
+
+
 export default function ProductDetailsContent() {
   const dispatch = useDispatch();
   const { productId } = useParams();
@@ -140,7 +142,9 @@ export default function ProductDetailsContent() {
   const [alignment, setAlignment] = React.useState(null);
 
   const handleChangeModel = (event, newAlignment) => {
-    setAlignment(newAlignment);
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
   };
 
   const matchProductDetails = (id) => {
@@ -172,11 +176,15 @@ export default function ProductDetailsContent() {
     }
   }, [isLoadingDetails]);
   console.log("isLoadingDetails ", isLoadingDetails);
+  const selectedStyle = {
+    backgroundColor: 'blue', // Màu sắc khi được chọn
+    color: 'white', // Màu chữ khi được chọn
+  };
   return (
     <>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px' }}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px', padding: "5px" }}>
         <Grid item xs={12} sm={12} md={6} >
-          <Box sx={{ marginLeft: '20px' }}>
+          <Box>
             <ProductSwiper image={productDetail?.product.image} />
           </Box>
         </Grid>
@@ -189,12 +197,13 @@ export default function ProductDetailsContent() {
                   sx={{
                     userSelect: "none",
                     fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "2.3em",
+                    fontSize: "2.5em",
                   }}
                 >
                   {productDetail?.product.name}
                 </Typography>
               </div>
+
               <div className="price" >
                 {
                   (productDetail?.unit_price !== productDetail?.sale_price)
@@ -226,7 +235,7 @@ export default function ProductDetailsContent() {
                       >
                         {" " + (productDetail?.sale_price) + "đ"}
                       </Typography>
-                    </span> 
+                    </span>
                     : <Typography
                       variant="h3"
                       component="div"
@@ -242,88 +251,114 @@ export default function ProductDetailsContent() {
                     </Typography>
                 }
               </div>
-              <div className="model">
-                <ToggleButtonGroup
-                  color="primary"
-                  value={alignment}
-                  exclusive
-                  onChange={handleChangeModel}
-                  aria-label="Platform"
-                >
-                  {
-                    dataDetails?.data.map((item, id) => {
-                      return <ToggleButton onClick={() => matchProductDetails(item._id)} value={item._id} key={id}>{item.power.powerValue == "" ? "" : item.power.powerValue} {item.color.colorName == "" ? "" : item.color.colorName} {(item.size.sizeName == "" ? "" : item.size.sizeName)}</ToggleButton>
-                    })
-                  }
-                </ToggleButtonGroup>
-              </div>
-              <QuantityInput quantity={quantity} handleInputChange={handleInputChange} handleIncrease={handleIncrease} handleDecrease={handleDecrease} />
-              <div className="btn-options" style={{ display: "flex" }}>
-                <Button
-                  className="Add-to-bag"
-                  color="primary"
+              <Box sx={{ background: "#f9f9f9", borderRadius: "8px", padding: "15px 15px", maxWidth: "550px" }}>
+                <div className="model">
+                  <span
+                    style={{
+                      userSelect: "none",
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: '1.5em',
+                    }}
+                  >
+                    Model
+                  </span>
+                  <ToggleButtonGroup
+                    color="primary"
+                    value={alignment}
+                    exclusive
+                    onChange={handleChangeModel}
+                    aria-label="Platform"
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    {
+                      dataDetails?.data.map((item, id) => {
+                        return <ToggleButton sx={{ background: "none", border: "none", borderRadius: '5px !important', margin: "10px 0" }} onClick={() => matchProductDetails(item._id)} value={item._id} key={id}>{item.power.powerValue == "" ? "" : item.power.powerValue} {item.color.colorName == "" ? "" : item.color.colorName} {(item.size.sizeName == "" ? "" : item.size.sizeName)}</ToggleButton>
+                      })
+                    }
+                  </ToggleButtonGroup>
+                </div>
+                <span
                   sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginRight: "1em",
-                    color: "black",
-                    backgroundColor: "white",
-                    "&:hover": {
-                      backgroundColor: "rgb(215 215 215)",
+                    userSelect: "none",
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: '1.5em',
+                    marginTop: "15px",
+                    marginBottom: '8px'
+                  }}
+                >
+                  Số Lượng
+                </span>
+                <QuantityInput quantity={quantity} handleInputChange={handleInputChange} handleIncrease={handleIncrease} handleDecrease={handleDecrease} />
+                <div className="btn-options" style={{ display: "flex" }}>
+                  <Button
+                    className="Add-to-bag"
+                    color="primary"
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: "1em",
                       color: "black",
-                      transition: ".3s",
-                    },
-                  }}
-                >
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <div
-                      style={{
-                        width: "2em",
-                        height: "2em",
-                      }}
-                      onClick={handleAddOrderProduct}
-                    >
-                      <AddShoppingCartIcon />
-                    </div>
-                  </Box>
-                </Button>
-                <Button
-                  className="buy-now"
-                  color="primary"
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginRight: "1em",
-                    color: "black",
-                    backgroundColor: "white",
-                    "&:hover": {
-                      backgroundColor: "rgb(215 215 215)",
+                      backgroundColor: "buttonface", 
+                      "&:hover": {
+                        backgroundColor: "rgb(215 215 215)",
+                        color: "black",
+                        transition: ".3s",
+                      },
+                    }}
+                  >
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <div
+                        style={{
+                          width: "2em",
+                          height: "2em",
+                        }}
+                        onClick={handleAddOrderProduct}
+                      >
+                        <AddShoppingCartIcon />
+                      </div>
+                    </Box>
+                  </Button>
+                  <Button
+                    className="buy-now"
+                    color="primary"
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: "1em",
                       color: "black",
-                      transition: ".3s",
-                    },
-                  }}
-                >
-                  <Box sx={{ display: "flex", alignItems: "center", textTransform: 'none' }}>
-                    <Typography variant="h6"><Link style={{ color: 'black', textDecoration: 'none' }} to='/payment'>Mua Ngay</Link></Typography>
-                  </Box>
-                </Button>
-                <button
-                  className="add-to-favourite-product"
-                  style={{
-                    width: "4em",
-                    cursor: "pointer",
-                    border: 'none'
-                  }}
-                >
-                  <Checkbox
-                    {...label}
-                    icon={<FavoriteBorder />}
-                    checkedIcon={<Favorite style={{ color: 'red' }} />}
-                  />
-                </button>
-              </div>
+                      backgroundColor: "buttonface",
+                      "&:hover": {
+                        backgroundColor: "rgb(215 215 215)",
+                        color: "black",
+                        transition: ".3s",
+                      },
+                    }}
+                  >
+                    <Box sx={{ display: "flex", alignItems: "center", textTransform: 'none' }}>
+                      <Typography variant="h6"><Link style={{ color: 'black', textDecoration: 'none' }} to='/payment'>Mua Ngay</Link></Typography>
+                    </Box>
+                  </Button>
+                  <button
+                    className="add-to-favourite-product"
+                    style={{
+                      width: "4em",
+                      cursor: "pointer",
+                      border: 'none'
+                    }}
+                  >
+                    <Checkbox
+                      {...label}
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite style={{ color: 'red' }} />}
+                    />
+                  </button>
+                </div>
+              </Box>
             </div>
             <div>
               <Toolbar style={{ padding: "0px" }}>
@@ -480,7 +515,7 @@ export default function ProductDetailsContent() {
           </Box>
         </Grid>
         <Grid item xs={1} lg={2} md={2}></Grid>
-      </Grid>
+      </Grid >
       <Box
         sx={{ margin: "50px 0", marginBottom: '0', backgroundColor: "#f7f7f7", padding: "50px 0" }}
       >
