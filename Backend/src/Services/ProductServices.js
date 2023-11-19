@@ -187,7 +187,7 @@ const createProductDetails = (newProductDetails) => {
                     message: "the product details is already",
                 })
             }
-            
+            let sale_price = unit_price - (unit_price * checkProduct.sale_rate)
             const createdProductDetails = await Product.ProductDetails.create({
                 product: checkProduct._id,
                 power: checkPower ? checkPower._id : null,
@@ -200,10 +200,36 @@ const createProductDetails = (newProductDetails) => {
                 warranty,
                 luminous_flux,
                 countInStock,
-                unit_price
+                unit_price,
+                sale_price
             })
 
             if (createdProductDetails) {
+                let price_update = {
+                    min_price: sale_price,
+                    max_price: sale_price,
+                }
+                if (sale_price > checkProduct.max_price || checkProduct.max_price === 0) {
+                    price_update = {
+                        min_price: checkProduct.min_price,
+                        max_price: sale_price,
+                    }
+                    await Product.Product.findByIdAndUpdate(checkProduct._id, price_update, { new: true })
+                }
+                if (sale_price < checkProduct.min_price || checkProduct.min_price === 0) {
+                    if (checkProduct.max_price === 0) {
+                        price_update = {
+                            min_price: sale_price,
+                            max_price: sale_price,
+                        }
+                    } else {
+                        price_update = {
+                            min_price: sale_price,
+                            max_price: checkProduct.max_price,
+                        }
+                    }
+                    await Product.Product.findByIdAndUpdate(checkProduct._id, price_update, { new: true })
+                }
                 resolve({
                     status: "OK",
                     message: "CREATE PRODUCT SUCCESS",
@@ -218,7 +244,7 @@ const createProductDetails = (newProductDetails) => {
 
 const createProduct = (newProduct) => {
     return new Promise(async (resolve, reject) => {
-        const { name, image, product_type, protection_rating } = newProduct
+        const { name, image, product_type, protection_rating, min_price, max_price, price, sale_rate } = newProduct
         try {
             const checkName = await Product.Product.findOne({
                 name: name
@@ -230,9 +256,7 @@ const createProduct = (newProduct) => {
                 })
             }
             const createdProduct = await Product.Product.create({
-                name,
-                image,
-                product_type
+                name, image, product_type, protection_rating, min_price, max_price, price, sale_rate
             })
             if (createdProduct) {
                 resolve({
@@ -247,11 +271,22 @@ const createProduct = (newProduct) => {
     })
 }
 
-const getAllProduct = (limit, page) => {
+const getAllProduct = (limit, page, sort) => {
     return new Promise(async (resolve, reject) => {
         try {
             const totalProduct = await Product.Product.count()
-            const allProduct = await Product.Product.find().limit(limit).skip(page * limit)
+            let allProduct = {}
+            if (sort === "asc") {
+                allProduct = await Product.Product.find().limit(limit).skip(page * limit).sort({
+                    min_price: sort
+                })
+            } else if (sort === "desc") {
+                allProduct = await Product.Product.find().limit(limit).skip(page * limit).sort({
+                    max_price: sort
+                })
+            } else {
+                allProduct = await Product.Product.find().limit(limit).skip(page * limit)
+            }
             resolve({
                 status: "OK",
                 message: "GET ALL PRODUCT SUCCESS",
@@ -372,19 +407,69 @@ const updateProductDetails = (id, data) => {
         try {
             const checkProductDetails = await Product.ProductDetails.findOne({
                 _id: id
-            })
+            }).populate('product');
             if (checkProductDetails === null) {
                 resolve({
                     status: "OK",
-                    message: "The product is not defined"
+                    message: "The product details is not defined"
                 })
             }
+            const new_sale_price = data.unit_price - (checkProductDetails.product.sale_rate * data.unit_price);
+            if (data.unit_price) {
+                data.sale_price = new_sale_price
+            }
             const updatedProductDetails = await Product.ProductDetails.findByIdAndUpdate(id, data, { new: true })
-            resolve({
-                status: "OK",
-                message: "SUCCESS",
-                data: updatedProductDetails
-            })
+            if (updatedProductDetails) {
+                // xử lí product min price, max price
+                if (data.unit_price) {
+                    let price_update = {
+                        min_price: checkProductDetails.product.min_price,
+                        max_price: checkProductDetails.product.max_price,
+                    }
+                    if (new_sale_price > checkProductDetails.product.max_price) {
+                        price_update.max_price = new_sale_price
+                        if (price_update.min_price === checkProductDetails.sale_price) {
+                            const minPriceDetails = await Product.ProductDetails.aggregate([
+                                { $match: { product: checkProductDetails.product._id } }, // Lọc các sản phẩm cùng product
+                                { $group: { _id: null, minPrice: { $min: "$sale_price" } } }, // Tìm min
+                            ]).exec();
+                            const minPrice = minPriceDetails.length ? minPriceDetails[0].minPrice : null;
+                            price_update.min_price = minPrice
+                        }
+                        await Product.Product.findByIdAndUpdate(checkProductDetails.product._id, price_update, { new: true })
+                    } else if (new_sale_price < checkProductDetails.product.min_price) {
+                        price_update.min_price = new_sale_price
+                        if (price_update.max_price === checkProductDetails.sale_price) {
+                            const maxPriceDetails = await Product.ProductDetails.aggregate([
+                                { $match: { product: checkProductDetails.product._id } }, // Lọc các sản phẩm cùng product
+                                { $group: { _id: null, maxPrice: { $max: "$sale_price" } } }, // Tìm max
+                            ]).exec();
+                            const maxPrice = maxPriceDetails.length ? maxPriceDetails[0].maxPrice : null;
+                            price_update.max_price = maxPrice
+                        }
+                        await Product.Product.findByIdAndUpdate(checkProductDetails.product._id, price_update, { new: true })
+                    } else {
+                        const minPriceDetails = await Product.ProductDetails.aggregate([
+                            { $match: { product: checkProductDetails.product._id } }, // Lọc các sản phẩm cùng product
+                            { $group: { _id: null, minPrice: { $min: "$sale_price" } } }, // Tìm min
+                        ]).exec();
+                        const minPrice = minPriceDetails.length ? minPriceDetails[0].minPrice : null;
+                        price_update.min_price = minPrice
+                        const maxPriceDetails = await Product.ProductDetails.aggregate([
+                            { $match: { product: checkProductDetails.product._id } }, // Lọc các sản phẩm cùng product
+                            { $group: { _id: null, maxPrice: { $max: "$sale_price" } } }, // Tìm max
+                        ]).exec();
+                        const maxPrice = maxPriceDetails.length ? maxPriceDetails[0].maxPrice : null;
+                        price_update.max_price = maxPrice
+                        await Product.Product.findByIdAndUpdate(checkProductDetails.product._id, price_update, { new: true })
+                    }
+                }
+                resolve({
+                    status: "OK",
+                    message: "SUCCESS",
+                    data: updatedProductDetails
+                })
+            }
         } catch (error) {
             console.log(error);
         }

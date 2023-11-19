@@ -13,28 +13,38 @@ export default function ProductCard(props) {
     const handleLink = () => {
         navigate(`/product-details/${props.index}`)
     }
+    const priceDisplay = (props.minPrice !== props.maxPrice) ? props.minPrice + "đ - " + props.maxPrice + "đ" : props.minPrice + "đ"
+    const saleRateDisplay = "-" + (props.saleRate * 100) + "%"
     return (
         <>
             <Box sx={{ padding: '10px' }}>
                 <Card sx={{ cursor: 'pointer', border: '1px solid #f3f3f3' }} className='card'>
                     <span onClick={handleLink}>
-
-                    <CardMedia alt='unsplash image' component="img" image={props.productImg ? props.productImg : ""} />
-                    <CardContent>
-                        <Typography
-                            gutterBottom
-                            variant='h5'
-                            sx={{
+                        <CardMedia alt='unsplash image' component="img" image={props.productImg ? props.productImg : ""} />
+                        <Box sx={{
+                            position: 'absolute',
+                            left: 0,
+                            top: 0,
+                            background: '#ef882e',
+                            color: 'white',
+                            padding: '2px 20px',
+                            borderBottomRightRadius: '5px'
+                        }}>{saleRateDisplay}</Box>
+                        <CardContent>
+                            <Typography
+                                gutterBottom
+                                variant='h5'
+                                sx={{
+                                    textAlign: 'center',
+                                    color: 'black'
+                                }}
+                            >{props.productName}</Typography>
+                            <Typography variant='body1' sx={{
+                                color: 'gray',
                                 textAlign: 'center',
-                                color: 'black'
-                            }}
-                        >{props.productName}</Typography>
-                        <Typography variant='body1' sx={{
-                            color: 'gray',
-                            textAlign: 'center',
-                        }}>20.000.000 VND</Typography>
-                        <Box className="card-overlay"></Box>
-                    </CardContent>
+                            }}>{priceDisplay}</Typography>
+                            <Box className="card-overlay"></Box>
+                        </CardContent>
                     </span>
                     <div onClick={handleOpen} className='fastViewDetails'><GridMaximize2O className='iconFastView' /></div>
                     <Modal

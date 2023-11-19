@@ -7,6 +7,9 @@ const productSchema = new mongoose.Schema(
     product_type: { type: String, required: true },
     descriptions: { type: String, required: false, default: "" },
     protection_rating: { type: Number, required: true, default: "0" },
+    min_price: { type: Number, required: true, default: 0},
+    max_price: { type: Number, required: true, default: 0},
+    sale_rate: { type: Number, required: false, default: 3.5 },
   },
   {
     timestamps: true,
@@ -68,6 +71,7 @@ const productDetailsSchema = new mongoose.Schema({
   luminous_flux: { type: String, required: false }, // quang thông
   countInStock: { type: Number, required: true },
   unit_price: { type: Number, required: true },
+  sale_price: { type: Number, required: true },
 });
 
 const ProductColor = mongoose.model("ProductColor", productColorSchema);

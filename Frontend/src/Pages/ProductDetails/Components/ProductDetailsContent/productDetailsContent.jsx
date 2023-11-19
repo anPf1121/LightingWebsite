@@ -164,7 +164,7 @@ export default function ProductDetailsContent() {
       },
     }));
   }
-  
+
   useEffect(() => {
     if (isLoadingDetails === false) {
       setAlignment(dataDetails?.data[0]._id);
@@ -189,24 +189,58 @@ export default function ProductDetailsContent() {
                   sx={{
                     userSelect: "none",
                     fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "2em",
+                    fontSize: "2.3em",
                   }}
                 >
                   {productDetail?.product.name}
                 </Typography>
               </div>
-              <div className="price">
-                <Typography
-                  variant="h4"
-                  sx={{
-                    userSelect: "none",
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "1.5em",
-                    width: "100%",
-                  }}
-                >
-                  {productDetail?.unit_price} vnd
-                </Typography>
+              <div className="price" >
+                {
+                  (productDetail?.unit_price !== productDetail?.sale_price)
+                    ? <span style={{ display: 'flex', gap: '20px', margin: "20px 0" }}>
+                      <Typography
+                        variant="h4"
+                        component="div"
+                        sx={{
+                          userSelect: "none",
+                          fontFamily: "'Cormorant Garamond', serif",
+                          fontSize: "1.5em",
+                          textDecoration: 'line-through',
+                          alignItems: 'center'
+                        }}
+                      >
+                        {(productDetail?.unit_price) + "đ"}
+                      </Typography>
+                      <Typography
+                        variant="h2"
+                        component="div"
+                        sx={{
+                          userSelect: "none",
+                          fontFamily: "'Cormorant Garamond', serif",
+                          fontSize: "2.2em",
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '20px'
+                        }}
+                      >
+                        {" " + (productDetail?.sale_price) + "đ"}
+                      </Typography>
+                    </span> 
+                    : <Typography
+                      variant="h3"
+                      component="div"
+                      sx={{
+                        userSelect: "none",
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "1.5em",
+                        textDecoration: 'line-through',
+                        alignItems: 'center'
+                      }}
+                    >
+                      {(productDetail?.unit_price) + "đ"}
+                    </Typography>
+                }
               </div>
               <div className="model">
                 <ToggleButtonGroup
@@ -218,12 +252,12 @@ export default function ProductDetailsContent() {
                 >
                   {
                     dataDetails?.data.map((item, id) => {
-                      return <ToggleButton onClick={() => matchProductDetails(item._id)}  value={item._id} key={id}>{item.power.powerValue == "" ? "" : item.power.powerValue} {item.color.colorName == "" ? "" : item.color.colorName} {(item.size.sizeName == "" ? "" : item.size.sizeName)}</ToggleButton>
+                      return <ToggleButton onClick={() => matchProductDetails(item._id)} value={item._id} key={id}>{item.power.powerValue == "" ? "" : item.power.powerValue} {item.color.colorName == "" ? "" : item.color.colorName} {(item.size.sizeName == "" ? "" : item.size.sizeName)}</ToggleButton>
                     })
                   }
                 </ToggleButtonGroup>
               </div>
-              <QuantityInput quantity={quantity} handleInputChange={handleInputChange} handleIncrease={handleIncrease} handleDecrease={handleDecrease}/>
+              <QuantityInput quantity={quantity} handleInputChange={handleInputChange} handleIncrease={handleIncrease} handleDecrease={handleDecrease} />
               <div className="btn-options" style={{ display: "flex" }}>
                 <Button
                   className="Add-to-bag"
