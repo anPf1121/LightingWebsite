@@ -40,7 +40,7 @@ export default function ProductSlideShow(props) {
                         props.products?.map((item, index) => {
                             return <>
                                 <SwiperSlide key={index}><Box>
-                                    <ProductCard productName={item.name} productImg={item.image[0]} />
+                                    <ProductCard saleRate={item.sale_rate} minPrice={item.min_price} maxPrice={item.max_price} productName={item.name} productImg={item.image[0]} />
                                 </Box></SwiperSlide>
                             </>
                         })

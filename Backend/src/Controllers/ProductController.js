@@ -126,8 +126,8 @@ const createProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
     try {
-        const { limit, page, sort } = req.query
-        const response = await ProductServices.getAllProduct(Number(limit) || 12, Number(page) || 0, sort);
+        const { limit, page, sort, filter } = req.query
+        const response = await ProductServices.getAllProduct(Number(limit) || 12, Number(page) || 0, sort, filter);
         return res.status(200).json(response)
     } catch (error) {
         return res.status(404).json({

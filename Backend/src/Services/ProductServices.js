@@ -271,22 +271,37 @@ const createProduct = (newProduct) => {
     })
 }
 
-const getAllProduct = (limit, page, sort) => {
+const getAllProduct = (limit, page, sort, filter) => {
     return new Promise(async (resolve, reject) => {
         try {
             const totalProduct = await Product.Product.count()
-            let allProduct = {}
-            if (sort === "asc") {
-                allProduct = await Product.Product.find().limit(limit).skip(page * limit).sort({
-                    min_price: sort
+            if (sort) {
+                const objectSort = {}
+                objectSort[sort[1]] = sort[0]
+                console.log("objectSort ", objectSort);
+                const allProductSort = await Product.Product.find().limit(limit).skip(page * limit).sort(objectSort)
+                resolve({
+                    status: "OK",
+                    message: "GET ALL PRODUCT SORT SUCCESS",
+                    data: allProductSort,
+                    total: totalProduct,
+                    currentPage: (page + 1),
+                    totalPage: Math.ceil(totalProduct / limit)
                 })
-            } else if (sort === "desc") {
-                allProduct = await Product.Product.find().limit(limit).skip(page * limit).sort({
-                    max_price: sort
-                })
-            } else {
-                allProduct = await Product.Product.find().limit(limit).skip(page * limit)
             }
+            if(filter) {
+                const label = filter[0]
+                const allProductFilter = await Product.Product.find({ [label]: { '$regex': filter[1]} }).limit(limit).skip(page * limit)
+                resolve({
+                    status: "OK",
+                    message: "GET ALL PRODUCT FILTER SUCCESS",
+                    data: allProductFilter,
+                    total: totalProduct,
+                    currentPage: (page + 1),
+                    totalPage: Math.ceil(totalProduct / limit)
+                })
+            }
+            const allProduct = await Product.Product.find().limit(limit).skip(page * limit)
             resolve({
                 status: "OK",
                 message: "GET ALL PRODUCT SUCCESS",
