@@ -4,6 +4,7 @@ const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     image: [{ type: String, required: true }],
+    collection: { type: mongoose.Schema.Types.ObjectId, ref: 'Collection', required: false },
     product_type: { type: String, required: true },
     descriptions: { type: String, required: false, default: "" },
     protection_rating: { type: Number, required: true, default: "0" },

@@ -6,6 +6,17 @@
     box-sizing: border-box;
 }
 
+.image-gallery-container-h .image-gallery-slide img {
+    width: 100vw;
+    height: auto;
+    transform: scale(1.1);
+    object-fit: contain;
+}
+
+.image-gallery-container-h .image-gallery-slide img:hover {
+    transform: scale(1.1);
+}
+
 /* header */
 
 .header-img {
