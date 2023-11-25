@@ -5,12 +5,12 @@ const productSchema = new mongoose.Schema(
     name: { type: String, required: true },
     image: [{ type: String, required: true }],
     collection: { type: mongoose.Schema.Types.ObjectId, ref: 'Collection', required: false },
-    product_type: { type: String, required: true },
+    product_type: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductType', required: true },
     descriptions: { type: String, required: false, default: "" },
     protection_rating: { type: Number, required: true, default: "0" },
     min_price: { type: Number, required: true, default: 0},
     max_price: { type: Number, required: true, default: 0},
-    sale_rate: { type: Number, required: false, default: 3.5 },
+    sale_rate: { type: Number, required: false, default: 0.35 },
   },
   {
     timestamps: true,
@@ -44,6 +44,15 @@ const productSizeSchema = new mongoose.Schema(
   }
 );
 
+const productTypeSchema = new mongoose.Schema(
+  {
+    typeName: { type: String },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const productCollectionSchema = new mongoose.Schema(
   {
     collectionImage: { type: String },
@@ -60,7 +69,6 @@ const productDetailsSchema = new mongoose.Schema({
   power: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductPower', required: false }, // công suất
   size: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductSize', required: false },
   color: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductColor', required: false },
-  inCollection: { type: mongoose.Schema.Types.ObjectId, ref: 'ProductCollection', required: false },
   voltage: { type: String, required: false }, // điện áp
   CRI: { type: String, required: false }, // chỉ số hoàn màu
   dimension: { type: String, required: false }, // kích thước
@@ -78,6 +86,7 @@ const productDetailsSchema = new mongoose.Schema({
 const ProductColor = mongoose.model("ProductColor", productColorSchema);
 const ProductPower = mongoose.model("ProductPower", productPowerSchema);
 const ProductSize = mongoose.model("ProductSize", productSizeSchema);
+const ProductType = mongoose.model("ProductType", productTypeSchema);
 const ProductCollection = mongoose.model('ProductCollection', productCollectionSchema);
 const ProductDetails = mongoose.model('ProductDetails', productDetailsSchema);
 const Product = mongoose.model("Product", productSchema);
@@ -88,5 +97,6 @@ module.exports = {
   ProductDetails,
   ProductPower,
   ProductSize,
-  ProductCollection
+  ProductCollection,
+  ProductType
 };

@@ -6,7 +6,7 @@ import ProductCard from "../../../Components/productCard";
 import ProductSlideShow from "../../../Components/productSlideShow";
 import StickyBox from "react-sticky-box";
 import * as ProductServices from "../../../../Services/ProductServices"
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TuneIcon from '@mui/icons-material/Tune';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -23,33 +23,45 @@ const theme = createTheme({
 export default function ProductsContent() {
     const navigate = useNavigate();
     const location = useLocation();
-    let { typeId } = useParams();
+    let { collectionId, typeId } = useParams();
     if (typeId === undefined) typeId = 0
+    const queryParams = new URLSearchParams(location.search);
+    const searchQuery = queryParams.get('search');
+    const typeQuery = queryParams.get('filter_type');
+    // console.log("searchQuery ", searchQuery);
+
+    const [products, setProducts] = useState(null);
+
+    const queryClient = useQueryClient();
 
     const getAllProducts = async () => {
-        const res = await ProductServices.GetAllProduct();
+        const res = await ProductServices.GetAllProduct(searchQuery, collectionId, typeQuery);
         return res;
     }
-    const [products, setProducts] = useState(null);
-    const { isLoading, data } = useQuery({ queryKey: ['products'], queryFn: getAllProducts })
+
+    const { isLoading, data } = useQuery(['products', collectionId, typeQuery], getAllProducts, {
+        enabled: !!typeQuery || !!collectionId,
+        onSuccess: (responseData) => {
+            if (responseData) {
+                setProducts(responseData.data); 
+            }
+        },
+    });
+
     const getAllProductType = async () => {
         const res = await ProductServices.getAllProductType();
         return res;
     }
 
-    useEffect(() => {
-        if (data?.data?.length > 0) {
-            setProducts(data?.data);
-        }
-    }, [data])
-
     const { isLoading: isLoadingType, data: typeData } = useQuery({ queryKey: ['product-types'], queryFn: getAllProductType })
-    const handleNavLink = (productId) => {
-        navigate(`/products/${productId}`);
-    }
 
-    const searchQuery = new URLSearchParams(location.search).get('search');
-    console.log("searchQuery ", searchQuery);
+    const handleNavLink = (typeId) => {
+        let queryString = `/products/${collectionId}`;
+        if (typeId) {
+            queryString += `?filter_type=${typeId}`
+        }
+        navigate(queryString);
+    }
 
     const [isOpenSort, setOpenSort] = useState(false)
     const [isOpenFilter, setOpenFilter] = useState(false)
@@ -191,8 +203,8 @@ export default function ProductsContent() {
                                                         <Typography component='div' variant="h5" sx={{ marginBottom: '25px' }} >Danh Mục Sản Phẩm</Typography>
                                                         {typeData?.data.map((item, index) => {
                                                             return (
-                                                                <div className="menu-item" key={item} onClick={() => handleNavLink(item)}>
-                                                                    {item}
+                                                                <div className="menu-item" key={item._id} onClick={() => handleNavLink(item._id)}>
+                                                                    {item.typeName}
                                                                 </div>
                                                             )
                                                         })}

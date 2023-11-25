@@ -3,12 +3,18 @@ import React from 'react'
 import BtnSeeMore from '../../Components/btnSeeMore'
 import * as CollectionServices from "../../../Services/CollectionServices"
 import { useQuery } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 export default function FullpageScroll() {
+    const navigate = useNavigate();
     const getAllCollection = async () => {
         const res = await CollectionServices.GetAllCollection();
         return res;
     }
     const { isLoading, data } = useQuery({ queryKey: ['collections'], queryFn: getAllCollection })
+    const handleNavLink = (collectionId) => {
+        navigate(`/products/${collectionId}`);
+    }
+    console.log("data ", data);
     return (
         <>
             <div className="container">
@@ -23,7 +29,7 @@ export default function FullpageScroll() {
                                     },
                                     alignItems: 'center'
                                 }}>
-                                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6} sx={{ borderRadius: '20px', objectFit: 'cover', overflow: 'hidden' }} >
+                                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6} sx={{ borderRadius: '20px', objectFit: 'cover', overflow: 'hidden', maxHeight: "50vh" }} >
                                         <img style={{ width: '100%', height: '100%', }} src={item.image} alt="none" />
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} sx={{}}>
@@ -36,7 +42,7 @@ export default function FullpageScroll() {
                                         }}>
                                             <Typography variant='h3' sx={{ textAlign: 'center' }}>{item.name}</Typography>
                                             <Typography sx={{ margin: '20px 0' }} variant='h6'>{item.description}</Typography>
-                                            <BtnSeeMore style={{ mgLeft: '0', transform: 'none' }} />
+                                            <BtnSeeMore onClick={() => handleNavLink(item._id)} style={{ mgLeft: '0', transform: 'none' }} />
                                         </Box>
                                     </Grid>
                                 </Grid>
@@ -57,10 +63,10 @@ export default function FullpageScroll() {
                                     }}>
                                         <Typography variant='h3' sx={{ textAlign: 'center' }}>{item.name}</Typography>
                                         <Typography sx={{ margin: '20px 0' }} variant='h6'>{item.description}</Typography>
-                                        <BtnSeeMore style={{ mgLeft: '0', transform: 'none' }} />
+                                        <BtnSeeMore onClick={() => handleNavLink(item._id)} style={{ mgLeft: '0', transform: 'none' }} />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} sx={{ borderRadius: '20px', objectFit: 'cover', overflow: 'hidden' }} >
+                                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} sx={{ borderRadius: '20px', objectFit: 'cover', overflow: 'hidden', maxHeight: "50vh" }} >
                                     <img style={{ width: '100%', height: '100%', }} src={item.image} alt="none" />
                                 </Grid>
                             </Grid>

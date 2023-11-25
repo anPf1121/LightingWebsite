@@ -59,7 +59,6 @@ export default function StickyNav() {
             navigate(`/products?search=${searchValue}`);
         }
     }
-    console.log("se ", searchValue);
     // LOGIN HANDLE
 
     const [userNameValue, setUserNameValue] = useState('');
@@ -129,7 +128,7 @@ export default function StickyNav() {
                                     boxShadow: 'none'
                                 }
                             }}>
-                                <Typography onClick={() => handleLink("products")} sx={{
+                                <Typography onClick={() => handleLink("products/0")} sx={{
                                     borderBottom: '1px solid #000', color: '#000', fontFamily: "'Cormorant Garamond', serif", "&:hover": {
                                         color: '#000',
                                     }

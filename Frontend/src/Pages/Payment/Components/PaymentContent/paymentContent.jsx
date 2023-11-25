@@ -23,9 +23,6 @@ function createData(
 
 export default function PaymentContent() {
     const orderSelector = useSelector((state) => state.order);
-    console.log("orderSelector.orderItems ", orderSelector.orderItems);
-        // orderSelector.orderItems.map((item, index) => {
-        // })
     let rows = [];
     const newData = orderSelector.orderItems.map((item) => createData(
         item.main_image, 

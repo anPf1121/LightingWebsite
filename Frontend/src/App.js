@@ -77,13 +77,14 @@ function App() {
             <Route exact path='/' element={<Home />} />
             <Route path='/product-details/:productId' element={<ProductDetails />} />
             <Route path='/products' element={<Products />} />
-            <Route path='/products/:typeId' element={<Products />} />
+            <Route path='/products/:collectionId' element={<Products />} />
             <Route path='/collections' element={<Collections />} />
             <Route path='/projects' element={<Projects />} />
             <Route path='/about-us' element={<AboutUs />} />
             <Route path='/payment' element={<Payment />} />
             <Route path='/payment/form' element={<PaymentForm />} />
             <Route path='/admin' element={<Admin />} />
+            <Route path="*" element={<p>Path not resolved</p>}  />
           </Routes>
         </Router>
       </ThemeProvider>

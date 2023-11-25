@@ -17,6 +17,7 @@ const createProductCollection = async (req, res) => {
         })
     }
 }
+
 const createProductColor = async (req, res) => {
     const { colorName } = req.body
     try {
@@ -45,6 +46,24 @@ const createProductPower = async (req, res) => {
             })
         }
         const response = await ProductServices.createProductPower(req.body);
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(404).json({
+            message: error
+        })
+    }
+}
+
+const createProductType = async (req, res) => {
+    const { typeName } = req.body
+    try {
+        if (!typeName) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The input is required'
+            })
+        }
+        const response = await ProductServices.createProductType(req.body);
         return res.status(200).json(response)
     } catch (error) {
         return res.status(404).json({
@@ -91,6 +110,7 @@ const createProductDetails = async (req, res) => {
         image,
         countInStock } = req.body
     try {
+        console.log(product, countInStock, unit_price);
         if (!product || !countInStock || !unit_price) {
             return res.status(200).json({
                 status: 'ERR',
@@ -274,4 +294,5 @@ module.exports = {
     createProductCollection,
     getAllProductType,
     getProduct,
+    createProductType
 }

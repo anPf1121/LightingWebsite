@@ -3,17 +3,17 @@ import React from 'react'
 import './globalComponents.css';
 import { Button } from '@mui/material';
 
-export default function BtnSeeMore({mgLeft, transform}) {
+export default function BtnSeeMore(props) {
     return (
         <>
-            <Button color='primary' sx={{
+            <Button color='primary' {...props} sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 margin: '5px 0px',
                 marginBottom: '50px',
-                marginLeft: `${mgLeft}`,
-                transform: `${transform}`,
+                marginLeft: `${props.mgLeft}`,
+                transform: `${props.transform}`,
                 color: 'white',
                 padding: '8px 20px',
                 border: '1px solid black',
@@ -25,6 +25,7 @@ export default function BtnSeeMore({mgLeft, transform}) {
                     color: 'black',
                     transition: '.3s',
                 },
+                
             }}>Xem Thêm</Button>
         </>
     )

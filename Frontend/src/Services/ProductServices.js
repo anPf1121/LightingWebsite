@@ -1,12 +1,22 @@
 import axios from "axios"
 
-export const GetAllProduct = async (search) => {
+export const GetAllProduct = async (search, collectionId, typeId) => {
     let res = {}
-    if(search) {
-        res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all`)
-    } else {
-        res = await axios.get(`${process.env.REACT_APP_API_KEY}/product/get-all`)
+    console.log("search, collectionId, typeId ", search, collectionId, typeId);
+    let queryString = `${process.env.REACT_APP_API_KEY}/product/get-all`
+    if (search) {
+        queryString += `?filter=name:${search}`
+    } 
+    if(collectionId && collectionId !== "0" && collectionId !== 0) {
+        // console.log("collectionId ", collectionId);
+        queryString += `?filter=collection:${collectionId}`
+    } 
+    if(typeId && typeId !== "0" && typeId !== 0) {
+        queryString += `?filter=product_type:${typeId}`
+        console.log("queryStringT ", queryString.toString());
     }
+    console.log("queryString ", queryString.toString());
+    res = await axios.get(queryString)
     return res.data;
 }
 

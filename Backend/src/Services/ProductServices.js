@@ -1,3 +1,4 @@
+const Collection = require('../Models/Collection')
 const Product = require('../Models/Product')
 
 const createProductCollection = (newColor) => {
@@ -52,6 +53,35 @@ const createProductColor = (newColor) => {
                     status: "OK",
                     message: "SUCCESS",
                     data: createdColor
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    })
+}
+
+const createProductType = (newType) => {
+    return new Promise(async (resolve, reject) => {
+        const { typeName } = newType
+        try {
+            const checkType = await Product.ProductType.findOne({
+                typeName: typeName
+            })
+            if (checkType !== null) {
+                resolve({
+                    status: "OK",
+                    message: "the type is already"
+                })
+            }
+            const createdType = await Product.ProductType.create({
+                typeName: typeName
+            })
+            if (createdType) {
+                resolve({
+                    status: "OK",
+                    message: "SUCCESS",
+                    data: createdType
                 })
             }
         } catch (error) {
@@ -244,10 +274,16 @@ const createProductDetails = (newProductDetails) => {
 
 const createProduct = (newProduct) => {
     return new Promise(async (resolve, reject) => {
-        const { name, image, product_type, protection_rating, min_price, max_price, price, sale_rate } = newProduct
+        const { name, image, product_type, protection_rating, collection, min_price, max_price, price, sale_rate } = newProduct
         try {
             const checkName = await Product.Product.findOne({
                 name: name
+            })
+            const checkType = await Product.ProductType.findOne({
+                typeName: product_type
+            })
+            const checkCollection = await Collection.findOne({
+                name: collection
             })
             if (checkName !== null) {
                 resolve({
@@ -256,7 +292,7 @@ const createProduct = (newProduct) => {
                 })
             }
             const createdProduct = await Product.Product.create({
-                name, image, product_type, protection_rating, min_price, max_price, price, sale_rate
+                name, image, product_type: checkType ? checkType._id : null, protection_rating, collection: checkCollection ? checkCollection._id : null, min_price, max_price, price, sale_rate
             })
             if (createdProduct) {
                 resolve({
@@ -275,10 +311,11 @@ const getAllProduct = (limit, page, sort, filter) => {
     return new Promise(async (resolve, reject) => {
         try {
             const totalProduct = await Product.Product.count()
+            console.log("filter ", filter);
             if (sort) {
                 const objectSort = {}
                 objectSort[sort[1]] = sort[0]
-                console.log("objectSort ", objectSort);
+
                 const allProductSort = await Product.Product.find().limit(limit).skip(page * limit).sort(objectSort)
                 resolve({
                     status: "OK",
@@ -289,9 +326,22 @@ const getAllProduct = (limit, page, sort, filter) => {
                     totalPage: Math.ceil(totalProduct / limit)
                 })
             }
-            if(filter) {
-                const label = filter[0]
-                const allProductFilter = await Product.Product.find({ [label]: { '$regex': filter[1]} }).limit(limit).skip(page * limit)
+            if (filter) {
+                let filterConditions = {};
+                let filterLabel = ""
+                filter.replace('?filter=', ':').split(":").forEach((value, index) => {
+                    if (index % 2 === 0) {
+                        filterLabel = value
+                    } else {
+                        if (filterLabel === 'name') {
+                            filterConditions[filterLabel] = { $regex: value };
+                        } else {
+                            filterConditions[filterLabel] = value;
+                        }
+                    }
+                });
+                console.log("filterConditions ", filterConditions);
+                const allProductFilter = await Product.Product.find(filterConditions).limit(limit).skip(page * limit)
                 resolve({
                     status: "OK",
                     message: "GET ALL PRODUCT FILTER SUCCESS",
@@ -321,7 +371,13 @@ const getProductDetails = (id) => {
         try {
             const productDetails = await Product.ProductDetails.find({
                 product: id
-            }).populate('size').populate('power').populate('color').populate('product')
+            }).populate('size').populate('power').populate('color').populate('product').populate({
+                path: 'product',
+                populate: {
+                    path: 'product_type',
+                    model: 'ProductType' 
+                }
+            })
             resolve({
                 status: "OK",
                 message: "GET PRODUCT DETAILS SUCCESS",
@@ -352,12 +408,11 @@ const getProduct = (id) => {
 const getAllProductType = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            const allProduct = await Product.Product.find();
-            const uniqueProductTypes = [...new Set(allProduct.map(product => product.product_type))];
+            const allProductType = await Product.ProductType.find();
             resolve({
                 status: "OK",
                 message: "GET PRODUCT TYPES SUCCESS",
-                data: uniqueProductTypes
+                data: allProductType
             })
         } catch (error) {
             console.log(error);
@@ -531,4 +586,5 @@ module.exports = {
     createProductCollection,
     getAllProductType,
     getProduct,
+    createProductType
 }

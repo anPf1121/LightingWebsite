@@ -163,7 +163,7 @@ export default function ProductDetailsContent() {
         productDetails: alignment,
         itemName: productDetail?.product.name + " " + productDetail?.power.powerValue + " " + productDetail?.size.sizeName + " " + productDetail?.color.colorName,
         main_image: productDetail?.product.image[0],
-        product_type: similarProducts[0].product_type,
+        product_type: productDetail?.product?.product_type.typeName,
         unit_price: productDetail?.unit_price
       },
     }));
@@ -175,7 +175,6 @@ export default function ProductDetailsContent() {
       setProductDetail(dataDetails?.data[0])
     }
   }, [isLoadingDetails]);
-  console.log("isLoadingDetails ", isLoadingDetails);
   const selectedStyle = {
     backgroundColor: 'blue', // Màu sắc khi được chọn
     color: 'white', // Màu chữ khi được chọn
@@ -302,7 +301,7 @@ export default function ProductDetailsContent() {
                       alignItems: "center",
                       marginRight: "1em",
                       color: "black",
-                      backgroundColor: "buttonface", 
+                      backgroundColor: "buttonface",
                       "&:hover": {
                         backgroundColor: "rgb(215 215 215)",
                         color: "black",
