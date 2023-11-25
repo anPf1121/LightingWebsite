@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const GetAllProduct = async (search, collectionId, typeId) => {
     let res = {}
-    console.log("search, collectionId, typeId ", search, collectionId, typeId);
+    console.log("search ", search);
     let queryString = `${process.env.REACT_APP_API_KEY}/product/get-all`
     if (search) {
         queryString += `?filter=name:${search}`

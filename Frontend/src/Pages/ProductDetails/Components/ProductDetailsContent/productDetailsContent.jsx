@@ -103,12 +103,10 @@ export default function ProductDetailsContent() {
   const label = { inputProps: { "aria-label": "Checkbox" } };
 
   const handleFacebookClick = () => {
-    // Xử lý khi người dùng nhấn nút Facebook
     window.open("https://www.facebook.com", "_blank");
   };
 
   const handleInstagramClick = () => {
-    // Xử lý khi người dùng nhấn nút Instagram
     window.open("https://www.instagram.com", "_blank");
   };
 
@@ -168,6 +166,9 @@ export default function ProductDetailsContent() {
       },
     }));
   }
+  const handleBuyNow = () => {
+    handleAddOrderProduct();
+  }
 
   useEffect(() => {
     if (isLoadingDetails === false) {
@@ -175,10 +176,7 @@ export default function ProductDetailsContent() {
       setProductDetail(dataDetails?.data[0])
     }
   }, [isLoadingDetails]);
-  const selectedStyle = {
-    backgroundColor: 'blue', // Màu sắc khi được chọn
-    color: 'white', // Màu chữ khi được chọn
-  };
+ 
   return (
     <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ marginTop: '100px', padding: "5px" }}>
@@ -324,6 +322,7 @@ export default function ProductDetailsContent() {
                   <Button
                     className="buy-now"
                     color="primary"
+                    onClick={handleBuyNow}
                     sx={{
                       display: "flex",
                       justifyContent: "center",

@@ -6,7 +6,7 @@ import ProductCard from "../../../Components/productCard";
 import ProductSlideShow from "../../../Components/productSlideShow";
 import StickyBox from "react-sticky-box";
 import * as ProductServices from "../../../../Services/ProductServices"
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TuneIcon from '@mui/icons-material/Tune';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -28,19 +28,16 @@ export default function ProductsContent() {
     const queryParams = new URLSearchParams(location.search);
     const searchQuery = queryParams.get('search');
     const typeQuery = queryParams.get('filter_type');
-    // console.log("searchQuery ", searchQuery);
 
     const [products, setProducts] = useState(null);
-
-    const queryClient = useQueryClient();
 
     const getAllProducts = async () => {
         const res = await ProductServices.GetAllProduct(searchQuery, collectionId, typeQuery);
         return res;
     }
 
-    const { isLoading, data } = useQuery(['products', collectionId, typeQuery], getAllProducts, {
-        enabled: !!typeQuery || !!collectionId,
+    const { isLoading, data } = useQuery(['products', searchQuery, collectionId, typeQuery], getAllProducts, {
+        enabled: !!typeQuery || !!collectionId || !!searchQuery,
         onSuccess: (responseData) => {
             if (responseData) {
                 setProducts(responseData.data); 
